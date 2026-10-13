@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+testvideos/
+Songs/
+regress/suite_out/
+regress/clean_out/
+regress/reg/
+regress/ref/
+*.mp4
+*.webm
+*.mkv
+*.ogg
+*.wav
+*.pkl
+*_ons.json
+*_live.json
+*_refcheck/

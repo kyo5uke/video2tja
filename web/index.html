@@ -1,0 +1,1579 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>video2tja 検出ビュー</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.8.0/cdn/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.8.0/cdn/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.8.0/cdn/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.8.0/cdn/700.css">
+<style>
+:root {
+  --bg: #f4f3ef; --panel: #ffffff; --ink: #1c1c1f; --sub: #6b6b72; --line: #e2e0da; --soft: #f8f7f4;
+  --accent: #e8590c; --accent-soft: #fff0e4; --ok: #2b8a3e; --ok-soft: #e7f6ea; --warn: #d6336c; --warn-soft: #fde8ef;
+  --don: #f03e3e; --ka: #1c9fd6; --roll: #f5b700; --gogo: rgba(255, 120, 40, .16);
+  --added: #2fb344; --front: #ae3ec9; --line2: #7048e8; --rescue: #f76707; --emerge: #0ca678;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --font: "Gen Interface JP", "Inter", "Noto Sans JP", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  --sb: #cbc8c0; --sb-hover: #a9a59c;        /* スクロールバーのつまみ(普段 / 乗せたとき)。つかんでいる間は --accent */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111114; --panel: #1b1b1f; --ink: #ececf0; --sub: #9a9aa3; --line: #2d2d33; --soft: #16161a;
+    --accent-soft: #3a2414; --ok-soft: #173020; --warn-soft: #3a1826; --gogo: rgba(255, 120, 40, .22);
+    --sb: #3a3a42; --sb-hover: #56565f;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111114; --panel: #1b1b1f; --ink: #ececf0; --sub: #9a9aa3; --line: #2d2d33; --soft: #16161a;
+  --accent-soft: #3a2414; --ok-soft: #173020; --warn-soft: #3a1826; --gogo: rgba(255, 120, 40, .22);
+  --sb: #3a3a42; --sb-hover: #56565f;
+}
+* { box-sizing: border-box; }
+/* スクロールバー: 溝は透明、細い丸いつまみ。乗せると太く濃く、つかむと橙。ページ全体も一覧・ログ・TJA の枠も同じ */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sb); border: 3px solid transparent; border-radius: 999px; background-clip: padding-box; min-height: 36px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--sb-hover); border-width: 2px; }
+::-webkit-scrollbar-thumb:active { background-color: var(--accent); border-width: 2px; }
+::-webkit-scrollbar-button { display: none; }
+@supports not selector(::-webkit-scrollbar) { * { scrollbar-width: thin; scrollbar-color: var(--sb) transparent; } }   /* Firefox */
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--font); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font-family: inherit; }
+header { padding: 16px 24px 6px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+header h1 { margin: 0; font-size: 20px; letter-spacing: .02em; }
+header .sub { color: var(--sub); }
+header .sp { flex: 1; }
+main { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 16px; padding: 8px 24px 32px; }
+@media (max-width: 1000px) { main { grid-template-columns: 1fr; padding: 8px 16px 24px; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.panel h2 { margin: 0 0 10px; font-size: 15px; }
+.stack > * + * { margin-top: 16px; }
+.tabs { display: flex; gap: 4px; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 3px; margin-bottom: 12px; }
+.tabs button { flex: 1; background: transparent; padding: 6px 8px; border-radius: 8px; color: var(--sub); }
+.tabs button.on { background: var(--panel); color: var(--ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.drop { border: 2px dashed var(--line); border-radius: 10px; padding: 16px 12px; text-align: center; color: var(--sub); cursor: pointer; transition: .15s; }
+.drop.over { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+.drop b { color: var(--ink); }
+label.small { display: block; font-size: 12px; color: var(--sub); margin: 12px 0 4px; }
+input[type=text], select { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); color: var(--ink); font: inherit; }
+.list { max-height: 260px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; margin-top: 6px; }
+.list div { padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px; display: flex; gap: 8px; align-items: center; }
+.list div:last-child { border-bottom: 0; }
+.list div:hover { background: var(--accent-soft); }
+.list div.sel { background: var(--accent); color: #fff; }
+.list .nm { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.testrow { display: flex; gap: 6px; margin-bottom: 6px; }
+.testrow select { flex: 1; min-width: 0; }
+.testrow button { white-space: nowrap; padding: 4px 12px; }
+.list div.loading, .list div.loading:hover { cursor: default; background: transparent; color: var(--sub); }
+.list div.loaderr { cursor: default; color: var(--warn); }
+.spin { width: 13px; height: 13px; flex: none; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; display: inline-block; vertical-align: -2px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.badge { font-size: 11px; padding: 0 7px; border-radius: 999px; border: 1px solid var(--line); color: var(--sub); flex: none; }
+.badge.ok { color: var(--ok); border-color: var(--ok); }
+.badge.ng { color: var(--warn); border-color: var(--warn); }
+.filters { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.filters label { font-size: 12px; color: var(--sub); display: flex; gap: 4px; align-items: center; cursor: pointer; }
+.chosen { font-size: 13px; margin-top: 6px; color: var(--sub); word-break: break-all; }
+.chosen b { color: var(--ink); }
+button { font: inherit; border: 0; border-radius: 8px; padding: 10px 16px; cursor: pointer; }
+button.primary { background: var(--accent); color: #fff; width: 100%; font-weight: 600; margin-top: 14px; }
+button.primary:disabled { opacity: .45; cursor: default; }
+button.ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); padding: 6px 12px; }
+button.ghost:hover { background: var(--soft); }
+.stages { display: grid; gap: 8px; }
+.stage { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); }
+.stage .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font-size: 12px; color: #fff; margin-top: 1px; }
+.stage.run { border-color: var(--accent); background: var(--accent-soft); }
+.stage.run .dot { border-color: var(--accent); border-top-color: transparent; animation: spin .8s linear infinite; }
+.stage.done .dot { background: var(--ok); border-color: var(--ok); }
+.stage.done .dot::after { content: "✓"; }
+.stage .name { font-weight: 600; }
+.stage .desc { color: var(--sub); font-size: 12.5px; }
+.stage .facts { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px; }
+.stage .facts span { background: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; font-size: 12px; }
+.stage .time { font-family: var(--font); color: var(--sub); font-size: 12px; white-space: nowrap; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.top .elapsed { font-family: var(--font); color: var(--sub); }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; background: var(--soft); }
+.chip .k { font-size: 11.5px; color: var(--sub); }
+.chip .v { font-size: 17px; font-weight: 700; }
+.chip.good .v { color: var(--ok); }
+.chip.bad .v { color: var(--warn); }
+/* ---- 変換の進み具合 ---- */
+.run-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.run-head h2 { margin: 0; font-size: 20px; }
+.run-status { font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: 13px; }
+.run-status.run { background: var(--accent-soft); color: var(--accent); }
+.run-status.ok { background: var(--ok-soft); color: var(--ok); }
+.run-status.ng { background: var(--warn-soft); color: var(--warn); }
+.run-sub { color: var(--sub); font-size: 13px; margin-top: 2px; }
+.bigbar { position: relative; height: 34px; border-radius: 12px; background: var(--soft); border: 1px solid var(--line); overflow: hidden; margin-top: 16px; }
+.bigbar .fill { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, #ff7a18, #e8590c); transition: width .4s ease; }
+.bigbar .fill.done { background: linear-gradient(90deg, #37b24d, #2b8a3e); }
+.bigbar .fill.ng { background: linear-gradient(90deg, #f06595, #d6336c); }
+.bigbar .fill.run::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(255,255,255,.18) 0 12px, transparent 12px 24px); animation: slide 1s linear infinite; }
+@keyframes slide { to { background-position: 34px 0; } }
+.bigbar .lbl { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; font-weight: 700; color: var(--ink); mix-blend-mode: normal; }
+.bigbar .lbl .pct { font-family: var(--font); font-size: 16px; }
+.run-times { display: flex; gap: 18px; margin-top: 8px; color: var(--sub); font-size: 13px; font-family: var(--font); flex-wrap: wrap; }
+.run-times b { color: var(--ink); }
+.steps { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 6px; margin-top: 18px; }
+@media (max-width: 1100px) { .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.step { border: 1px solid var(--line); border-radius: 10px; padding: 8px 8px 7px; background: var(--soft); text-align: center; min-width: 0; }
+.step .ic { width: 26px; height: 26px; border-radius: 50%; margin: 0 auto 4px; display: grid; place-items: center; font-size: 13px; font-weight: 700; border: 2px solid var(--line); color: var(--sub); background: var(--panel); }
+.step .nm { font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.step .tm { font-size: 11.5px; color: var(--sub); font-family: var(--font); }
+.step.done { background: var(--ok-soft); border-color: transparent; }
+.step.done .ic { background: var(--ok); border-color: var(--ok); color: #fff; }
+.step.cur { background: var(--accent-soft); border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,89,12,.15); }
+.step.cur .ic { border-color: var(--accent); border-top-color: transparent; animation: spin .8s linear infinite; color: transparent; }
+.step.skip { opacity: .45; }
+.curcard { margin-top: 16px; border: 2px solid var(--accent); border-radius: 14px; padding: 16px 18px; background: var(--accent-soft); }
+.curcard.done { border-color: var(--ok); background: var(--ok-soft); }
+.curcard.ng { border-color: var(--warn); background: var(--warn-soft); }
+.curcard .k { font-size: 12px; color: var(--sub); }
+.curcard .t { font-size: 22px; font-weight: 800; margin: 2px 0 4px; }
+.curcard .d { font-size: 14px; }
+.curcard .facts { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+.curcard .facts span { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-size: 13px; }
+.curcard .sub { margin-top: 12px; }
+.curcard .subbar { height: 10px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); overflow: hidden; }
+.curcard .subbar .f { height: 100%; background: var(--accent); transition: width .3s ease; }
+.curcard .subbar.busy .f { width: 35% !important; animation: subbusy 1.4s ease-in-out infinite; }
+@keyframes subbusy { 0% { margin-left: -35%; } 100% { margin-left: 100%; } }
+.curcard .subt { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; margin-top: 5px; color: var(--sub); }
+.curcard .subt b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.donelist { margin-top: 16px; display: grid; gap: 6px; }
+.donelist .it { display: grid; grid-template-columns: 22px 110px 1fr auto; gap: 10px; align-items: baseline; padding: 6px 10px; border-radius: 8px; background: var(--soft); font-size: 13px; }
+.donelist .it .c { color: var(--ok); font-weight: 700; }
+.donelist .it .n { font-weight: 600; }
+.donelist .it .f { color: var(--sub); }
+.donelist .it .s { font-family: var(--font); color: var(--sub); font-size: 12px; }
+.guide { color: var(--sub); padding: 40px 20px; text-align: center; }
+.guide ol { text-align: left; display: inline-block; font-size: 15px; color: var(--ink); line-height: 2; }
+/* ---- 検出ビュー ---- */
+.viewer-title { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.viewer-title h2 { margin: 0; font-size: 18px; }
+.stage-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 12px; }
+@media (max-width: 1300px) { .stage-wrap { grid-template-columns: 1fr; } }
+.player { position: relative; background: #000; border-radius: 12px; overflow: hidden; }
+.player video { width: 100%; display: block; }
+.player canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.side { display: flex; flex-direction: column; gap: 10px; }
+.viewmode { display: inline-flex; gap: 2px; background: var(--soft); border: 1px solid var(--line); border-radius: 9px; padding: 2px; margin-top: 10px; }
+.viewmode button { background: transparent; padding: 5px 12px; border-radius: 7px; color: var(--ink); font-size: 13px; }
+.viewmode button.on { background: var(--accent); color: #fff; }
+#leftCol.chartmode > :not(#chartWrap) { display: none; }       /* 譜面で見る: 動画・時間軸などを隠して譜面だけ */
+#leftCol:not(.chartmode) > #chartWrap { display: none; }
+.side.chartmode .loupe, .side.chartmode .now { display: none; }
+#chart { width: 100%; display: block; cursor: crosshair; }
+#chartWrap { position: relative; }
+.chtools { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--sub); margin-bottom: 8px; }
+.chtools .grp { display: inline-flex; gap: 2px; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 2px; }
+.chtools .grp button { background: transparent; padding: 3px 10px; border-radius: 6px; color: var(--ink); font-size: 13px; }
+.chtools .grp button.on { background: var(--accent); color: #fff; }
+.chtools { flex-wrap: wrap; }
+.chtools .play { background: var(--accent); color: #fff; border-radius: 8px; padding: 4px 12px; font-size: 13px; }
+.chtools select { font-size: 13px; padding: 2px 6px; border-radius: 7px; border: 1px solid var(--line); background: var(--soft); color: var(--ink); }
+.chtools .tm { min-width: 7.5em; }
+.chhead { position: absolute; width: 2px; background: var(--accent); pointer-events: none; box-shadow: 0 0 6px var(--accent); border-radius: 1px; z-index: 2; }
+.chtip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 9px;
+  font-size: 12px; line-height: 1.5; box-shadow: 0 4px 14px rgba(0,0,0,.15); white-space: nowrap; z-index: 3; }
+.side.livemode .loupe { display: none; }               /* 変換中は判定枠ルーペを出さない(終わったら戻す) */
+#liveSide { position: sticky; top: 12px; z-index: 2; }  /* 進み具合はスクロールに付いてくる */
+.loupe { background: #000; border-radius: 12px; overflow: hidden; position: relative; }
+.loupe canvas { width: 100%; display: block; }
+.loupe .cap { position: absolute; left: 10px; top: 6px; color: #fff; font-size: 12px; opacity: .85; text-shadow: 0 1px 2px #000; }
+.now { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 13px; }
+.now .big { font-family: var(--font); font-size: 22px; font-weight: 700; letter-spacing: .02em; }
+.now .row { display: flex; justify-content: space-between; gap: 8px; }
+.now .row span:first-child { color: var(--sub); }
+.nextlist { font-family: var(--mono); font-size: 12.5px; margin-top: 6px; }
+.nextlist div { display: flex; gap: 8px; align-items: center; padding: 1px 0; }
+.nextlist i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+.nextlist .o { color: var(--sub); font-size: 11.5px; }
+.bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 10px 0 6px; }
+.bar .grp { display: flex; gap: 4px; align-items: center; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+.bar .grp button { background: transparent; padding: 5px 10px; border-radius: 7px; color: var(--ink); font-size: 13px; }
+.bar .grp button:hover { background: var(--panel); }
+.bar .grp button.on { background: var(--accent); color: #fff; }
+.bar .tc { font-family: var(--font); font-size: 13px; color: var(--sub); margin-left: auto; }
+.layers { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; color: var(--sub); margin: 4px 0 8px; }
+.layers label { display: flex; gap: 5px; align-items: center; cursor: pointer; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--sub); margin-bottom: 8px; }
+.legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; vertical-align: -1px; margin-right: 4px; }
+.legend .pill { display: inline-block; padding: 0 6px; border-radius: 6px; color: #fff; font-size: 11px; margin-right: 4px; }
+canvas.tl { width: 100%; display: block; border-radius: 10px; background: var(--soft); border: 1px solid var(--line); cursor: grab; touch-action: none; user-select: none; }
+.diffs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; max-height: 84px; overflow: auto; }
+.diffs button { font-family: var(--font); font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--soft); color: var(--ink); }
+.diffs button.m { border-color: var(--warn); color: var(--warn); }
+.diffs button.e { border-color: var(--accent); color: var(--accent); }
+.kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; background: var(--soft); }
+.hint { color: var(--sub); font-size: 12.5px; }
+.feed { font-family: var(--mono); font-size: 12px; max-height: 260px; overflow: auto; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; white-space: pre-wrap; word-break: break-all; }
+.feed .hl { color: var(--accent); }
+.feed .err { color: var(--warn); }
+details summary { cursor: pointer; color: var(--sub); font-size: 13px; margin: 6px 0; }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+.stack > * + * { margin-top: 0; }      /* 間隔は gap で(変換中は右の列の順番を入れ替えるので、2 つ目の上の余白だと崩れる) */
+#runView.live { display: none; }       /* 変換中は進み具合を検出ビューの右の列(#liveSide)に出して 1 画面に収める */
+.liveside { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+.liveside .hd { display: flex; align-items: center; gap: 8px; }
+.liveside .hd b { font-size: 15px; }
+.liveside .lsbar { height: 10px; border-radius: 6px; background: var(--line); overflow: hidden; margin: 8px 0 4px; }
+.liveside .lsbar > i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+.liveside .lsmeta { display: flex; justify-content: space-between; font-size: 12px; color: var(--sub); }
+.liveside .lssteps { margin-top: 8px; display: grid; gap: 2px; }
+.liveside .lsstep { display: grid; grid-template-columns: 16px 1fr auto; gap: 6px; font-size: 13px; padding: 3px 6px; border-radius: 6px; align-items: center; }
+.liveside .lsstep.done { color: var(--sub); }
+.liveside .lsstep.cur { background: var(--panel); box-shadow: inset 0 0 0 1px var(--accent); font-weight: 700; }
+.liveside .lssub { font-size: 12px; color: var(--sub); margin: 2px 0 4px 28px; }
+.liveside .lssub .lsbar { height: 6px; margin: 3px 0; }
+.tjabar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0 4px; }
+.tjabar .grp { display: flex; gap: 2px; background: var(--soft); border: 1px solid var(--line); border-radius: 9px; padding: 2px; }
+.tjabar .grp button { background: transparent; padding: 4px 10px; border-radius: 7px; color: var(--ink); font-size: 13px; }
+.tjabar .grp button.on { background: var(--accent); color: #fff; }
+pre.tja { font-family: var(--mono); font-size: 12px; max-height: 320px; overflow: auto; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+.tbar { display: flex; height: 26px; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--line); background: var(--soft); }
+.tbar div { display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; white-space: nowrap; overflow: hidden; min-width: 2px; }
+.hidden { display: none !important; }
+.err-box { border: 1px solid var(--warn); color: var(--warn); border-radius: 8px; padding: 8px 12px; margin-top: 10px; font-size: 13px; white-space: pre-wrap; }
+.empty { color: var(--sub); text-align: center; padding: 60px 20px; }
+.empty b { color: var(--ink); font-size: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>video2tja 検出ビュー</h1>
+  <span class="sp"></span>
+  <button class="ghost" id="theme" title="明るさを切り替え">◐</button>
+</header>
+<main>
+  <div class="stack">
+    <section class="panel">
+      <div class="tabs"><button id="tabOpen" class="on">結果を開く</button><button id="tabRun">新しく変換</button></div>
+      <div id="paneOpen">
+        <input id="rq" type="text" placeholder="曲名・動画 ID で絞り込み">
+        <div class="filters">
+          <label><input type="radio" name="rf" value="all" checked> すべて</label>
+          <label><input type="radio" name="rf" value="ng"> 参照と違いあり</label>
+          <label><input type="radio" name="rf" value="ok"> 完全一致</label>
+          <label><input type="radio" name="rf" value="web"> このページで変換</label>
+        </div>
+        <div id="rlist" class="list" style="max-height:520px"><div class="loading"><span class="spin"></span>読み込み中…</div></div>
+        <div id="rcount" class="hint" style="margin-top:6px"></div>
+      </div>
+      <div id="paneRun" class="hidden">
+        <div class="testrow"><select id="testSel"><option value="short">短い曲(2 分)</option><option value="hidden">隠れた音符が多い曲</option><option value="fps120">120fps の録画</option></select><button id="testRun" class="ghost" title="短い曲 = only my railgun(段位 二段)・隠れた音符が多い曲 = !!!カオスタイム!!!・120fps の録画 = 2026-09-28 01-23-51(曲は音声から探す)">テスト変換</button></div>
+        <div id="testMsg" class="hint"></div>
+        <div id="drop" class="drop"><b>動画を放り込む・クリックして選ぶ</b></div>
+        <input id="file" type="file" accept="video/*" class="hidden">
+        <div id="upmsg" class="chosen"></div>
+        <label class="small">これまでの動画</label>
+        <input id="vq" type="text" placeholder="曲名で絞り込み(例: カオスタイム)">
+        <div id="vlist" class="list"><div class="loading"><span class="spin"></span>読み込み中…</div></div>
+        <div id="vchosen" class="chosen"></div>
+        <label class="small">音声から見つけた曲 <button id="sfbtn" class="ghost" style="padding:1px 8px;font-size:12px" disabled>探し直す</button></label>
+        <div id="sfind" class="list" style="max-height:170px"></div>
+        <label class="small">曲フォルダ</label>
+        <input id="sq" type="text" placeholder="曲名で検索(例: リバースシンデレラ・Chaos Time)">
+        <div id="slist" class="list"><div class="loading"><span class="spin"></span>読み込み中…</div></div>
+        <div id="extdrop" class="drop" style="margin-top:6px;padding:10px"><b>ライブラリに無い譜面(TJA・音源)</b></div>
+        <input id="extfile" type="file" accept=".tja,.ogg,.mp3,.wav" multiple class="hidden">
+        <div id="schosen" class="chosen"></div>
+        <select id="tjasel" class="hidden" style="margin-top:6px"></select>
+        <label class="small" style="margin-top:8px"><input type="checkbox" id="nosong"> ライブラリに無い曲</label>
+        <input id="nstitle" type="text" class="hidden" placeholder="曲名(省くと動画の名前)">
+        <label class="small">動かし方</label>
+        <select id="cpu"><option value="8" selected>軽い(CPU 8 本)</option><option value="all">全力</option></select>
+        <label class="small" style="margin-top:8px" title="120fps などの録画を 60fps に直すときの書き出し方。60fps の動画では使わない">120fps 録画の準備の書き出し</label>
+        <select id="prepEnc"><option value="cpu" selected>CPU</option><option value="nvenc">GPU(速いが精度が落ちる)</option></select>
+        <button id="start" class="primary" disabled>変換を始める</button>
+        <div id="starterr" class="err-box hidden"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="stack">
+    <section id="viewer" class="panel">
+      <div id="vEmpty" class="empty"><b>左の一覧から結果を開く</b></div>
+      <div id="vBody" class="hidden">
+        <div class="viewer-title"><h2 id="vTitle"></h2><span id="vSub" class="hint"></span></div>
+        <div id="chips" class="chips"></div>
+        <div class="viewmode" id="viewMode"><button data-m="chart">譜面で見る</button><button data-m="video" class="on">動画で見る</button></div>
+        <div class="stage-wrap" style="margin-top:12px">
+          <div id="leftCol">
+            <div id="chartWrap">
+              <div class="chtools">
+                <button id="chPlay" class="play" title="再生・停止(スペース)">▶ 再生</button>
+                <span class="grp" id="chRates"><button data-r="0.5">0.5×</button><button data-r="0.75">0.75×</button><button data-r="1" class="on">1×</button></span>
+                <label>音符の音 <select id="chSnd"><option value="off">なし</option><option value="det">採譜</option><option value="ref">本家</option></select></label>
+                <span class="tm" id="chTime"></span>
+                <span style="margin-left:auto">1 行の小節数</span> <span class="grp" id="chK"><button data-k="1">1</button><button data-k="2">2</button><button data-k="4">4</button><button data-k="8">8</button></span></div>
+              <canvas id="chart"></canvas>
+              <div id="chHead" class="chhead hidden"></div>
+              <div id="chTip" class="chtip hidden"></div>
+            </div>
+            <div class="player"><video id="vid" playsinline preload="auto"></video><canvas id="ov"></canvas></div>
+            <div class="bar">
+              <div class="grp"><button id="bPlay" title="再生・停止(スペース)">▶ 再生</button><button id="bPrevF" title="1 フレーム戻す(←)">◀◀</button><button id="bNextF" title="1 フレーム進める(→)">▶▶</button></div>
+              <div class="grp" id="rates"><button data-r="0.1">0.1×</button><button data-r="0.25">0.25×</button><button data-r="0.5">0.5×</button><button data-r="1" class="on">1×</button></div>
+              <div class="grp"><button id="bPrevD" title="前の違い(P)">◀ 違い</button><button id="bNextD" title="次の違い(N)">違い ▶</button></div>
+              <span class="tc" id="tc"></span>
+            </div>
+            <div class="layers">
+              <label><input type="checkbox" id="lNotes" checked> 採譜の音符</label>
+              <label><input type="checkbox" id="lOrigin" checked> 見つけ方の印</label>
+              <label><input type="checkbox" id="lRef" checked> 参照</label>
+              <label><input type="checkbox" id="lBars" checked> 小節線</label>
+              <label><input type="checkbox" id="lRolls" checked> 連打・風船</label>
+              <label><input type="checkbox" id="lFlash" checked> 判定の光</label>
+              <label title="一度は音符として見つけたが、確かめ直して偽物と判断し外したもの(譜面には入らない)"><input type="checkbox" id="lRemoved"> 外した偽物</label>
+              <label><input type="checkbox" id="lHud" checked> 画面の文字</label>
+            </div>
+            <div class="legend">
+              <span><i style="background:var(--don)"></i>ドン</span><span><i style="background:var(--ka)"></i>カッ</span><span><i style="background:var(--roll)"></i>連打・風船</span>
+              <span class="pill" style="background:var(--added)" title="白い縁の円から足した">隠れ</span><span class="pill" style="background:var(--front)" title="判定枠の手前で顔を見て足した">顔</span><span class="pill" style="background:var(--line2)" title="点の直線から拾った">直線</span><span class="pill" style="background:var(--rescue)" title="途中で見失った軌跡">救済</span><span class="pill" style="background:var(--emerge)" title="判定枠の手前だけで見えた">枠前</span><span class="pill" style="background:var(--front)" title="判定枠の真上で 1〜2 枚だけ写った">目撃</span><span class="pill" style="background:var(--rescue)" title="途中から見え始めた軌跡">途中</span><span class="pill" style="background:var(--line2)" title="レーンの上下の縁にはみ出した色から見つけた(ほかの音符に隠れていた)">縁</span>
+            </div>
+            <canvas id="tl" class="tl" height="150" style="height:150px"></canvas>
+            <canvas id="ovv" class="tl" height="46" style="height:46px;margin-top:6px"></canvas>
+            <div id="diffs" class="diffs"></div>
+          </div>
+          <div class="side">
+            <div id="liveSide" class="liveside hidden"><div class="hd"><b id="lsStatus">変換中</b><span style="flex:1"></span><button class="ghost" id="lsCancel" style="padding:3px 10px">止める</button></div>
+              <div id="lsDone" class="hidden"><div id="lsSummary" class="lsmeta" style="display:block;margin-top:6px"></div>
+                <div style="display:flex;gap:6px;margin-top:8px"><button class="ghost" id="lsToAi" style="padding:4px 10px" title="本家の音源とヘッダーに、この譜面(清書版)を載せて Songs/13 AI譜面 に入れる">ゲームに入れる</button></div>
+                <div id="lsToAiMsg" class="hint" style="margin-top:4px"></div></div>
+              <div id="lsBody"></div></div>
+            <div class="loupe"><canvas id="lp" width="600" height="300" style="aspect-ratio:2/1"></canvas><div class="cap">判定枠ルーペ(2 倍)</div></div>
+            <div class="now">
+              <div class="row"><span>動画の時刻</span><span class="big" id="nowT">0.000</span></div>
+              <div class="row"><span>フレーム</span><span id="nowF"></span></div>
+              <div class="row"><span>通過した音符</span><span id="nowN"></span></div>
+              <div class="row"><span>この先の音符</span><span></span></div>
+              <div id="nextlist" class="nextlist"></div>
+            </div>
+          </div>
+        </div>
+        <details style="margin-top:12px"><summary>書き出した TJA</summary>
+          <div class="tjabar"><div class="grp" id="tjaSel"><button data-k="clean" class="on" title="音符・小節線は採譜から 5ms 以内、流れる速さは 3% 以内のまま、セル数を最小にして細かい BPM・SCROLL の変更をまとめた版(ゲームにはこちらを入れる)">清書版</button><button data-k="raw" title="測った時刻と速さをそのまま書いた版">採譜そのまま</button></div><span id="tjastat" class="hint"></span></div>
+          <div id="tjapath" class="hint"></div><pre id="tja" class="tja"></pre></details>
+        <details style="margin-top:6px"><summary>処理のログ</summary><div id="vlog" class="feed" style="max-height:360px"></div></details>
+      </div>
+    </section>
+
+    <section id="runView" class="panel hidden">
+      <div id="runGuide" class="guide"><div style="font-size:17px;font-weight:700;color:var(--ink)">動画から譜面を作る</div></div>
+      <div id="runBody" class="hidden">
+        <div class="run-head"><h2 id="runTitle"></h2><span id="runStatus" class="run-status run">変換中</span><span style="flex:1"></span><button id="cancel" class="ghost">止める</button><button id="runOpen" class="ghost hidden">結果を見る</button><button id="toAi" class="ghost hidden" title="本家の音源とヘッダーに、この譜面(清書版)を載せて Songs/13 AI譜面 に入れる">ゲームに入れる</button></div>
+        <div id="toAiMsg" class="hint hidden"></div>
+        <div id="runSub" class="run-sub"></div>
+        <div class="bigbar"><div id="runFill" class="fill run"></div><div class="lbl"><span id="runLbl"></span><span id="runPct" class="pct"></span></div></div>
+        <div class="run-times"><span>経過 <b id="runEl">0</b> 秒</span><span id="runEtaW">残り目安 <b id="runEta">—</b></span><span id="runSpeed"></span></div>
+        <div id="runSteps" class="steps"></div>
+        <div id="runCur" class="curcard"></div>
+        <div id="runDone" class="donelist"></div>
+        <div id="runerr" class="err-box hidden"></div>
+        <details style="margin-top:14px"><summary>処理の出力(詳しく)</summary>
+          <div id="feed" class="feed"></div>
+          <details><summary>すべての出力</summary><div id="raw" class="feed" style="max-height:360px"></div></details>
+        </details>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const CF = '"Gen Interface JP", "Noto Sans JP", system-ui, sans-serif';   // canvas の文字の書体(本文の --font と同じ)
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+// ---------- 明るさ ----------
+(() => { try { const t = localStorage.getItem('v2t-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {} })();
+$('theme').onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const nx = cur === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = nx;
+  try { localStorage.setItem('v2t-theme', nx); } catch (e) {}
+  drawAll();
+};
+// ---------- タブ ----------
+// 左のタブで右側も切り替える: 「結果を開く」= 検出ビュー、「新しく変換」= 変換の進み具合だけ(ほかは出さない)
+function showTab(run) {
+  $('tabRun').classList.toggle('on', run); $('tabOpen').classList.toggle('on', !run);
+  $('paneRun').classList.toggle('hidden', !run); $('paneOpen').classList.toggle('hidden', run);
+  $('runView').classList.toggle('hidden', !run); $('viewer').classList.toggle('hidden', run && !liveOn && !liveDone);
+  const v_ = $('vid'); if (run && v_ && !v_.paused) v_.pause();
+}
+// 人がタブを押したか(起動時に前回の結果を開き直すのは、一覧の読み込みを待つ間に人がタブを動かしていないときだけ)
+let tabTouched = false;
+$('tabOpen').onclick = () => { tabTouched = true; showTab(false); };
+$('tabRun').onclick = () => { tabTouched = true; showTab(true); };
+
+// ---------- 段階とログの読み取り ----------
+const STAGES = [
+  ['準備', '曲フォルダの譜面(TJA)と音源(ogg)を探す'],
+  ['音声合わせ', '動画の音と曲の音源を重ね合わせて、「動画の何秒が曲の 0 秒か」を決める'],
+  ['較正', 'レーンの高さ・判定枠の位置・音符の大きさを測る(録画ごとに画面の大きさや位置が違うので)'],
+  ['検出', '動画を全フレーム読み、流れてくる赤・青の丸を見つけ、フレームをまたいで追いかけて「判定枠に着く時刻」と速さを出す'],
+  ['隠れた音符', '速さの違う音符に追い越されて隠れながら流れる音符を、白い縁の円を追いかけて拾い直す。途中から現れた軌跡が本物かも縁で確かめる'],
+  ['風船', '風船の吹き出しの数字を読んで打数を出す'],
+  ['ゴーゴー', 'レーンの色が変わる区間(ゴーゴータイム)を探す'],
+  ['音声安定', '参照の譜面と照らし合わせて一致率を出し、映像と音のずれ(OFFSET)を測る'],
+  ['譜面作成', '音符の時刻を BPM・小節・拍に並べて TJA を書き出す'],
+];
+const OPTIONAL = { '検出(やり直し)': 'フレーム落ちを見つけたので、時計を直してもう一度追いかける', '現れた音符': '途中から現れた音符を確かめる', '遅い音符': 'ゆっくり流れる音符の叩いた時刻を確かめる' };
+let parsed = null;
+function newParsed() { return { done: {}, order: [], facts: {}, cal: null, calAdopt: null, cals: [], added: [], removed: [], misses: [], extras: [], best: null, error: null, finished: false, bpm: null, notes: null, prog: null }; }
+function fact(stage, txt) { (parsed.facts[stage] = parsed.facts[stage] || []).push(txt); }
+function currentStage() { for (const [n] of STAGES) if (!(n in parsed.done)) return n; return null; }
+function parseLine(ln) {
+  let m;
+  // 段階の中の進み具合「[進み] 段階: いくつ/全部 何を」(detect2.progress)
+  if ((m = ln.match(/^\[進み\] ([^:]+): (?:(\d+)\/(\d+) )?(.*)$/))) {
+    const p = parsed.prog && parsed.prog.stage === m[1] ? parsed.prog : { stage: m[1], t0: Date.now() };
+    p.done = m[2] ? +m[2] : null; p.total = m[3] ? +m[3] : null; p.what = m[4]; p.t = Date.now();
+    if (p.what !== p.lastWhat) { p.whatT0 = Date.now(); p.lastWhat = p.what; }
+    parsed.prog = p; return null;
+  }
+  if ((m = ln.match(/^\[時間\]\s+(\S+)\s+([\d.]+)s/))) { parsed.done[m[1]] = +m[2]; if (!parsed.order.includes(m[1])) parsed.order.push(m[1]); return 'hl'; }
+  if ((m = ln.match(/Δ\(VID2OGG\) = ([-\d.]+)/))) {
+    fact('音声合わせ', `動画の ${(+m[1]).toFixed(2)} 秒 = 曲の 0 秒`);
+    const mc = ln.match(/waveform corr ([-\d.]+)/);
+    // 本物の曲は 0.13 以上(曲探しの 1100 本)。0.1 未満は選んだ曲の音源が動画の曲と違う見込みが高い
+    if (mc && +mc[1] < 0.1) { parsed.warn = `選んだ曲の音源と動画の音声がほとんど合いません(相関 ${(+mc[1]).toFixed(3)})。曲が違うか、音源が別の版かもしれません`; fact('音声合わせ', '⚠ ' + parsed.warn); }
+    return 'hl';
+  }
+  if ((m = ln.match(/lane_y ([\d.]+)\s+judge_x ([\d.]+) d ([\d.]+)/))) { parsed.cals.push({ lane_y: +m[1], judge_x: +m[2], d: +m[3], W: 1920, H: 1080 }); return 'hl'; }
+  if ((m = ln.match(/calib: (\d+)x(\d+) @([\d.]+)fps.*lane_y ([\d.]+)\s+d_small ([\d.]+)\s+judge_x ([\d.]+)/))) { parsed.cals.push({ lane_y: +m[4], judge_x: +m[6], d: +m[5], W: +m[1], H: +m[2] }); fact('較正', `${m[1]}×${m[2]} ${(+m[3]).toFixed(0)}fps・レーン y=${(+m[4]).toFixed(0)}・判定枠 x=${(+m[6]).toFixed(0)}・小音符 ${(+m[5]).toFixed(0)}px`); return 'hl'; }
+  if ((m = ln.match(/判定枠 x ([\d.]+) を採用/))) { parsed.calAdopt = +m[1]; return 'hl'; }
+  if ((m = ln.match(/^デコード: (\S+)/))) { fact('検出', m[1].includes('cuvid') || m[1].includes('cuda') ? 'GPU でデコード' : 'デコード: ' + m[1]); return; }
+  if (/候補のキャッシュを使う/.test(ln)) { fact('検出', '前回読んだ候補を再利用'); return 'hl'; }
+  if ((m = ln.match(/parallel decode: (\d+) frames in (\d+) chunks \((\d+) workers\)/))) { fact('検出', `${m[1]} フレームを ${m[3]} 本で並列に読んだ`); return 'hl'; }
+  if ((m = ln.match(/ゲームの時計 — 孤立した複製 (\d+) 枚.*処理落ちの組 (\d+)/))) { fact('検出', `録画の複製・落ちたフレーム: 複製 ${m[1]}・処理落ち ${m[2]} 組`); return; }
+  if ((m = ln.match(/V\(median\) ([\d.]+) px\/frame, tracks (\d+), onsets (\d+)/))) { fact('検出', `軌跡 ${m[2]} 本 → 音符 ${m[3]} 個(よくある速さ ${(+m[1]).toFixed(1)}px/フレーム)`); return 'hl'; }
+  if ((m = ln.match(/ringtrack: 区間 (.*)/))) { const ws = m[1].trim().split(/\s+/).map(s => s.split('-').map(Number)).filter(w => w.length === 2); fact('隠れた音符', `追い越しのある区間 ${ws.length} か所・計 ${ws.reduce((a, w) => a + (w[1] - w[0]), 0).toFixed(0)} 秒を調べる`); return 'hl'; }
+  if ((m = ln.match(/隠れて流れる音符を (\d+) 個足した: (.*)/))) { for (const it of m[2].matchAll(/(don|ka) ([\d.]+)\(速さ ([\d.]+)\)/g)) parsed.added.push({ color: it[1], t: +it[2], vel: +it[3] }); fact('隠れた音符', `隠れた音符を ${m[1]} 個足した`); return 'hl'; }
+  if ((m = ln.match(/偽の音符 (\d+) 個を外した: (.*)/))) { for (const it of m[2].matchAll(/(don|ka) ([\d.]+)/g)) parsed.removed.push({ color: it[1], t: +it[2] }); fact('隠れた音符', `偽物 ${m[1]} 個を外した`); return 'hl'; }
+  if ((m = ln.match(/\[gogo\] ゴーゴー (\d+) 区間/))) { fact('ゴーゴー', `ゴーゴー ${m[1]} 区間`); return 'hl'; }
+  if ((m = ln.match(/^風船の打数: (.*)/))) { const n = (m[1].match(/→/g) || []).length; fact('風船', `風船 ${n} 個`); return 'hl'; }
+  if ((m = ln.match(/detected (\d+) onsets, (\d+) bars/))) { parsed.notes = +m[1]; fact('音声安定', `音符 ${m[1]} 個・小節線 ${m[2]} 本`); return 'hl'; }
+  if ((m = ln.match(/best course: (\w+)\s+recall ([\d.]+)% precision ([\d.]+)%\s+misses (\d+) extras (\d+)/))) { parsed.best = { course: m[1], recall: +m[2], precision: +m[3], misses: +m[4], extras: +m[5] }; fact('音声安定', `参照の ${m[1]} と一致 ${m[2]}%(取りこぼし ${m[4]}・余分 ${m[5]})`); return 'hl'; }
+  if ((m = ln.match(/misses \(video s\): (.*)/))) { parsed.misses = m[1].trim().split(/\s+/).map(Number); return 'hl'; }
+  if ((m = ln.match(/extras \(video s\): (.*)/))) { parsed.extras = m[1].trim().split(/\s+/).map(Number); return 'hl'; }
+  if ((m = ln.match(/同期: 採用 ([-+\d.]+)ms/))) { fact('音声安定', `映像と音のずれ ${m[1]}ms を補正`); return 'hl'; }
+  if ((m = ln.match(/推定 BPM ([\d.]+)/))) { parsed.bpm = +m[1]; return; }
+  if ((m = ln.match(/書き出し (.*?\.tja)\s+小節数 (\d+)\s+音符記号 (\d+)/))) { fact('譜面作成', `${m[2]} 小節の TJA を書き出した`); return 'hl'; }
+  if (/Traceback|Error:|エラー/.test(ln)) { parsed.error = (parsed.error || '') + ln + '\n'; return 'err'; }
+  if (/^\[web\] 終了/.test(ln)) { parsed.finished = true; return 'hl'; }
+  return null;
+}
+// ---- 変換の進み具合 ----
+// 段階の重み(CPU 8 本・2 分半の曲でのおおよその秒)。終わった段階の実際の秒で目安を合わせ直す
+const WEIGHT = { '準備': 0.5, '音声合わせ': 3, '較正': 3, '検出': 18, '検出(やり直し)': 12, '隠れた音符': 2.5, '現れた音符': 1, '遅い音符': 1, '風船': 1, 'ゴーゴー': 1, '音声安定': 2, '譜面作成': 1 };
+let stageStart = {}, runT0 = 0;
+function allStages() {
+  const names = STAGES.map(s => s[0]); const all = [...STAGES];
+  for (const n of parsed.order) if (!names.includes(n) && OPTIONAL[n]) all.splice(names.indexOf('隠れた音符') + (n === '検出(やり直し)' ? 0 : 1), 0, [n, OPTIONAL[n]]);
+  return all;
+}
+function renderRun(job) {
+  const all = allStages(), now = Date.now();
+  const cur = parsed.finished ? null : currentStage();
+  if (cur && !(cur in stageStart)) stageStart[cur] = now;
+  const failed = parsed.finished && (parsed.error || (job && job.code));
+  // 目安: 終わった段階の「実際の秒 ÷ 重み」で残りの重みを秒にする
+  let wDone = 0, sDone = 0, wAll = 0;
+  for (const [n] of all) { const w = WEIGHT[n] ?? 1; wAll += w; if (n in parsed.done) { wDone += w; sDone += parsed.done[n]; } }
+  const k = wDone > 2 ? Math.max(0.3, sDone / wDone) : 1;
+  let frac = 0, curEl = 0, fracReal = null;
+  if (cur) { curEl = (now - stageStart[cur]) / 1000; frac = Math.min(0.92, curEl / ((WEIGHT[cur] ?? 1) * k)); }
+  const pg = parsed.prog && !parsed.finished && parsed.prog.stage === cur ? parsed.prog : null;
+  // 段階の中の数字の進み(読んだ区切りの数など)があれば、それで今の段階の進みと残りを出す(経過だけの目安より確か)
+  if (pg && pg.total) { fracReal = Math.min(0.99, pg.done / pg.total); frac = fracReal; }
+  const pct = parsed.finished ? 100 : Math.min(99, 100 * (wDone + (cur ? (WEIGHT[cur] ?? 1) * frac : 0)) / wAll);
+  const curRemain = fracReal !== null && fracReal > 0.03 && curEl > 2 ? curEl * (1 - fracReal) / fracReal : (cur ? Math.max(0, (WEIGHT[cur] ?? 1) * k - curEl) : 0);
+  const remain = parsed.finished ? 0 : Math.max(0, (wAll - wDone - (cur ? (WEIGHT[cur] ?? 1) : 0)) * k + curRemain);
+  const fill = $('runFill'); fill.style.width = pct.toFixed(1) + '%'; fill.className = 'fill ' + (failed ? 'ng' : parsed.finished ? 'done' : 'run');
+  $('runPct').textContent = pct.toFixed(0) + '%';
+  $('runLbl').textContent = failed ? '止まりました' : parsed.finished ? '完了' : (cur || '準備中') + ' …';
+  $('runEl').textContent = ((now - runT0) / 1000).toFixed(0);
+  $('runEta').textContent = parsed.finished ? '—' : remain < 1 ? 'まもなく' : '約 ' + Math.ceil(remain) + ' 秒';
+  const st = $('runStatus'); st.className = 'run-status ' + (failed ? 'ng' : parsed.finished ? 'ok' : 'run'); st.textContent = failed ? '失敗' : parsed.finished ? '完了' : '変換中';
+  // 段階の並び
+  $('runSteps').innerHTML = all.map(([n], i) => {
+    const done = n in parsed.done, isCur = n === cur, skip = !done && parsed.finished;
+    const tm = done ? (parsed.done[n] < 0.05 ? '—' : parsed.done[n].toFixed(1) + 's') : isCur ? curEl.toFixed(0) + 's' : '';
+    return `<div class="step ${done ? 'done' : isCur ? 'cur' : skip ? 'skip' : ''}" title="${esc(n)}"><div class="ic">${done ? '✓' : i + 1}</div><div class="nm">${esc(n)}</div><div class="tm">${tm}</div></div>`;
+  }).join('');
+  // 今の段階(大きく)
+  const cc = $('runCur');
+  if (failed) {
+    cc.className = 'curcard ng'; cc.innerHTML = `<div class="k">止まりました</div><div class="t">うまく変換できませんでした</div><div class="d">下の「処理の出力」に詳しい理由があります</div>`;
+  } else if (parsed.finished) {
+    const b = parsed.best;
+    cc.className = 'curcard done';
+    cc.innerHTML = `<div class="k">完了</div><div class="t">譜面ができました</div><div class="d">${b ? `参照(${esc(b.course)})との一致 <b>${b.recall.toFixed(1)}% / ${b.precision.toFixed(1)}%</b>(参照にだけある ${b.misses}・採譜にだけある ${b.extras})` : '参照の譜面が無いので、答え合わせはしていません'}</div>` +
+      (parsed.warn ? `<div class="d" style="margin-top:8px;color:var(--warn);font-weight:700">⚠ ${esc(parsed.warn)}</div>` : '') + `
+      <div class="facts">${parsed.notes ? `<span>音符 ${parsed.notes} 個</span>` : ''}${parsed.bpm ? `<span>BPM 約 ${parsed.bpm.toFixed(0)}</span>` : ''}<span>かかった時間 ${((now - runT0) / 1000).toFixed(0)} 秒</span></div>
+      <div class="d" style="margin-top:8px">まもなく結果の動画に切り替わります</div>`;
+  } else {
+    const d = (all.find(x => x[0] === cur) || [cur, ''])[1];
+    cc.className = 'curcard';
+    // 段階の中の進み: 数字があればバーと「いくつ / 全部」、無ければ動いている印。段階名が違う行(曲探しなど)も、終わっていなければ出す
+    const pp = parsed.prog && !(parsed.prog.stage in parsed.done) && (now - parsed.prog.t) < 60000 ? parsed.prog : null;
+    let sub = '';
+    if (pp) {
+      const has = pp.total > 0, pc = has ? Math.min(100, 100 * pp.done / pp.total) : 0;
+      const el_ = ((now - (pp.whatT0 || pp.t0)) / 1000).toFixed(0);
+      sub = `<div class="sub"><div class="subbar ${has ? '' : 'busy'}"><div class="f" style="width:${pc.toFixed(1)}%"></div></div>` +
+        `<div class="subt"><span>${pp.stage !== cur ? esc(pp.stage) + ': ' : ''}${esc(pp.what || '')}</span><span>${has ? `<b>${pp.done} / ${pp.total}</b>(${pc.toFixed(0)}%)` : `${el_} 秒`}</span></div></div>`;
+    }
+    cc.innerHTML = `<div class="k">いま実行中(${all.findIndex(x => x[0] === cur) + 1} / ${all.length})</div><div class="t">${esc(cur || '準備中')}</div><div class="d">${esc(d || '')}</div>` + sub +
+      ((parsed.facts[cur] || []).length ? `<div class="facts">${parsed.facts[cur].map(f => `<span>${esc(f)}</span>`).join('')}</div>` : '');
+  }
+  // 終わった段階の要点
+  $('runDone').innerHTML = all.filter(([n]) => n in parsed.done).map(([n]) =>
+    `<div class="it"><span class="c">✓</span><span class="n">${esc(n)}</span><span class="f">${esc((parsed.facts[n] || []).join(' ・ ') || '')}</span><span class="s">${parsed.done[n] < 0.05 ? '—' : parsed.done[n].toFixed(1) + ' 秒'}</span></div>`).join('');
+  if (parsed.error) { $('runerr').textContent = parsed.error; $('runerr').classList.remove('hidden'); } else $('runerr').classList.add('hidden');
+  renderLiveSide({ all, cur, failed, pct, remain, curEl, now });
+}
+// 変換中の進み具合(検出ビューの右の列): 全体のバー・経過と残り・段階の一覧(済み ✓・いま ▶ と段階の中の進み)
+function renderLiveSide(r) {
+  const el = $('liveSide'); if (!el) return;
+  if (!liveOn && !liveDone) { el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+  $('lsStatus').textContent = r.failed ? '止まりました' : parsed.finished ? '完了' : '変換中';
+  $('lsCancel').classList.toggle('hidden', !!parsed.finished);
+  $('lsDone').classList.toggle('hidden', !liveDone);
+  if (liveDone) {
+    const b = parsed.best;
+    $('lsSummary').innerHTML = (b ? `参照(${esc(b.course)})との一致 <b>${b.recall.toFixed(1)}% / ${b.precision.toFixed(1)}%</b>(参照にだけ ${b.misses}・採譜にだけ ${b.extras})` : '参照の譜面が無いので、答え合わせはしていません') +
+      `<br>かかった時間 ${((r.now - runT0) / 1000).toFixed(0)} 秒`;
+  }
+  const pp = parsed.prog && !(parsed.prog.stage in parsed.done) && (r.now - parsed.prog.t) < 60000 ? parsed.prog : null;
+  const steps = r.all.map(([n]) => {
+    const done = n in parsed.done, isCur = n === r.cur;
+    const tm = done ? (parsed.done[n] < 0.05 ? '—' : parsed.done[n].toFixed(1) + 's') : isCur ? r.curEl.toFixed(0) + 's' : '';
+    let sub = '';
+    if (isCur && pp) {
+      const has = pp.total > 0, pc = has ? Math.min(100, 100 * pp.done / pp.total) : 0;
+      sub = `<div class="lssub">${has ? `<div class="lsbar"><i style="width:${pc.toFixed(1)}%"></i></div>` : ''}${esc(pp.what || '')}${has ? ` <b>${pp.done} / ${pp.total}</b>` : ''}</div>`;
+    }
+    return `<div class="lsstep ${done ? 'done' : isCur ? 'cur' : ''}"><span>${done ? '✓' : isCur ? '▶' : '・'}</span><span>${esc(n)}</span><span>${tm}</span></div>` + sub;
+  }).join('');
+  $('lsBody').innerHTML = `<div class="lsbar"><i style="width:${r.pct.toFixed(1)}%"></i></div>
+    <div class="lsmeta"><span><b>${r.pct.toFixed(0)}%</b></span><span>経過 ${((r.now - runT0) / 1000).toFixed(0)} 秒 ・ 残り ${parsed.finished ? '—' : r.remain < 1 ? 'まもなく' : '約 ' + Math.ceil(r.remain) + ' 秒'}</span></div>
+    <div class="lssteps">${steps}</div>` + (parsed.error ? `<div class="err-box" style="margin-top:8px">${esc(parsed.error)}</div>` : '');
+}
+function feedLines(arr, reset) {
+  const feed = $('feed'), raw = $('raw');
+  if (reset) { feed.innerHTML = ''; raw.textContent = ''; }
+  let fh = '', rh = '';
+  for (const ln of arr) { const k = parseLine(ln); rh += esc(ln) + '\n'; if (k) fh += `<div class="${k}">${esc(ln.trim())}</div>`; }
+  const atBottom = feed.scrollTop + feed.clientHeight >= feed.scrollHeight - 30;
+  feed.insertAdjacentHTML('beforeend', fh); raw.insertAdjacentHTML('beforeend', rh);
+  if (atBottom || reset) feed.scrollTop = reset ? 0 : feed.scrollHeight;
+}
+
+// ---------- 結果を開く ----------
+let results = [], openKey = null;
+// 左の一覧の読み込み中・失敗の表示(結果の一覧は 1100 本を超え、サーバーが集めるのに数秒かかる)
+const LOADING_ROW = '<div class="loading"><span class="spin"></span>読み込み中…</div>';
+const loadState = { results: 'loading', videos: 'loading', songs: 'loading' };
+function loadErrRow(what) { return `<div class="loaderr">読み込めませんでした <button class="ghost" style="padding:1px 8px;font-size:12px" onclick="event.stopPropagation(); reload_('${what}')">読み直す</button></div>`; }
+function reload_(what) { ({ results: loadResults, videos: loadVideos, songs: loadSongs })[what](); }
+async function loadResults() {
+  loadState.results = 'loading'; if (!results.length) renderResults(); else $('rcount').innerHTML = '<span class="spin"></span> 読み込み中…';
+  try { const r = await fetch('/api/results'); if (!r.ok) throw new Error(r.status); results = await r.json(); loadState.results = 'ok'; }
+  catch (e) { loadState.results = 'err'; }
+  renderResults();
+}
+function renderResults() {
+  if (loadState.results !== 'ok' && !results.length) {
+    $('rlist').innerHTML = loadState.results === 'err' ? loadErrRow('results') : LOADING_ROW; $('rcount').textContent = ''; return;
+  }
+  const q = $('rq').value.toLowerCase().trim(), f = document.querySelector('input[name=rf]:checked').value;
+  const hits = results.filter(r => (!q || r.name.toLowerCase().includes(q) || r.id.toLowerCase().includes(q)) &&
+    (f === 'all' || (f === 'ng' && r.kind !== 'web' && r.diff > 0) || (f === 'ok' && r.kind !== 'web' && r.diff === 0) || (f === 'web' && r.kind === 'web')));
+  $('rlist').innerHTML = hits.slice(0, 400).map(r => {
+    const b = (r.kind === 'web' ? '<span class="badge">変換</span>' : r.kind === 'suite' ? '<span class="badge">試験</span>' : '') +
+      (r.diff === 0 ? '<span class="badge ok">一致</span>' : r.diff > 0 ? `<span class="badge ng">違い ${r.diff}</span>` : '');
+    const key = r.kind + ':' + r.id;
+    return `<div data-k="${esc(key)}" class="${key === openKey ? 'sel' : ''}" title="${esc(r.id)}"><span class="nm">${esc(r.name)}</span>${r.course ? `<span class="badge">${esc(r.course)}</span>` : ''}${b}</div>`;
+  }).join('') || '<div class="hint" style="cursor:default">見つかりません</div>';
+  $('rcount').textContent = `${hits.length} 件(全 ${results.length} 件)`;
+}
+$('rq').oninput = renderResults;
+document.querySelectorAll('input[name=rf]').forEach(e => e.onchange = renderResults);
+$('rlist').onclick = (e) => { const d = e.target.closest('div[data-k]'); if (!d) return; const [kind, ...rest] = d.dataset.k.split(':'); openResult(kind, rest.join(':')); };
+// 書き出した TJA: 清書版(既定)と採譜そのままを切り替える。行数・BPM/SCROLL の変更の数を並べて出す
+let tjaKind = 'clean';
+function tjaStat(t) {
+  if (!t) return null;
+  const L = t.split(/\r?\n/); let on = false, n = 0, b = 0, sc = 0;
+  for (const l of L) {
+    if (l.startsWith('#START')) { on = true; continue; }
+    if (l.startsWith('#END')) { on = false; continue; }
+    if (!on || !l.trim()) continue;
+    n++; if (l.startsWith('#BPMCHANGE')) b++; if (l.startsWith('#SCROLL')) sc++;
+  }
+  return { n, b, sc };
+}
+function showTja(res, kind) {
+  const clean = kind === 'clean' && res.tja_clean;
+  $('tja').textContent = (clean ? res.tja_clean : res.tja) || '(TJA がありません)';
+  $('tjapath').textContent = (clean ? res.tja_clean_path : res.tja_path) || '';
+  document.querySelectorAll('#tjaSel button').forEach(b => {
+    b.classList.toggle('on', b.dataset.k === (clean ? 'clean' : 'raw'));
+    b.disabled = b.dataset.k === 'clean' && !res.tja_clean;
+    b.onclick = () => { tjaKind = b.dataset.k; showTja(res, tjaKind); };
+  });
+  const a = tjaStat(res.tja), c = tjaStat(res.tja_clean);
+  $('tjastat').textContent = a && c ? `本文 ${a.n} → ${c.n} 行・BPM の変更 ${a.b} → ${c.b}・SCROLL の変更 ${a.sc} → ${c.sc}(採譜そのまま → 清書版)` : (res.tja_clean_err ? '清書に失敗: ' + res.tja_clean_err : '');
+}
+async function openResult(kind, id) {
+  openKey = kind + ':' + id; renderResults();
+  $('vEmpty').innerHTML = '<span class="spin"></span> <b>開いています…</b>'; $('vEmpty').classList.remove('hidden'); $('vBody').classList.add('hidden');
+  const r = await fetch(`/api/open?kind=${encodeURIComponent(kind)}&id=${encodeURIComponent(id)}`); const j = await r.json();
+  if (!r.ok) { $('vEmpty').innerHTML = '<b>' + esc(j.error || '開けませんでした') + '</b>'; return; }
+  parsed = newParsed(); let lh = '';
+  for (const ln of (j.log || '').split('\n')) { const k = parseLine(ln); if (k) lh += `<div class="${k}">${esc(ln.trim())}</div>`; }
+  parsed.finished = true; $('vlog').innerHTML = lh || '<span class="hint">ログがありません</span>';
+  showTab(false); setViewMode('video'); showViewer(j);
+}
+
+// ---------- 新しく変換 ----------
+let videoPath = null, songDir = null, songs = [], videos = [], job = null, es = null, tStart = 0, timer = null;
+async function loadVideos() {
+  loadState.videos = 'loading'; if (!videos.length) renderVideos();
+  try { const r = await fetch('/api/videos'); if (!r.ok) throw new Error(r.status); videos = await r.json(); loadState.videos = 'ok'; }
+  catch (e) { loadState.videos = 'err'; }
+  renderVideos();
+}
+function renderVideos() {
+  if (loadState.videos !== 'ok' && !videos.length) { $('vlist').innerHTML = loadState.videos === 'err' ? loadErrRow('videos') : LOADING_ROW; return; }
+  const q = $('vq').value.toLowerCase().trim();
+  const hits = videos.filter(v => !q || v.title.toLowerCase().includes(q) || v.name.toLowerCase().includes(q));
+  $('vlist').innerHTML = hits.slice(0, 300)
+    .map(v => `<div data-p="${esc(v.path)}" class="${v.path === videoPath ? 'sel' : ''}" title="${esc(v.name)}"><span class="nm">${esc(v.title)}</span>${v.course ? `<span class="badge">${esc(v.course)}</span>` : ''}<span class="badge">${esc(v.where)}</span></div>`).join('')
+    || '<div class="hint" style="cursor:default">見つかりません</div>';
+}
+$('vq').oninput = renderVideos;
+$('vlist').onclick = (e) => { const d = e.target.closest('div[data-p]'); if (d) pickVideo(d.dataset.p); };
+// 動画を選ぶ。曲名の分かっている動画(試験・一括試験)は、曲フォルダと参照の TJA も選ぶ
+function pickVideo(p) {
+  videoPath = p; const v = videos.find(x => x.path === p);
+  $('vchosen').innerHTML = '選んだ動画: <b>' + esc(v ? v.title : p.split(/[\\/]/).pop()) + '</b>' + (v && v.title !== v.name ? ` <span style="opacity:.6">(${esc(v.name)})</span>` : '');
+  $('sfbtn').disabled = false;
+  if (v && v.dir && songs.some(s_ => s_.dir === v.dir)) { selectSong(v.dir, v.ref); $('sq').value = ''; $('sfind').innerHTML = ''; }
+  else {
+    // 前の動画で選んだ曲は消す(曲探しが決められなかったとき、前の曲のまま変換が始まった: 銀の黎明の録画を Nivalis*Anima で変換した)。
+    // 自分で入れたライブラリに無い譜面(ext:)は残す
+    if (!(songDir && songDir.startsWith('ext:'))) {
+      songDir = null; autoRef = null; $('tjasel').classList.add('hidden');
+      $('schosen').innerHTML = '<span style="opacity:.7">曲はまだ選ばれていません(動画の音声から探しています)</span>'; renderSongs();
+    }
+    findSong(p);
+  }
+  renderVideos(); updStart();
+}
+// 動画の音声から曲を探す(songfind.py)。1 位がはっきり高ければ(0.2 以上で 2 位の 2 倍以上)その曲フォルダと TJA を選ぶ
+let sfSeq = 0;
+async function findSong(p) {
+  const my = ++sfSeq;
+  $('sfind').innerHTML = '<div class="loading"><span class="spin"></span>曲を探しています…</div>';
+  let r, j;
+  try { r = await fetch('/api/findsong?video=' + encodeURIComponent(p)); j = await r.json(); } catch (e) { j = { error: String(e) }; r = { ok: false }; }
+  if (my !== sfSeq) return;
+  if (!r.ok || !Array.isArray(j)) { $('sfind').innerHTML = '<div class="hint" style="cursor:default">' + esc(j.error || '探せませんでした') + '</div>'; return; }
+  if (!j.length) { $('sfind').innerHTML = '<div class="hint" style="cursor:default">候補がありません</div>'; return; }
+  $('sfind').innerHTML = j.map((c, i) => `<div data-d="${esc(c.dir)}" data-t="${esc(c.tja || '')}" title="${esc(c.dir)}"><span class="nm">${esc(c.title || c.dir.split('/').pop())} <span style="opacity:.55;font-size:12px">${esc(c.dir)}${c.tja ? ' / ' + esc(c.tja) : ''}</span></span>${c.same && c.same.length ? `<span class="badge" title="${esc(c.same.join(' / '))}">同じ音源 ${c.same.length}</span>` : ''}<span class="badge">${c.score.toFixed(2)}</span></div>`).join('');
+  // 自動で選ぶかは songfind.choose が決める(1 位の組が 0.13 以上で 2 位の組の 1.5 倍以上。同じ音源の段位・自動採譜のフォルダはまとめる)
+  const clear = j[0].auto;
+  if (clear && songs.some(s_ => s_.dir === j[0].dir)) { selectSong(j[0].dir, j[0].tja); $('sq').value = ''; }
+  else $('sfind').insertAdjacentHTML('afterbegin', '<div class="hint" style="cursor:default">候補から選ぶ</div>');
+}
+$('sfind').onclick = (e) => { const d = e.target.closest('div[data-d]'); if (d) selectSong(d.dataset.d, d.dataset.t || undefined); };
+$('sfbtn').onclick = () => { if (videoPath) findSong(videoPath); };
+const drop = $('drop');
+drop.onclick = () => $('file').click();
+drop.ondragover = (e) => { e.preventDefault(); drop.classList.add('over'); };
+drop.ondragleave = () => drop.classList.remove('over');
+drop.ondrop = (e) => { e.preventDefault(); drop.classList.remove('over'); if (e.dataTransfer.files[0]) upload(e.dataTransfer.files[0]); };
+$('file').onchange = (e) => { if (e.target.files[0]) upload(e.target.files[0]); };
+function upload(f) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/upload'); xhr.setRequestHeader('X-Filename', encodeURIComponent(f.name));
+  xhr.upload.onprogress = (e) => { $('upmsg').textContent = '送っています… ' + Math.round(100 * e.loaded / e.total) + '%'; };
+  xhr.onload = async () => { const r = JSON.parse(xhr.responseText); $('upmsg').textContent = '受け取りました: ' + r.name; await loadVideos(); pickVideo(r.path); };
+  xhr.onerror = () => { $('upmsg').textContent = '送れませんでした'; };
+  xhr.send(f);
+}
+async function loadSongs() {
+  loadState.songs = 'loading'; if (!songs.length) renderSongs();
+  try { const r = await fetch('/api/songs'); if (!r.ok) throw new Error(r.status); songs = await r.json(); loadState.songs = 'ok'; }
+  catch (e) { loadState.songs = 'err'; }
+  renderSongs();
+}
+function renderSongs() {
+  if (loadState.songs !== 'ok' && !songs.length) { $('slist').innerHTML = loadState.songs === 'err' ? loadErrRow('songs') : LOADING_ROW; return; }
+  const q = $('sq').value.toLowerCase().trim();
+  const hits = q ? songs.filter(s => s.dir.toLowerCase().includes(q) || (s.title || '').toLowerCase().includes(q)) : songs;
+  $('slist').innerHTML = hits.slice(0, 150).map(s => `<div data-d="${esc(s.dir)}" class="${s.dir === songDir ? 'sel' : ''}" title="${esc(s.dir)}"><span class="nm">${esc(s.title || s.dir.split('/').pop())} <span style="opacity:.55;font-size:12px">${esc(s.dir)}</span></span></div>`).join('') || '<div class="hint" style="cursor:default">見つかりません</div>';
+}
+$('sq').oninput = renderSongs;
+// ライブラリに無い譜面: 選んだファイル(TJA と、あれば音源)を 1 つの作業フォルダに送り、その中身を曲として選ぶ
+const extdrop = $('extdrop');
+extdrop.onclick = () => $('extfile').click();
+extdrop.ondragover = (e) => { e.preventDefault(); extdrop.classList.add('over'); };
+extdrop.ondragleave = () => extdrop.classList.remove('over');
+extdrop.ondrop = (e) => { e.preventDefault(); extdrop.classList.remove('over'); if (e.dataTransfer.files.length) uploadSong(e.dataTransfer.files); };
+$('extfile').onchange = (e) => { if (e.target.files.length) uploadSong(e.target.files); };
+async function uploadSong(files) {
+  const fs = Array.from(files).filter(f => /\.(tja|ogg|mp3|wav)$/i.test(f.name));
+  if (!fs.some(f => /\.tja$/i.test(f.name))) { $('schosen').textContent = 'TJA が入っていません(.tja を選んでください)'; return; }
+  const tok = 'ext_' + Date.now();
+  for (const f of fs) {
+    $('schosen').textContent = '送っています… ' + f.name;
+    const r = await fetch('/api/upload_song', { method: 'POST', headers: { 'X-Filename': encodeURIComponent(f.name), 'X-Folder': tok }, body: f });
+    if (!r.ok) { $('schosen').textContent = (await r.json()).error || '送れませんでした'; return; }
+  }
+  const r = await fetch('/api/extsong?token=' + encodeURIComponent(tok)); const j = await r.json();
+  if (!r.ok) { $('schosen').textContent = j.error || '読めませんでした'; return; }
+  extSong = j; $('nosong').checked = false; $('nstitle').classList.add('hidden');
+  selectSong(j.dir, j.tjas[0]);
+}
+$('slist').onclick = (e) => { const d = e.target.closest('div[data-d]'); if (d) selectSong(d.dataset.d); };
+let autoRef = null;       // 曲探しで選んだ音源の TJA(「自動」のときの出発点)
+let extSong = null;       // ライブラリに無い譜面(/api/extsong の中身)。曲フォルダは 'ext:<名前>'
+function selectSong(dir, ref) {
+  songDir = dir; autoRef = ref || null;
+  const s = dir && dir.startsWith('ext:') ? extSong : songs.find(x => x.dir === songDir);
+  if (dir && dir.startsWith('ext:') && s) {
+    $('schosen').innerHTML = '選んだ譜面: <b>' + esc(s.title) + '</b> <span style="opacity:.6">(ライブラリに無い譜面・' + esc(s.tjas.join(' / ')) + ')</span><br>' +
+      (s.audio ? '<span style="opacity:.75">音源も一緒にあるので、音源で時刻を合わせて答え合わせします</span>'
+               : '<span style="opacity:.75">音源が無いので、動画の音声を音源にして作り、音符の並びで時刻を合わせて答え合わせします</span>');
+  } else {
+    $('schosen').innerHTML = '選んだ曲: <b>' + esc((s && s.title) || songDir) + '</b> <span style="opacity:.6">' + esc(songDir) + '</span>';
+  }
+  const sel = $('tjasel');
+  // 既定は「自動」: 同じ音源を使う TJA(裏譜面だけの別ファイルなど)を全部照合し、最も合ったコースで答え合わせする
+  if (s && s.tjas.length > 1) { sel.innerHTML = '<option value="" selected>自動(同じ音源の譜面を全部照合)</option>' + s.tjas.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join(''); sel.classList.remove('hidden'); } else sel.classList.add('hidden');
+  renderSongs(); updStart();
+}
+function updStart() { $('start').disabled = !(videoPath && (songDir || $('nosong').checked)) || (job && !job.done); }
+$('nosong').onchange = () => { $('nstitle').classList.toggle('hidden', !$('nosong').checked); updStart(); };
+// テスト変換: 決まった動画を選んで(曲名の分かる動画は曲フォルダも)、選べたら「変換を始める」を押す。曲を音声から探す動画は見つかるまで待つ
+const TESTS = {
+  short: { id: 'ZmrYCRk1Cbk' },                     // 段位 二段 only my railgun(127 秒・1080p60・一致 100%)
+  hidden: { id: 'qbahlfTpF7E' },                    // !!!カオスタイム!!!(速さの違う音符に追い越されて隠れる音符が多い)
+  fps120: { name: '2026-09-28 01-23-51.mp4' },      // ユーザーの 120fps の録画(準備で 60fps に直す。曲は音声から探す)
+};
+$('testRun').onclick = async () => {
+  const t = TESTS[$('testSel').value], msg = $('testMsg');
+  if (loadState.videos !== 'ok') { msg.textContent = '動画の一覧を読み込み中です'; return; }
+  const v = videos.find(x => (t.id && x.id === t.id) || (t.name && x.name === t.name));
+  if (!v) { msg.textContent = 'テストの動画が見つかりません'; return; }
+  if (job && !job.done) { msg.textContent = 'ほかの変換が終わってから押してください'; return; }
+  $('testRun').disabled = true; msg.innerHTML = '<span class="spin"></span> 動画と曲を選んでいます…';
+  if ($('nosong').checked) { $('nosong').checked = false; $('nosong').onchange(); }      // 前に「ライブラリに無い曲」を選んでいたら外す(テストは曲フォルダを使う)
+  pickVideo(v.path);
+  const t0 = Date.now();
+  while ($('start').disabled && Date.now() - t0 < 120000) await new Promise(r => setTimeout(r, 300));     // 曲探しは初回 1〜2 分
+  $('testRun').disabled = false;
+  if ($('start').disabled) { msg.textContent = '曲が選べませんでした'; return; }
+  msg.textContent = ''; $('start').click();
+};
+$('start').onclick = async () => {
+  $('starterr').classList.add('hidden');
+  const body = $('nosong').checked ? { cpu: $('cpu').value, prep_enc: $('prepEnc').value, video: videoPath, nosong: true, title: $('nstitle').value }
+    : { cpu: $('cpu').value, prep_enc: $('prepEnc').value, video: videoPath, song_dir: songDir,
+        ref_tja: ($('tjasel').classList.contains('hidden') ? null : $('tjasel').value) || autoRef,
+        ref_auto: $('tjasel').classList.contains('hidden') || !$('tjasel').value };
+  const r = await fetch('/api/run', { method: 'POST', body: JSON.stringify(body) }); const j = await r.json();
+  if (!r.ok) { $('starterr').textContent = j.error; $('starterr').classList.remove('hidden'); return; }
+  startJob(j);
+};
+$('cancel').onclick = () => { if (job) fetch('/api/job/' + job.id + '/cancel', { method: 'POST', body: '{}' }); };
+let runTick = 0;
+// ---------- 変換中の検出ビュー(途中経過) ----------
+// サーバーの /api/job/<id>/live(detect2・run_song が段階ごとに書くファイル)を 0.7 秒ごとに読み、音符が増えていくのを検出ビューに出す。
+// 読み込み中は仮の音符(区切りの流れの速さで判定枠まで延ばした見積もり)、追跡が終わると本物、隠れた音符などの段階ごとに足される
+let liveOn = false, liveDone = false, liveTick = 0, liveSig = '', liveFollow = true, liveViewT = null;
+// 変換が終わったら、同じ画面のまま中身を完成版(本家との照合・違いの印・TJA)に入れ替える(「結果を開く」に切り替えない)
+async function finishInPlace(id) {
+  let j;
+  try { const r = await fetch(`/api/open?kind=web&id=${encodeURIComponent(id)}`); j = await r.json(); if (!r.ok) return false; } catch (e) { return false; }
+  parsed = newParsed(); let lh = '';
+  for (const ln of (j.log || '').split('\n')) { const k = parseLine(ln); if (k) lh += `<div class="${k}">${esc(ln.trim())}</div>`; }
+  parsed.finished = true; $('vlog').innerHTML = lh || '<span class="hint">ログがありません</span>';
+  liveOn = false; liveDone = true; document.querySelector('.stage-wrap .side').classList.remove('livemode'); showViewer(j);
+  openKey = 'web:' + id; renderResults();
+  return true;
+}
+function liveRes(d) {
+  const ons = d.ons ? d.ons : { fps: 60, onsets: (d.prov || []).map(([t, c, b, v]) => ({ t, color: c, big: b, vel: v, prov: true })), bars: [], gogo: [] };
+  return { info: { video: d.video || videoPath, title: $('runTitle').textContent, kind: 'web', id: job ? job.id : '' }, ons, ref: d.ref || [], ref_course: d.ref_course || null, ref_bars: d.ref_bars || [], calib_ref: d.calib_ref || null };
+}
+async function pollLive() {
+  if (!job) return;
+  let d; try { d = await (await fetch('/api/job/' + job.id + '/live')).json(); } catch (e) { return; }
+  if (!liveOn) return;
+  const n = d.ons ? d.ons.onsets.length : (d.prov || []).length;
+  const sig = (d.stage || '') + ':' + n + ':' + (d.upto ?? '') + ':' + JSON.stringify(d.ranges || []) + ':' + (d.ref_course || '') + ':' + ((d.ref || []).length);
+  if (sig === liveSig) return; liveSig = sig;
+  showViewer(liveRes(d), null, { live: { stage: d.stage || '準備中', upto: d.ons ? null : (d.upto ?? null), ranges: d.ons ? null : (d.ranges || null), span: d.ons ? null : (d.span || null), prov: !d.ons, duration: d.duration || 0 } });
+}
+function startLive(j) {
+  liveOn = true; liveDone = false; liveSig = ''; liveFollow = true;
+  document.querySelector('.stage-wrap .side').classList.add('livemode');
+  bornMap.clear(); setViewMode('chart');
+  $('runView').classList.add('live'); $('viewer').classList.remove('hidden');
+  showViewer(liveRes({ video: j.video }), null, { live: { stage: '準備中', upto: null, prov: true } });
+  clearInterval(liveTick); liveTick = setInterval(pollLive, 400);
+}
+function stopLive() {
+  clearInterval(liveTick); liveTick = 0; liveOn = false; liveDone = false; $('runView').classList.remove('live'); $('liveSide').classList.add('hidden');
+  document.querySelector('.stage-wrap .side').classList.remove('livemode');
+}
+$('lsCancel').onclick = () => { if (job) fetch('/api/job/' + job.id + '/cancel', { method: 'POST', body: '{}' }); };
+$('lsToAi').onclick = async () => {
+  if (!job) return;
+  $('lsToAi').disabled = true; $('lsToAiMsg').textContent = '入れています…';
+  try {
+    const r = await fetch('/api/toai/' + job.id, { method: 'POST', body: '{}' }); const j = await r.json();
+    $('lsToAiMsg').textContent = r.ok ? '入れました: ' + j.dir : '入れられませんでした: ' + (j.error || '');
+  } catch (e) { $('lsToAiMsg').textContent = '入れられませんでした: ' + e; }
+  $('lsToAi').disabled = false;
+};
+['tl', 'ovv', 'ov'].forEach(id => $(id).addEventListener('pointerdown', () => { liveFollow = false; }));
+$('vid').addEventListener('play', () => { liveFollow = false; });
+function startJob(j) {
+  job = j; parsed = newParsed(); stageStart = {}; runT0 = Date.now() - (j.done === false && j.elapsed ? j.elapsed * 1000 : 0);
+  showTab(true); startLive(j); $('runGuide').classList.add('hidden'); $('runBody').classList.remove('hidden'); $('runOpen').classList.add('hidden'); $('toAi').classList.add('hidden'); $('toAiMsg').classList.add('hidden'); $('cancel').classList.remove('hidden');
+  const v = videos.find(x => x.path === videoPath); const sg = songs.find(x => x.dir === songDir);
+  $('runTitle').textContent = (v && v.dir ? v.title : (sg && sg.title) || (songDir && songDir.startsWith('ext:') && extSong ? extSong.title : (songDir || '').split('/').pop()));
+  $('runSub').textContent = '動画: ' + (v ? v.name : (videoPath || '').split(/[\\/]/).pop()) + ' ・ 曲フォルダ: ' + songDir + ' ・ CPU ' + (j.cpu === 'all' ? '全部' : j.cpu + ' 本') + (j.prep_enc === 'nvenc' ? ' ・ 準備の書き出し GPU' : '');
+  $('feed').innerHTML = ''; $('raw').textContent = '';
+  clearInterval(runTick); runTick = setInterval(() => renderRun(job), 250);
+  updStart(); renderRun(job);
+  if (es) es.close();
+  es = new EventSource('/api/job/' + j.id + '/events');
+  let pending = [], raf = 0;
+  es.onmessage = (e) => { pending.push(JSON.parse(e.data)); if (!raf) raf = requestAnimationFrame(() => { feedLines(pending); pending = []; raf = 0; renderRun(job); }); };
+  es.addEventListener('done', async () => {
+    clearInterval(liveTick); liveTick = 0;
+    es.close(); feedLines(pending); pending = [];
+    job.done = true; clearInterval(runTick); $('cancel').classList.add('hidden'); updStart();
+    try { const info = await (await fetch('/api/jobs')).json(); const me = info.find(x => x.id === job.id); if (me) job.code = me.code; } catch (e) {}
+    parsed.finished = true; renderRun(job);
+    const res = await (await fetch('/api/job/' + job.id + '/result')).json();
+    if (!res.ons || job.code) { stopLive(); if (!res.ons) parsed.error = parsed.error || '結果のファイルがありません(途中で止まった?)'; renderRun(job); return; }
+    loadResults();
+    // 少し見せてから結果の動画に切り替える(参照の音符はサーバーの「結果を開く」で作る)
+    $('runOpen').classList.remove('hidden');
+    $('runOpen').onclick = () => openResult('web', job.id);
+    // 終わった変換の譜面をゲームの「13 AI譜面」に入れる
+    $('toAi').classList.remove('hidden'); $('toAiMsg').classList.add('hidden');
+    $('toAi').onclick = async () => {
+      $('toAi').disabled = true; $('toAiMsg').textContent = '入れています…'; $('toAiMsg').classList.remove('hidden');
+      try {
+        const r = await fetch('/api/toai/' + job.id, { method: 'POST', body: '{}' }); const j = await r.json();
+        $('toAiMsg').textContent = r.ok ? '入れました: ' + j.dir : '入れられませんでした: ' + (j.error || '');
+      } catch (e) { $('toAiMsg').textContent = '入れられませんでした: ' + e; }
+      $('toAi').disabled = false;
+    };
+    // 同じ画面のまま中身を完成版に入れ替える(開けなければ今までどおり「結果を開く」へ)
+    if (await finishInPlace(job.id)) renderRun(job);
+    else { stopLive(); openResult('web', job.id); }
+  });
+}
+
+// ---------- 検出ビュー ----------
+const ORIGIN = [   // 見つけ方の印(onsets の旗 → 表示)
+  ['ringtrack', '隠れ', '--added'], ['front', '顔', '--front'], ['sighted', '目撃', '--front'], ['line', '直線', '--line2'],
+  ['rescued', '救済', '--rescue'], ['emerged', '途中', '--rescue'], ['emerge', '枠前', '--emerge'], ['hidden', '縁', '--line2'],
+];
+let V = null;          // 開いている結果
+let zoom = 6, lastDraw = 0;
+const JX = 615, CY = 386;
+function showViewer(res, took, opts) {
+  const live = (opts && opts.live) || null;       // 変換中: { stage, upto(読み終えた秒), prov(仮の音符か) }
+  const o = res.ons, fps = o.fps || 60;
+  const on = o.onsets.slice().sort((a, b) => a.t - b.t);
+  const notes = on.filter(x => x.color === 'don' || x.color === 'ka').map(x => {
+    const og = ORIGIN.find(([k]) => x[k]); return { ...x, vel: Math.abs(x.vel || 0), origin: og ? og[1] : null, ocol: og ? og[2] : null };
+  });
+  // 連打・風船(終わりの無い風船は打数 ÷ 14.5 打/秒か次の音符の手前まで)
+  const rolls = []; let head = null;
+  const closeOpen = (nextT) => { if (!head) return; const te = Math.min(head.t + (head.count || 5) / 14.5, (nextT ?? Infinity) - 0.05); rolls.push({ t: head.t, te: Math.max(te, head.t + 0.05), vel: Math.abs(head.vel || 10), vel_e: Math.abs(head.vel || 10), big: !!head.big, kind: head.color, count: head.count }); head = null; };
+  for (const x of on) {
+    if (x.color === 'renda' || x.color === 'balloon') { closeOpen(x.t); head = x; }
+    else if (x.color === 'roll_end' && head) { rolls.push({ t: head.t, te: x.t, vel: Math.abs(head.vel || x.vel || 10), vel_e: Math.abs(x.vel || head.vel || 10), big: !!head.big, kind: head.color, count: head.count }); head = null; }
+    else if ((x.color === 'don' || x.color === 'ka') && head && x.t > head.t + 0.02) closeOpen(x.t);
+  }
+  closeOpen(null);
+  const bars = (o.bars || []).map((t, i) => ({ t, vel: Math.abs((o.bar_vels || [])[i] || 0) }));
+  const gogo = o.gogo || [];
+  // 参照の音符: ドン・カッだけ。位置を描く速さは、同じ時刻の近くの採譜の音符から借りる
+  const ref = (res.ref || []).filter(([t, c]) => '1234'.includes(c)).map(([t, c]) => ({ t, color: (c === '1' || c === '3') ? 'don' : 'ka', big: c === '3' || c === '4' }));
+  // 参照の連打・風船: 頭(5 連打・6 大連打・7 風船)から次の 8 まで
+  const refRolls = []; let eh = null;
+  for (const [t, c] of (res.ref || []).slice().sort((a, b) => a[0] - b[0])) {
+    if ('567'.includes(c)) eh = { t, big: c === '6', kind: c === '7' ? 'balloon' : 'renda' };
+    else if (c === '8' && eh) { refRolls.push({ ...eh, te: t }); eh = null; }
+  }
+  const tt = notes.map(n => n.t);
+  const nearIdx = (t) => { let lo = 0, hi = tt.length; while (lo < hi) { const m = (lo + hi) >> 1; if (tt[m] < t) lo = m + 1; else hi = m; } return Math.min(Math.max(lo, 0), tt.length - 1); };
+  for (const e of ref) { const i = nearIdx(e.t); const cands = [notes[i], notes[i - 1], notes[i + 1]].filter(Boolean); const c = cands.sort((a, b) => Math.abs(a.t - e.t) - Math.abs(b.t - e.t))[0]; e.vel = c ? c.vel : 15; }
+  // 参照の連打の速さ: 採譜の同じ連打(頭が近いもの)か、近くの音符から借りる
+  for (const r of refRolls) { const rr = rolls.find(x => Math.abs(x.t - r.t) < 0.3); if (rr) r.vel = rr.vel; else { const i = nearIdx(r.t); r.vel = notes[i] ? notes[i].vel : 15; } }
+  // 違い(照合の結果: 動画の秒)
+  const miss = parsed.misses || [], extra = parsed.extras || [];
+  for (const e of ref) e.miss = miss.some(t => Math.abs(t - e.t) < 0.02);
+  for (const n of notes) n.extra = extra.some(t => Math.abs(t - n.t) < 0.02);
+  const diffs = [...miss.map(t => ({ t, k: 'm' })), ...extra.map(t => ({ t, k: 'e' }))].sort((a, b) => a.t - b.t);
+  // 較正(基準配置 → 動画の画素)
+  let cal = null; if (parsed.cals.length) { cal = parsed.cals.find(c => parsed.calAdopt && Math.abs(c.judge_x - parsed.calAdopt) < 0.05) || parsed.cals[parsed.cals.length - 1]; }
+  let T0 = Math.max(0, (notes[0]?.t ?? o.start) - 3), T1 = (notes[notes.length - 1]?.t ?? o.end) + 3;
+  if (live) {       // 変換中は動画の全体を出す(音符が増えても全体図の枠が動かない)
+    const du = $('vid').duration; T0 = 0;
+    T1 = (isFinite(du) && du > 0) ? du : live.duration > 0 ? live.duration : (Number.isFinite(T1) ? Math.max(10, T1) : 10);
+  }
+  const movedHead_ = !!(V && V.live && V._movedHead);
+  V = { res, fps, notes, rolls, bars, gogo, ref, refRolls, diffs, cal, T0, T1, removed: parsed.removed, teff: o.teff || null, live, _movedHead: movedHead_,
+        refBars: res.ref_bars || [] };
+  if (viewMode === 'chart') requestAnimationFrame(drawChart);
+  // 見出しとチップ
+  $('vTitle').textContent = res.info.title || '';
+  $('vSub').textContent = ({ wide: '一括試験 ', suite: '全曲試験 ', web: '変換 ' }[res.info.kind] || '') + res.info.id + (res.ref_course ? ' ・参照 ' + res.ref_course : '');
+  const b = parsed.best, chips = [];
+  chips.push(['音符', notes.length + ' 個']);
+  if (rolls.length) chips.push(['連打・風船', rolls.length + ' 個']);
+  const cnt = {}; for (const n of notes) if (n.origin) cnt[n.origin] = (cnt[n.origin] || 0) + 1;
+  const oc = Object.entries(cnt).map(([k, v]) => k + ' ' + v).join('・'); if (oc) chips.push(['特別な見つけ方', oc]);
+  if (parsed.removed.length) chips.push(['偽物として外した', parsed.removed.length + ' 個']);
+  chips.push(['ゴーゴー', gogo.length + ' 区間']);
+  if (parsed.bpm) chips.push(['BPM(推定)', parsed.bpm.toFixed(0)]);
+  if (b) chips.push(['参照との一致 (' + b.course + ')', b.recall.toFixed(1) + '% / ' + b.precision.toFixed(1) + '%', b.misses + b.extras === 0 ? 'good' : 'bad']);
+  if (b) chips.push(['違い', b.misses + b.extras === 0 ? 'なし' : `参照のみ ${b.misses}・採譜のみ ${b.extras}`, b.misses + b.extras === 0 ? 'good' : 'bad']);
+  if (took) chips.push(['かかった時間', took.toFixed(0) + ' 秒']);
+  if (live) {
+    chips.length = 0;
+    chips.push(['いまの段階', live.stage]);
+    chips.push(['見つけた音符', notes.length + ' 個' + (live.prov ? '(仮)' : '')]);
+    if (live.upto != null) chips.push(['読み終えた所', live.upto.toFixed(0) + ' 秒']);
+    if (rolls.length) chips.push(['連打・風船', rolls.length + ' 個']);
+    if (gogo.length) chips.push(['ゴーゴー', gogo.length + ' 区間']);
+  }
+  $('chips').innerHTML = chips.map(([k, v, c]) => `<div class="chip ${c || ''}"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join('');
+  $('diffs').innerHTML = diffs.map(d => `<button class="${d.k}" data-t="${d.t}">${d.k === 'm' ? '参照のみ' : '採譜のみ'} ${d.t.toFixed(2)}s</button>`).join('');
+  if (live) { $('tja').textContent = '(変換が終わると出ます)'; $('tjapath').textContent = ''; $('tjastat').textContent = ''; }
+  else showTja(res, res.tja_clean ? tjaKind : 'raw');
+  $('vEmpty').classList.add('hidden'); $('vBody').classList.remove('hidden');
+  const vid = $('vid'), src_ = '/media?path=' + encodeURIComponent(res.info.video);
+  if (live) {
+    // 変換中: 同じ動画なら読み直さない。見る位置は、動画や時間軸に触るまで読み終えた所に付いていく(音符が増えていくのが見える)
+    if (vid.dataset.src !== src_) {
+      vid.pause(); shownT = null; vid.src = src_; vid.dataset.src = src_; $('bPlay').textContent = '▶ 再生';
+      vid.onloadedmetadata = () => { if (V && V.live && vid.duration) V.T1 = vid.duration; drawAll(); };
+    }
+    if (liveFollow && live.upto != null) liveViewT = Math.max(0, live.upto - zoom * 0.4);
+    // 読み込みが終わって本物の音符になったら、見る位置を曲の頭(最初の音符の少し前)へ(読み終えた所は曲の後ろの結果画面のあたりで何も無い)
+    if (liveFollow && live.upto == null && !V._movedHead && notes.length) { liveViewT = Math.max(0, notes[0].t - 1); V._movedHead = true; }
+    if (liveFollow && vid.paused && liveViewT !== null && vid.readyState >= 1 && Math.abs(vid.currentTime - liveViewT) > 0.05) vid.currentTime = liveViewT;
+    requestAnimationFrame(drawAll);
+    return;
+  }
+  const qt = new URLSearchParams(location.search).get('t');
+  if (vid.dataset.src === src_ && vid.readyState >= 1) {
+    // 同じ動画(変換が終わって完成版に入れ替えたとき・同じ結果を開き直したとき)は読み直さず、見ている位置と再生のまま描き直す
+    vid.onloadedmetadata = null; requestAnimationFrame(drawAll);
+  } else {
+    vid.pause(); shownT = null; vid.src = src_; vid.dataset.src = src_; $('bPlay').textContent = '▶ 再生';
+    requestAnimationFrame(() => { drawTimeline(0); drawNow(0); });
+    vid.onloadedmetadata = () => { vid.currentTime = qt ? +qt : diffs.length ? Math.max(0, diffs[0].t - 1.5) : Math.max(0, (notes[0]?.t ?? 0) - 2); drawAll(); };
+  }
+  history.replaceState(null, '', '?open=' + encodeURIComponent(res.info.kind + ':' + res.info.id) + (qt ? '&t=' + qt : ''));
+}
+$('diffs').onclick = (e) => { const b = e.target.closest('button[data-t]'); if (b) seekTo(+b.dataset.t - 1.2, true); };
+
+// 基準配置(1920×1080)→ 動画の画素(calib.affine の逆)
+function mapper(W, H) {
+  const R = (V && V.res.calib_ref) || { judge_x: 618, lane_y: 385.7, d_small: 76.2 };
+  const c = V && V.cal;
+  const canon = !c || (Math.abs(c.d / R.d_small - 1) < 0.02 && Math.abs(c.judge_x - R.judge_x) < 4 && Math.abs(c.lane_y - R.lane_y) < 4 && W === 1920 && H === 1080);
+  if (canon) { const k = W / 1920; return (x, y) => [x * k, y * k]; }
+  const s = R.d_small / c.d, tx = R.judge_x - s * c.judge_x, ty = R.lane_y - s * c.lane_y;
+  const kx = W / (c.W || W), ky = H / (c.H || H);
+  return (x, y) => [((x - tx) / s) * kx, ((y - ty) / s) * ky];
+}
+function css() { const c = getComputedStyle(document.documentElement); const g = (k) => c.getPropertyValue(k).trim(); return { don: g('--don'), ka: g('--ka'), roll: g('--roll'), gogo: g('--gogo'), ink: g('--ink'), sub: g('--sub'), line: g('--line'), warn: g('--warn'), accent: g('--accent'), soft: g('--soft'), panel: g('--panel'), get: g }; }
+
+// 1 つの描画先(動画の上・ルーペ)に、基準配置の座標で描く
+function drawScene(ctx, P, unit, tau, opts) {
+  const C = css(), fps = V.fps, dpr = opts.dpr;
+  const xOf = (t, v) => JX + (t - tau) * v * fps;
+  const [, yL] = P(JX, CY);
+  const X_LO = opts.xlo ?? 540, X_HI = opts.xhi ?? 1975;
+  const inx = (x) => x > X_LO - 90 && x < X_HI + 90;
+  // 判定枠の線: 較正で測った判定枠の円の中心(基準配置 618.0)。JX(615)は音符の時刻の決まり(色の塊の中心がここに来た時刻)で、
+  // 円の中心より 3px 左なので、線を JX に引くと左に寄って見えた
+  const [jx] = P((V.res.calib_ref && V.res.calib_ref.judge_x) || 618, CY);
+  ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = 2 * dpr; ctx.setLineDash([5 * dpr, 5 * dpr]);
+  ctx.beginPath(); ctx.moveTo(jx, yL - 72 * unit); ctx.lineTo(jx, yL + 72 * unit); ctx.stroke(); ctx.restore();
+  // ゴーゴー
+  if (V.gogo.some(([a, b]) => tau >= a && tau <= b)) { ctx.fillStyle = 'rgba(255,140,40,.9)'; ctx.fillRect(P(X_LO, CY)[0], yL - 100 * unit, P(X_HI, CY)[0] - P(X_LO, CY)[0], 4 * dpr); }
+  // 小節線
+  if ($('lBars').checked) {
+    ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 1.5 * dpr;
+    for (const b of V.bars) { if (!b.vel) continue; const x = xOf(b.t, b.vel); if (!inx(x)) continue; const [px] = P(x, CY); ctx.beginPath(); ctx.moveTo(px, yL - 92 * unit); ctx.lineTo(px, yL + 92 * unit); ctx.stroke(); }
+  }
+  // 連打・風船
+  if ($('lRolls').checked) for (const r of V.rolls) {
+    const x0 = xOf(r.t, r.vel), x1 = xOf(r.te, r.vel_e); if (x1 < X_LO - 90 || x0 > X_HI + 90) continue;
+    const rad = (r.big ? 75 : 48) * unit; const [p0] = P(Math.max(x0, X_LO - 90), CY); const [p1] = P(Math.min(x1, X_HI + 90), CY);
+    ctx.strokeStyle = C.roll; ctx.lineWidth = 3.5 * dpr; ctx.globalAlpha = .95;
+    ctx.beginPath(); ctx.moveTo(p0, yL - rad); ctx.lineTo(p1, yL - rad); ctx.moveTo(p0, yL + rad); ctx.lineTo(p1, yL + rad); ctx.stroke();
+    if (x0 >= X_LO - 90) { ctx.beginPath(); ctx.arc(p0, yL, rad, 0, 7); ctx.stroke();
+      if (opts.labels) { tag(ctx, p0, yL - rad - 10 * dpr, (r.kind === 'balloon' ? '風船 ' + (r.count ?? '?') + ' 打' : '連打'), C.roll, dpr, '#111'); } }
+    if (x1 <= X_HI + 90) { ctx.beginPath(); ctx.arc(p1, yL, rad * .6, 0, 7); ctx.stroke(); }
+    ctx.globalAlpha = 1;
+  }
+  // 参照の連打・風船: レーンの下側(参照の菱形の段)に黄色の帯
+  if ($('lRef').checked) for (const r of (V.refRolls || [])) {
+    const x0 = xOf(Math.max(r.t, tau), r.vel), x1 = xOf(r.te, r.vel); if (x1 < X_LO - 90 || x0 > X_HI + 90) continue;
+    const [p0] = P(Math.max(x0, X_LO - 90), CY), [p1] = P(Math.min(x1, X_HI + 90), CY), yy = yL + (r.big ? 88 : 62) * unit;
+    ctx.strokeStyle = C.roll; ctx.lineWidth = (r.big ? 7 : 5) * unit; ctx.globalAlpha = .8; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(p0, yy); ctx.lineTo(p1, yy); ctx.stroke(); ctx.globalAlpha = 1; ctx.lineCap = 'butt';
+  }
+  // 参照: レーンの下側に菱形。参照にだけある音符は赤く点滅
+  if ($('lRef').checked) for (const e of V.ref) {
+    if (e.t < tau - 0.06) continue; const x = xOf(e.t, e.vel); if (!inx(x)) continue;
+    const [px] = P(x, CY), yy = yL + (e.big ? 88 : 62) * unit, s = (e.big ? 10 : 7) * unit * 1.2;
+    ctx.fillStyle = e.color === 'don' ? C.don : C.ka; ctx.globalAlpha = e.miss ? 1 : .85;
+    ctx.beginPath(); ctx.moveTo(px, yy - s); ctx.lineTo(px + s, yy); ctx.lineTo(px, yy + s); ctx.lineTo(px - s, yy); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = 1;
+    if (e.miss) {
+      const pulse = .5 + .5 * Math.sin(performance.now() / 110);
+      ctx.strokeStyle = `rgba(255,40,90,${.4 + .6 * pulse})`; ctx.lineWidth = (3 + 3 * pulse) * dpr;
+      ctx.beginPath(); ctx.arc(px, yL, (e.big ? 80 : 54) * unit, 0, 7); ctx.stroke();
+      if (opts.labels) tag(ctx, px, yL + (e.big ? 108 : 84) * unit, '参照にだけある', '#ff2860', dpr);
+    }
+  }
+  // 採譜の音符
+  if ($('lNotes').checked) for (let i = V.notes.length - 1; i >= 0; i--) {
+    const n = V.notes[i]; if (!n.vel || n.t < tau - 0.05) continue;
+    const x = xOf(n.t, n.vel); if (!inx(x)) continue;
+    const [px] = P(x, CY), rad = (n.big ? 75 : 48) * unit, col = n.color === 'don' ? C.don : C.ka;
+    const near = Math.abs(n.t - tau) < 0.034;
+    ctx.save();
+    ctx.shadowColor = col; ctx.shadowBlur = (near ? 18 : 8) * dpr;
+    ctx.lineWidth = (near ? 6 : 3.5) * dpr * (n.big ? 1.2 : 1); ctx.strokeStyle = col;
+    if (n.origin === '隠れ' || n.origin === '顔' || n.origin === '目撃') ctx.setLineDash([8 * dpr, 5 * dpr]);
+    ctx.beginPath(); ctx.arc(px, yL, rad, 0, 7); ctx.stroke(); ctx.restore();
+    // 中心の十字(位置の目安)
+    ctx.strokeStyle = col; ctx.lineWidth = 1.5 * dpr; ctx.beginPath(); ctx.moveTo(px - 7 * dpr, yL); ctx.lineTo(px + 7 * dpr, yL); ctx.moveTo(px, yL - 7 * dpr); ctx.lineTo(px, yL + 7 * dpr); ctx.stroke();
+    if (n.extra) {
+      const pulse = .5 + .5 * Math.sin(performance.now() / 110);
+      ctx.strokeStyle = `rgba(255,150,30,${.4 + .6 * pulse})`; ctx.lineWidth = (3 + 3 * pulse) * dpr;
+      ctx.beginPath(); ctx.arc(px, yL, rad + 10 * unit, 0, 7); ctx.stroke();
+      if (opts.labels) tag(ctx, px, yL - rad - 30 * dpr, '採譜にだけある', '#ff9620', dpr, '#111');
+    }
+    if ($('lOrigin').checked && n.origin && opts.labels) tag(ctx, px, yL - rad - 10 * dpr, n.origin, C.get(n.ocol), dpr);
+  }
+  // 判定の光: 判定枠を通った直後 0.25 秒、広がる輪と時刻
+  if ($('lFlash').checked) for (const n of V.notes) {
+    const dt = tau - n.t; if (dt < 0 || dt > 0.25) continue;
+    const k = dt / 0.25, rad = (n.big ? 75 : 48) * unit * (1 + .8 * k), col = n.color === 'don' ? C.don : C.ka;
+    ctx.globalAlpha = 1 - k; ctx.strokeStyle = col; ctx.lineWidth = 5 * dpr * (1 - k) + 1;
+    ctx.beginPath(); ctx.arc(jx, yL, rad, 0, 7); ctx.stroke();
+    if (opts.labels) { ctx.fillStyle = '#fff'; ctx.font = `700 ${15 * dpr}px ${CF}`; ctx.textAlign = 'center';
+      ctx.fillText((n.color === 'don' ? (n.big ? '大ドン' : 'ドン') : (n.big ? '大カッ' : 'カッ')) + '  ' + n.t.toFixed(3) + 's', jx, yL - (n.big ? 95 : 70) * unit - 20 * dpr * k); ctx.textAlign = 'left'; }
+    ctx.globalAlpha = 1;
+  }
+}
+function tag(ctx, x, y, text, bg, dpr, fg) {
+  ctx.font = `700 ${12 * dpr}px ${CF}`; const w = ctx.measureText(text).width + 12 * dpr, h = 18 * dpr;
+  ctx.fillStyle = bg; roundRect(ctx, x - w / 2, y - h, w, h, 6 * dpr); ctx.fill();
+  ctx.fillStyle = fg || '#fff'; ctx.textAlign = 'center'; ctx.fillText(text, x, y - 5 * dpr); ctx.textAlign = 'left';
+}
+function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+
+function drawOverlay(tau) {
+  const vid = $('vid'), cv = $('ov');
+  const rect = vid.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  if (cv.width !== Math.round(rect.width * dpr) || cv.height !== Math.round(rect.height * dpr)) { cv.width = Math.round(rect.width * dpr); cv.height = Math.round(rect.height * dpr); }
+  const ctx = cv.getContext('2d'); ctx.clearRect(0, 0, cv.width, cv.height);
+  const W = vid.videoWidth, H = vid.videoHeight; if (!W) return;
+  const sc = Math.min(rect.width / W, rect.height / H), ox = (rect.width - W * sc) / 2, oy = (rect.height - H * sc) / 2;
+  const m = mapper(W, H);
+  const P = (x, y) => { const [vx, vy] = m(x, y); return [(ox + vx * sc) * dpr, (oy + vy * sc) * dpr]; };
+  const unit = P(JX + 1, CY)[0] - P(JX, CY)[0];
+  drawScene(ctx, P, unit, tau, { dpr, labels: true });
+  if ($('lHud').checked) {
+    const passed = V.notes.filter(n => n.t <= tau).length;
+    ctx.fillStyle = 'rgba(0,0,0,.55)'; roundRect(ctx, 10 * dpr, 10 * dpr, 250 * dpr, 50 * dpr, 10 * dpr); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = `700 ${18 * dpr}px ui-monospace, Consolas, monospace`; ctx.fillText(tau.toFixed(3) + ' s', 20 * dpr, 34 * dpr);
+    ctx.font = `${12 * dpr}px ${CF}`; ctx.fillText(`通過 ${passed} / ${V.notes.length}  ・ ${$('vid').playbackRate}×`, 20 * dpr, 52 * dpr);
+  }
+}
+// 判定枠ルーペ: 動画の判定枠のまわり(基準配置 x 540〜900・レーン ±105)を拡大し、同じものを重ねる
+function drawLoupe(tau) {
+  const vid = $('vid'), cv = $('lp'), W = vid.videoWidth, H = vid.videoHeight; if (!W) return;
+  const dpr = window.devicePixelRatio || 1, cw = cv.clientWidth; if (!cw) return;
+  const ch = Math.round(cw / 2); if (cv.width !== Math.round(cw * dpr)) { cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr); }
+  const ctx = cv.getContext('2d'), m = mapper(W, H);
+  const xa = 540, xb = 900, ya = CY - 90, yb = CY + 90;
+  const [sx0, sy0] = m(xa, ya), [sx1, sy1] = m(xb, yb);
+  ctx.imageSmoothingEnabled = true; ctx.drawImage(vid, sx0, sy0, sx1 - sx0, sy1 - sy0, 0, 0, cv.width, cv.height);
+  const kx = cv.width / (xb - xa), ky = cv.height / (yb - ya);
+  const P = (x, y) => [(x - xa) * kx, (y - ya) * ky];
+  drawScene(ctx, P, kx, tau, { dpr, labels: false, xlo: xa, xhi: xb });
+}
+// 右の「今」: この先の音符
+function drawNow(tau) {
+  $('nowT').textContent = tau.toFixed(3); $('nowF').textContent = Math.round(tau * V.fps) + '(' + V.fps.toFixed(0) + 'fps)';
+  $('nowN').textContent = V.notes.filter(n => n.t <= tau).length + ' / ' + V.notes.length;
+  const C = css(); const up = V.notes.filter(n => n.t > tau - 0.02).slice(0, 7);
+  $('nextlist').innerHTML = up.map(n => `<div><i style="background:${n.color === 'don' ? C.don : C.ka}${n.big ? ';outline:2px solid ' + (n.color === 'don' ? C.don : C.ka) + ';outline-offset:1px' : ''}"></i>${n.t.toFixed(3)}s <span class="o">+${Math.max(0, (n.t - tau) * 1000).toFixed(0)}ms ${n.origin ? '・' + n.origin : ''}${n.extra ? '・採譜のみ' : ''}</span></div>`).join('');
+  $('tc').textContent = tau.toFixed(3) + ' / ' + ($('vid').duration || 0).toFixed(1) + ' s';
+}
+// 時間軸: 上の段 = 参照、下の段 = 採譜
+function drawTimeline(tau) {
+  const cv = $('tl'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = 150; cv.width = w * dpr; cv.height = h * dpr;
+  const ctx = cv.getContext('2d'), C = css(); ctx.scale(dpr, dpr);
+  const a = tau - zoom / 2, b = tau + zoom / 2, L = 58, X = (t) => L + (t - a) / (b - a) * (w - L);
+  const yE = 48, yM = 102;
+  ctx.fillStyle = C.gogo; for (const [g0, g1] of V.gogo) if (g1 > a && g0 < b) ctx.fillRect(Math.max(L, X(g0)), 0, X(g1) - Math.max(L, X(g0)), h);
+  ctx.strokeStyle = C.line; ctx.lineWidth = 1; for (const br of V.bars) if (br.t > a && br.t < b) { ctx.beginPath(); ctx.moveTo(X(br.t), 18); ctx.lineTo(X(br.t), h - 18); ctx.stroke(); }
+  ctx.fillStyle = C.sub; ctx.font = '11px ' + CF;
+  for (let s = Math.ceil(a); s < b; s++) if (X(s) > L) ctx.fillText(s + 's', X(s) + 2, h - 5);
+  ctx.fillStyle = C.ink; ctx.font = '600 12px ' + CF; ctx.fillText('参照', 10, yE + 4); ctx.fillText('採譜', 10, yM + 4);
+  ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(L, yE); ctx.lineTo(w, yE); ctx.moveTo(L, yM); ctx.lineTo(w, yM); ctx.stroke();
+  for (const r of V.rolls) if (r.te > a && r.t < b) { ctx.fillStyle = C.roll; ctx.fillRect(Math.max(L, X(r.t)), yM - (r.big ? 9 : 6), X(r.te) - Math.max(L, X(r.t)), r.big ? 18 : 12); }
+  for (const r of (V.refRolls || [])) if (r.te > a && r.t < b) { ctx.fillStyle = C.roll; ctx.fillRect(Math.max(L, X(r.t)), yE - (r.big ? 9 : 6), X(r.te) - Math.max(L, X(r.t)), r.big ? 18 : 12); }
+  for (const e of V.ref) if (e.t > a - .2 && e.t < b + .2 && X(e.t) > L) {
+    const x = X(e.t), rad = e.big ? 10 : 6.5; ctx.fillStyle = e.color === 'don' ? C.don : C.ka; ctx.beginPath(); ctx.arc(x, yE, rad, 0, 7); ctx.fill();
+    if (e.miss) { ctx.strokeStyle = C.warn; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, yE, rad + 5, 0, 7); ctx.stroke(); ctx.fillStyle = C.warn; ctx.fillText('参照のみ', x - 22, yE - 16); }
+  }
+  for (const n of V.notes) if (n.t > a - .2 && n.t < b + .2 && X(n.t) > L) {
+    ctx.globalAlpha = n.prov ? 0.55 : 1;         // 仮の音符(読み込み中の見積もり)は薄く
+    const x = X(n.t), rad = n.big ? 10 : 6.5; ctx.fillStyle = n.color === 'don' ? C.don : C.ka; ctx.beginPath(); ctx.arc(x, yM, rad, 0, 7); ctx.fill();
+    if (n.origin) { ctx.strokeStyle = C.get(n.ocol); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(x, yM, rad + 3.5, 0, 7); ctx.stroke(); }
+    if (n.extra) { ctx.strokeStyle = C.accent; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, yM, rad + 6, 0, 7); ctx.stroke(); ctx.fillStyle = C.accent; ctx.fillText('採譜のみ', x - 22, yM + 26); }
+  }
+  ctx.globalAlpha = 1;
+  for (const [g0, g1] of unreadGaps(a, b)) {
+    const x0 = Math.max(L, X(g0)), x1 = X(g1); if (x1 <= x0) continue;
+    ctx.fillStyle = 'rgba(128,128,128,0.28)'; ctx.fillRect(x0, 0, x1 - x0, h);
+    if (x1 - x0 > 90) { ctx.fillStyle = C.sub; ctx.font = '11px ' + CF; ctx.fillText('まだ読んでいない', x0 + 6, 14); }
+  }
+  if ($('lRemoved').checked) for (const r of V.removed) if (r.t > a && r.t < b && X(r.t) > L) {
+    const x = X(r.t); ctx.strokeStyle = C.sub; ctx.lineWidth = 1.5; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(x, yM, 7, 0, 7); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.sub; ctx.font = '10px ' + CF; ctx.fillText('外した', x - 14, yM + 22);
+  }
+  const xc = X(tau); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(xc, 8); ctx.lineTo(xc, h - 8); ctx.stroke();
+  drawOverview(tau);
+}
+// ---------- 譜面で見る ----------
+// 曲全体を本家の小節線(無ければ採譜の小節線、それも無ければ 2 秒ずつ)で区切り、1 行 4 小節で折り返して描く。
+// 各行の上の段 = 本家の音符、下の段 = 採譜の音符(同じ大きさで比べる)。変換中は仮の音符が薄く入り、段階ごとに足された音符は光る輪で知らせる
+let viewMode = 'video';
+let CH_K = 2; try { CH_K = +localStorage.getItem('v2t_chK') || 2; } catch (e) {}
+const CH_ROW = 80, CH_GUT = 44, CH_YR = 24, CH_YM = 54;   // 行の高さ・左の余白・上の段(本家)・下の段(採譜)の y
+let chHits = [], chGeo = null;      // マウスで調べる: 描いた音符の位置と、位置 → 時刻の換算
+const bornMap = new Map();          // 音符の「最初に出た時刻」(光る輪の演出)。キーは色 + 50ms 単位の時刻(仮 → 本物の数 ms の差では変わらない)
+function setViewMode(m) {
+  viewMode = m;
+  $('leftCol').classList.toggle('chartmode', m === 'chart');
+  document.querySelector('.stage-wrap .side').classList.toggle('chartmode', m === 'chart');
+  document.querySelectorAll('#viewMode button').forEach(b => b.classList.toggle('on', b.dataset.m === m));
+  if (m === 'chart') requestAnimationFrame(drawChart); else requestAnimationFrame(drawAll);
+}
+document.querySelectorAll('#viewMode button').forEach(b => b.onclick = () => setViewMode(b.dataset.m));
+function setChK(k) {
+  CH_K = k; try { localStorage.setItem('v2t_chK', String(k)); } catch (e) {}
+  document.querySelectorAll('#chK button').forEach(b => b.classList.toggle('on', +b.dataset.k === k)); drawChart();
+}
+document.querySelectorAll('#chK button').forEach(b => { b.classList.toggle('on', +b.dataset.k === CH_K); b.onclick = () => setChK(+b.dataset.k); });
+// マウスを乗せた音符の説明(時刻・大小・見つけ方・本家との差)
+const COLN = { don: 'ドン', ka: 'カッ' };
+function chNear(e) {
+  const r = $('chart').getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  let best = null;
+  for (const h of chHits) { const d = Math.hypot(h.x - x, h.y - y); if (d <= h.r + 5 && (!best || d < best.d)) best = { ...h, d }; }
+  return { x, y, best };
+}
+function chTime(x, y) {       // 位置 → 時刻(ダブルクリックで動画へ)
+  if (!chGeo) return null;
+  const { M, mw, nMeas } = chGeo, row = Math.floor((y - 4) / CH_ROW), col = Math.floor((x - CH_GUT) / mw), i = row * CH_K + col;
+  if (col < 0 || col >= CH_K || i < 0 || i >= nMeas) return null;
+  return M[i] + ((x - CH_GUT - col * mw) / mw) * (M[i + 1] - M[i]);
+}
+function chPos(t) {           // 時刻 → 譜面の上の位置(drawChart の pos と同じ)
+  const { M, mw, nMeas } = chGeo; let lo = 0, hi = M.length - 1;
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; if (M[m] <= t) lo = m; else hi = m - 1; }
+  const i = Math.min(lo, nMeas - 1), f = (t - M[i]) / ((M[i + 1] - M[i]) || 1);
+  return [CH_GUT + (i % CH_K) * mw + Math.max(0, Math.min(1, f)) * mw, Math.floor(i / CH_K) * CH_ROW + 4, Math.floor(i / CH_K)];
+}
+// 再生位置の線。再生中は線の行が画面の外へ出そうになったら、その行が画面の上から 3 割の所に来るようスクロールする
+// (行が変わったときだけ確かめる。ホイールで動かしたら追うのをやめ、再生・クリックで戻る)
+let chFollow = true, chLastRow = -1;
+function chHeadUpd() {
+  const hd = $('chHead');
+  if (!V || viewMode !== 'chart' || !chGeo) { hd.classList.add('hidden'); return; }
+  const t = vid.currentTime, [x, y, row] = chPos(t), cv = $('chart');
+  hd.classList.remove('hidden');
+  hd.style.left = (cv.offsetLeft + x - 1) + 'px'; hd.style.top = (cv.offsetTop + y) + 'px'; hd.style.height = (CH_ROW - 8) + 'px';
+  $('chTime').textContent = t.toFixed(1) + ' / ' + (isFinite(vid.duration) ? vid.duration.toFixed(1) : '–') + ' 秒';
+  if (!vid.paused && chFollow && row !== chLastRow) {
+    const yy = cv.getBoundingClientRect().top + y, vh = window.innerHeight;
+    if (yy < vh * 0.12 || yy + CH_ROW > vh * 0.85) window.scrollTo({ top: window.scrollY + yy - vh * 0.3, behavior: 'smooth' });
+  }
+  chLastRow = row;
+}
+window.addEventListener('wheel', () => { if (viewMode === 'chart' && !vid.paused) chFollow = false; }, { passive: true });
+$('chart').addEventListener('click', (e) => {
+  const r = $('chart').getBoundingClientRect(), t = chTime(e.clientX - r.left, e.clientY - r.top);
+  if (t == null) return;
+  chFollow = true; chLastRow = -1; liveFollow = false; seekTo(Math.max(0, t)); chHeadUpd();
+});
+$('chPlay').onclick = () => { chFollow = true; chLastRow = -1; togglePlay(); };
+$('chRates').onclick = (e) => { const b = e.target.closest('button[data-r]'); if (b) setRate(+b.dataset.r); };
+// 音符の音: 再生中、選んだ方(採譜・本家)の音符の時刻にドン・カッを鳴らす(耳で比べる)。0.15 秒先まで Web Audio の時刻で予約する
+let chSnd = 'off'; try { chSnd = localStorage.getItem('v2t_chSnd') || 'off'; } catch (e) {}
+$('chSnd').value = chSnd;
+$('chSnd').onchange = () => { chSnd = $('chSnd').value; try { localStorage.setItem('v2t_chSnd', chSnd); } catch (e) {} sndFrom = null; };
+const SND_AHEAD = 0.15;       // 先に予約する長さ(秒、動画の時刻)。画面の描き直しの間隔(〜17ms)が揺れても鳴らし漏れない長さ
+let actx = null, sndFrom = null, sndLastT = null, sndCache = { src: null, n: -1, arr: [] };
+function sndList() {
+  const src = chSnd === 'ref' ? V.ref : V.notes;
+  if (sndCache.src !== src || sndCache.n !== src.length) sndCache = { src, n: src.length, arr: src.slice().sort((a, b) => a.t - b.t) };
+  return sndCache.arr;
+}
+function hitSound(at, color, big) {
+  const g = actx.createGain(); g.connect(actx.destination);
+  const o = actx.createOscillator();
+  if (color === 'don') {        // ドン: 低い音が下がりながら消える
+    o.type = 'sine'; o.frequency.setValueAtTime(190, at); o.frequency.exponentialRampToValueAtTime(70, at + 0.10);
+    g.gain.setValueAtTime(big ? 0.9 : 0.6, at); g.gain.exponentialRampToValueAtTime(0.001, at + 0.16);
+  } else {                      // カッ: 高く短い音
+    o.type = 'triangle'; o.frequency.setValueAtTime(1500, at); o.frequency.exponentialRampToValueAtTime(900, at + 0.04);
+    g.gain.setValueAtTime(big ? 0.55 : 0.4, at); g.gain.exponentialRampToValueAtTime(0.001, at + 0.06);
+  }
+  o.connect(g); o.start(at); o.stop(at + 0.2);
+}
+function sndTick() {
+  if (chSnd === 'off' || vid.paused || !V) { sndFrom = null; return; }
+  if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return; } }
+  if (actx.state === 'suspended') actx.resume();
+  const t = vid.currentTime, rate = vid.playbackRate || 1;
+  if (sndFrom === null || sndLastT === null || t < sndLastT - 0.05 || t > sndLastT + 0.5) sndFrom = t;     // 始め・seek の後はいまから
+  sndLastT = t;
+  const arr = sndList(), end = t + SND_AHEAD * rate;
+  let lo = 0, hi = arr.length; while (lo < hi) { const m = (lo + hi) >> 1; if (arr[m].t < sndFrom) lo = m + 1; else hi = m; }
+  for (let i = lo; i < arr.length && arr[i].t < end; i++) hitSound(actx.currentTime + Math.max(0, (arr[i].t - t) / rate), arr[i].color, arr[i].big);
+  sndFrom = Math.max(sndFrom, end);
+}
+function playLoop() { if (vid.paused || !V) return; sndTick(); if (viewMode === 'chart') chHeadUpd(); requestAnimationFrame(playLoop); }
+$('vid').addEventListener('play', () => { sndFrom = null; requestAnimationFrame(playLoop); });     // vid の宣言より前なので $('vid')
+['pause', 'seeked', 'loadedmetadata'].forEach(ev => $('vid').addEventListener(ev, () => { sndFrom = null; if (viewMode === 'chart') chHeadUpd(); }));
+function updChPlay() { $('chPlay').textContent = vid.paused ? '▶ 再生' : '❚❚ 止める'; }
+['play', 'playing', 'pause', 'ended', 'emptied', 'loadstart'].forEach(ev => $('vid').addEventListener(ev, updChPlay));
+$('chart').addEventListener('mousemove', (e) => {
+  const { x, y, best } = chNear(e), tip = $('chTip');
+  if (!best) { tip.classList.add('hidden'); return; }
+  const n = best.n, other = best.kind === 'det' ? V.ref : V.notes;
+  let near = null; for (const o of other) if (o.color === n.color && (!near || Math.abs(o.t - n.t) < Math.abs(near.t - n.t))) near = o;
+  const dms = near && Math.abs(near.t - n.t) < 0.1 ? Math.round((n.t - near.t) * 1000) : null;
+  const lines = [(best.kind === 'det' ? '採譜' : '本家') + ' ' + (COLN[n.color] || n.color) + (n.big ? '(大)' : '') + ' ・ ' + n.t.toFixed(3) + ' 秒' + (n.prov ? '(仮)' : '')];
+  if (best.kind === 'det' && n.origin) lines.push('見つけ方: ' + n.origin);
+  if (dms !== null) lines.push((best.kind === 'det' ? '本家との差 ' : '採譜との差 ') + (dms >= 0 ? '+' : '') + (best.kind === 'det' ? dms : -dms) + ' ms');
+  else if (!n.prov) lines.push(best.kind === 'det' ? '本家に無い' : '採譜に無い');
+  if (n.vel) lines.push('速さ ' + n.vel.toFixed(1) + ' px/フレーム');
+  tip.innerHTML = lines.map(esc).join('<br>'); tip.classList.remove('hidden');
+  const W = $('chartWrap').clientWidth; tip.style.left = Math.min(x + 14, W - tip.offsetWidth - 4) + 'px'; tip.style.top = (y + $('chart').offsetTop + 14) + 'px';
+});
+$('chart').addEventListener('mouseleave', () => $('chTip').classList.add('hidden'));
+$('chart').addEventListener('dblclick', (e) => {
+  const { x, y, best } = chNear(e), t = best ? best.n.t : chTime(x, y);
+  if (t == null) return;
+  liveFollow = false; setViewMode('video'); seekTo(Math.max(0, t - 1.0), true);
+});
+window.addEventListener('resize', () => { if (viewMode === 'chart' && V) drawChart(); });
+function chartMeasures() {
+  let M = (V.refBars && V.refBars.length >= 2) ? V.refBars.slice() : (V.bars && V.bars.length >= 2 ? V.bars.map(b => b.t) : []);
+  M.sort((a, b) => a - b);
+  const ts = V.notes.map(n => n.t).concat(V.ref.map(e => e.t));
+  const lo = ts.length ? Math.min(...ts) : (V.live && V.live.span ? V.live.span[0] : V.T0), hi = ts.length ? Math.max(...ts) : (V.live && V.live.span ? V.live.span[1] : V.T1);
+  if (M.length < 2) { M = []; for (let t = Math.max(0, lo - 1); t < hi + 2.5; t += 2) M.push(+t.toFixed(3)); return M; }
+  const dd = M.slice(1).map((t, i) => t - M[i]).sort((a, b) => a - b), d = dd[dd.length >> 1] || 2;
+  for (let k = 0; k < 8 && M[0] > lo - 0.01; k++) M.unshift(M[0] - d);          // 本家の小節の外に音符があれば、前後に 8 小節まで足す
+  for (let k = 0; k < 8 && M[M.length - 1] < hi + 0.01; k++) M.push(M[M.length - 1] + d);
+  return M;
+}
+function drawChart() {
+  if (!V || viewMode !== 'chart') return;
+  const cv = $('chart'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth; if (!w) return;
+  const M = chartMeasures(), nMeas = Math.max(1, M.length - 1), rows = Math.ceil(nMeas / CH_K), h = rows * CH_ROW + 8;
+  cv.width = w * dpr; cv.height = h * dpr; cv.style.height = h + 'px';
+  const ctx = cv.getContext('2d'), C = css(); ctx.scale(dpr, dpr);
+  const mw = (w - CH_GUT) / CH_K, now = performance.now();
+  chHits = []; chGeo = { M, mw, nMeas };
+  const mIdx = (t) => { let lo = 0, hi = M.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (M[m] <= t) lo = m; else hi = m - 1; } return lo; };
+  const pos = (t) => { const i = Math.min(mIdx(t), nMeas - 1); const f = (t - M[i]) / ((M[i + 1] - M[i]) || 1); return [CH_GUT + (i % CH_K) * mw + Math.max(0, Math.min(1, f)) * mw, Math.floor(i / CH_K) * CH_ROW + 4, i]; };
+  // 音符を置く小節。小節線ちょうどの音符は、本家では小節線と同じ時刻、採譜では数 ms 前後にずれるので、時刻だけで決めると採譜だけ前の小節の右端に出た。
+  // 本家の音符は小節線の CH_SAME 前までを次の小節に入れ(時刻の丸めで小節線の直前になっても次の小節の頭)、採譜の音符は対応する本家の音符
+  // (同じ色で CH_MATCH 以内の最も近いもの)と同じ小節に置き、小節線から少しはみ出して描く。対応の無い採譜の音符は本家と同じ決め方
+  const CH_SAME = 0.005, CH_MATCH = 0.035;      // make_tja・清書が同じ時刻とみなす幅 / 照合の幅(評価・比較動画と同じ)
+  const CH_DIFF_WARN = 8;                       // 行の「本家との差」をこの ms 以上で色付け(時刻の測りのぶれ sd 2〜5ms の外)
+  const posIn = (t, i) => { i = Math.max(0, Math.min(i, nMeas - 1)); const f = (t - M[i]) / ((M[i + 1] - M[i]) || 1); return [CH_GUT + (i % CH_K) * mw + Math.max(-0.2, Math.min(1.2, f)) * mw, Math.floor(i / CH_K) * CH_ROW + 4, i]; };
+  const refIdx = (t) => mIdx(t + CH_SAME);
+  const refBy = { don: [], ka: [] }; for (const e of V.ref) (refBy[e.color] || []).push(e.t);
+  refBy.don.sort((a, b) => a - b); refBy.ka.sort((a, b) => a - b);
+  const detIdx = (n) => {
+    const a = refBy[n.color]; if (!a || !a.length) return refIdx(n.t);
+    let lo = 0, hi = a.length; while (lo < hi) { const m = (lo + hi) >> 1; if (a[m] < n.t) lo = m + 1; else hi = m; }
+    let best = null; for (const k of [lo - 1, lo]) if (k >= 0 && k < a.length && Math.abs(a[k] - n.t) < CH_MATCH && (best === null || Math.abs(a[k] - n.t) < Math.abs(best - n.t))) best = a[k];
+    return refIdx(best === null ? n.t : best);
+  };
+  // 区間 [t0, t1] を小節ごとに分けて塗る(ゴーゴー・まだ読んでいない所・連打)
+  const spanFill = (t0, t1, y, hh, fill) => {
+    for (let i = Math.max(0, mIdx(t0)); i < nMeas && M[i] < t1; i++) {
+      const a = Math.max(t0, M[i]), b = Math.min(t1, M[i + 1]); if (b <= a) continue;
+      const x0 = CH_GUT + (i % CH_K) * mw + (a - M[i]) / (M[i + 1] - M[i]) * mw, x1 = CH_GUT + (i % CH_K) * mw + (b - M[i]) / (M[i + 1] - M[i]) * mw;
+      fill(x0, Math.floor(i / CH_K) * CH_ROW + 4 + y, x1 - x0, hh);
+    }
+  };
+  // 行の地・ゴーゴー・まだ読んでいない小節
+  for (let r = 0; r < rows; r++) { ctx.fillStyle = C.soft; ctx.fillRect(CH_GUT, r * CH_ROW + 4, w - CH_GUT, CH_ROW - 8); }
+  for (const [g0, g1] of V.gogo) spanFill(g0, g1, 0, CH_ROW - 8, (x, y, ww, hh) => { ctx.fillStyle = C.gogo; ctx.fillRect(x, y, ww, hh); });
+  for (const [g0, g1] of unreadGaps(M[0], M[M.length - 1])) spanFill(g0, g1, 0, CH_ROW - 8, (x, y, ww, hh) => { ctx.fillStyle = 'rgba(128,128,128,0.30)'; ctx.fillRect(x, y, ww, hh); });
+  // 小節線と小節の番号
+  ctx.font = '11px ' + CF;
+  for (let i = 0; i <= nMeas; i++) {
+    const r = Math.floor(Math.min(i, nMeas - 1) / CH_K), c = i === nMeas ? CH_K : i % CH_K; if (i === nMeas && nMeas % CH_K) continue;
+    const x = CH_GUT + (i === nMeas ? (((nMeas - 1) % CH_K) + 1) : c) * mw, y = (i === nMeas ? Math.floor((nMeas - 1) / CH_K) : r) * CH_ROW + 4;
+    ctx.strokeStyle = C.sub; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + CH_ROW - 8); ctx.stroke();
+    if (i < nMeas && i % CH_K === 0) {
+      ctx.fillStyle = C.sub; ctx.font = '600 12px ' + CF; ctx.fillText(String(i + 1), 6, y + 14);
+      ctx.font = '10px ' + CF; ctx.fillText('本家', 8, y + CH_YR + 4); ctx.fillText('採譜', 8, y + CH_YM + 4); ctx.font = '11px ' + CF;
+    }
+  }
+  // 連打・風船(黄色の帯)
+  for (const r of (V.refRolls || [])) spanFill(r.t, r.te, CH_YR - (r.big ? 7 : 5), r.big ? 14 : 10, (x, y, ww, hh) => { ctx.globalAlpha = 0.7; ctx.fillStyle = C.roll; ctx.fillRect(x, y, ww, hh); ctx.globalAlpha = 1; });
+  for (const r of V.rolls) spanFill(r.t, r.te, CH_YM - (r.big ? 7 : 5), r.big ? 14 : 10, (x, y, ww, hh) => { ctx.fillStyle = C.roll; ctx.fillRect(x, y, ww, hh); });
+  // 本家の音符(上の段)。採譜と同じ大きさで、少し薄く
+  const RS = Math.max(4, Math.min(7, mw / 40)), RB = RS * 1.5;       // 小音符・大音符の半径(小節の幅に合わせる)
+  for (const e of V.ref) {
+    const [x, y] = posIn(e.t, refIdx(e.t)), rad = e.big ? RB : RS;
+    ctx.globalAlpha = 0.7; ctx.fillStyle = e.color === 'don' ? C.don : C.ka; ctx.beginPath(); ctx.arc(x, y + CH_YR, rad, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
+    if (e.miss) { ctx.strokeStyle = C.warn; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(x, y + CH_YR, rad + 4, 0, 7); ctx.stroke(); }
+    chHits.push({ x, y: y + CH_YR, r: rad, kind: 'ref', n: e });
+  }
+  // 採譜の音符(下の段)。後から出た音符は光る輪で知らせる
+  let anim = false;
+  for (const n of V.notes) {
+    const [x, y] = posIn(n.t, detIdx(n)), rad = n.big ? RB : RS, key = n.color + ':' + Math.round(n.t * 20);
+    chHits.push({ x, y: y + CH_YM, r: rad, kind: 'det', n });
+    let born = bornMap.get(key); if (born === undefined) { born = now; bornMap.set(key, born); }
+    ctx.globalAlpha = n.prov ? 0.45 : 1;
+    ctx.fillStyle = n.color === 'don' ? C.don : C.ka; ctx.beginPath(); ctx.arc(x, y + CH_YM, rad, 0, 7); ctx.fill();
+    ctx.globalAlpha = 1;
+    if (n.origin) { ctx.strokeStyle = C.get(n.ocol); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y + CH_YM, rad + 3, 0, 7); ctx.stroke(); }
+    if (n.extra) { ctx.strokeStyle = C.accent; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, y + CH_YM, rad + 5, 0, 7); ctx.stroke(); }
+    const age = now - born;
+    if (V.live && age < 1500) {
+      const k = age / 1500; ctx.strokeStyle = C.accent; ctx.globalAlpha = 1 - k; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(x, y + CH_YM, rad + 4 + 10 * k, 0, 7); ctx.stroke(); ctx.globalAlpha = 1; anim = true;
+    }
+  }
+  // 行ごとの「本家との差」(対応する音符の 採譜 − 本家 の中央値)を行の左下に出す。行の間で段がついていれば、採譜ではなく片方の時刻の段差
+  // (ダーク・エクス・マキナ♡ 45.6〜47.0s: 本家の仕掛けの小節が画面より 19ms 短く、前は −15ms・後は +5ms。映像の音声は曲と一続きで段が無い)
+  if (V.ref.length) {
+    const byRow = new Map();
+    for (const n of V.notes) {
+      if (n.prov) continue;
+      const a = refBy[n.color]; if (!a || !a.length) continue;
+      let lo = 0, hi = a.length; while (lo < hi) { const m = (lo + hi) >> 1; if (a[m] < n.t) lo = m + 1; else hi = m; }
+      let best = null; for (const k of [lo - 1, lo]) if (k >= 0 && k < a.length && Math.abs(a[k] - n.t) < CH_MATCH && (best === null || Math.abs(a[k] - n.t) < Math.abs(best - n.t))) best = a[k];
+      if (best === null) continue;
+      const row = Math.floor(Math.min(detIdx(n), nMeas - 1) / CH_K);
+      if (!byRow.has(row)) byRow.set(row, []); byRow.get(row).push((n.t - best) * 1000);
+    }
+    ctx.font = '600 10px ' + CF;
+    for (const [row, ds] of byRow) {
+      if (ds.length < 2) continue;
+      ds.sort((a, b) => a - b); const md = ds[ds.length >> 1];
+      ctx.fillStyle = Math.abs(md) >= CH_DIFF_WARN ? C.accent : C.sub;
+      ctx.fillText((md >= 0 ? '+' : '−') + Math.abs(md).toFixed(0) + 'ms', 4, row * CH_ROW + 4 + CH_ROW - 12);
+    }
+    ctx.font = '11px ' + CF;
+  }
+  // 読み込んでいる所(頭から続けて読み終えた所)
+  if (V.live && V.live.upto != null) {
+    const [x, y] = pos(V.live.upto); ctx.strokeStyle = C.accent; ctx.lineWidth = 2; ctx.setLineDash([4, 3]);
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + CH_ROW - 8); ctx.stroke(); ctx.setLineDash([]);
+  }
+  if (anim) requestAnimationFrame(drawChart);
+  chHeadUpd();
+}
+// 変換中のまだ読んでいない区間([a, b] の中)。区切りは読み終えた順に来るので、読み終えた区間(ranges)の外を返す
+function unreadGaps(a, b) {
+  if (!V || !V.live || !V.live.ranges) return [];
+  if (V.live.span) { a = Math.max(a, V.live.span[0]); b = Math.min(b, V.live.span[1]); }      // 検出する範囲の外(曲の前後)は読まないので影にしない
+  const out = []; let t = a;
+  for (const [r0, r1] of V.live.ranges) { if (r1 < t) continue; if (r0 > b) break; if (r0 > t) out.push([t, Math.min(r0, b)]); t = Math.max(t, r1); }
+  if (t < b) out.push([t, b]);
+  return out;
+}
+function drawOverview(tau) {
+  const cv = $('ovv'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = 46; if (!w) return; cv.width = w * dpr; cv.height = h * dpr;
+  const ctx = cv.getContext('2d'), C = css(); ctx.scale(dpr, dpr);
+  const X = (t) => (t - V.T0) / (V.T1 - V.T0) * w;
+  ctx.fillStyle = C.gogo; for (const [g0, g1] of V.gogo) ctx.fillRect(X(g0), 0, Math.max(2, X(g1) - X(g0)), h);
+  for (const r of V.rolls) { ctx.fillStyle = C.roll; ctx.fillRect(X(r.t), 20, Math.max(1, X(r.te) - X(r.t)), 6); }
+  for (const n of V.notes) { ctx.fillStyle = n.color === 'don' ? C.don : C.ka; ctx.fillRect(X(n.t), n.color === 'don' ? 7 : 29, 1.4, 10); }
+  for (const d of V.diffs) { ctx.fillStyle = d.k === 'm' ? C.warn : C.accent; ctx.fillRect(X(d.t) - 1.5, 0, 3, h); }
+  for (const [g0, g1] of unreadGaps(V.T0, V.T1)) { ctx.fillStyle = 'rgba(128,128,128,0.35)'; ctx.fillRect(X(g0), 0, Math.max(1, X(g1) - X(g0)), h); }
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.strokeRect(X(tau - zoom / 2), 1, Math.max(3, X(tau + zoom / 2) - X(tau - zoom / 2)), h - 2);
+}
+// 画面に出ているフレームの時刻。currentTime は表示中のフレームと最大 1 フレーム(16ms)ずれ、速い音符では円が 15px ほどずれて見えた。
+// requestVideoFrameCallback の mediaTime(表示したフレームの時刻)を使う。無いブラウザはフレームの頭にそろえる
+let shownT = null;
+function frameTime() {
+  // 変換中に動画がまだ読めていなければ、時間軸は読み終えた所に付いていく(動画が読めたら動画の位置)
+  if (V && V.live && liveFollow && liveViewT !== null && vid.readyState < 1) return liveViewT;
+  const t = vid.currentTime, fps = V ? V.fps : 60;
+  if (shownT !== null && Math.abs(shownT - t) < 0.25) return shownT;
+  return Math.floor(t * fps + 1e-3) / fps;
+}
+let scrubT = null;       // 引いている間の目標の時刻(動画の絵の読み込みを待たずに、時間軸・「今」・重ね描きをこの時刻で描く)
+// 動画のフレーム → 音符の時刻と同じ時計(検出が録画の落ちたフレーム・複製を並べ直した分と、ゲームの描画の揺れ。run_song の teff)。
+// 動画の再生時刻のままで描くと、落ちたフレームの後はそのフレーム数ぶん円がずれた
+function effT(tau) {
+  const te = V && V.teff; if (!te || !te.d) return tau;
+  const f = Math.round(tau * V.fps), k = f - te.f0;
+  return k >= 0 && k < te.d.length ? (f + te.d[k]) / V.fps : tau;
+}
+// 書体の読み込みが終わったら canvas を描き直す(先に描いた分は代わりの書体のまま残るため)
+if (document.fonts) {
+  const redraw_ = () => { if (V) (viewMode === 'chart' ? drawChart : drawAll)(); };
+  document.fonts.addEventListener('loadingdone', redraw_);
+  for (const w of [400, 600, 700]) document.fonts.load(`${w} 12px "Gen Interface JP"`, '本家採譜参照まだ読んでいない外した通過 0123456789×').then(redraw_, () => {});
+}
+function drawAll() {
+  if (!V) return;
+  if (viewMode === 'chart') { chHeadUpd(); return; }
+  const tau = effT(scrubT !== null ? scrubT : frameTime());
+  drawOverlay(tau); drawLoupe(tau); drawTimeline(tau); drawNow(tau);
+}
+const vid = $('vid');
+function onFrame(now, md) { shownT = md.mediaTime; drawAll(); vid.requestVideoFrameCallback(onFrame); }
+if (vid.requestVideoFrameCallback) vid.requestVideoFrameCallback(onFrame);
+// requestVideoFrameCallback の無いブラウザだけ、再生中は毎画面描く
+function loop() { if (!V) return; drawAll(); if (!vid.paused && !vid.requestVideoFrameCallback) requestAnimationFrame(loop); }
+// 一時停止中の点滅: 画面に入る範囲(判定枠の前後 3 秒)に違いがあるときだけ描き直す
+function pulseLoop() { if (V && vid.paused && V.diffs.some(d => d.t > vid.currentTime - 0.1 && d.t < vid.currentTime + 3)) drawOverlay(effT(frameTime())); requestAnimationFrame(pulseLoop); }
+requestAnimationFrame(pulseLoop);
+// 再生ボタンの表示は、動画が実際に止まっているか(paused)で毎回決める。曲を切り替えると pause の合図が来ないまま止まり、表示が逆になっていた
+function updPlay() { $('bPlay').textContent = vid.paused ? '▶ 再生' : '❚❚ 止める'; }
+['play', 'playing', 'pause', 'ended', 'emptied', 'loadstart', 'loadedmetadata', 'seeked'].forEach(ev => vid.addEventListener(ev, updPlay));
+vid.onplay = () => { updPlay(); loop(); };
+vid.onpause = () => { updPlay(); drawAll(); };
+vid.onseeked = () => { shownT = null; drawAll(); };
+window.onresize = drawAll;
+['lNotes', 'lOrigin', 'lRef', 'lBars', 'lRolls', 'lFlash', 'lHud', 'lRemoved'].forEach(id => $(id).onchange = drawAll);
+// 引いている間: 描くのは 1 画面に 1 回(requestAnimationFrame)、動画は最後に指した時刻へ追いつく
+let scrubRaf = 0;
+function scrub(t) {
+  scrubT = Math.max(0, Math.min(vid.duration || t, t)); seekTo(scrubT);
+  if (!scrubRaf) scrubRaf = requestAnimationFrame(() => { scrubRaf = 0; drawAll(); });
+}
+function endScrub() { const t = scrubT; scrubT = null; if (t !== null) { seekNext = null; seekBusy = false; seekTo(t); } drawAll(); }
+// 引いている間は seek が連続するので、前の seek が終わるまで最後の目標だけ覚えておく(溜まると追いつかずにカクつく)
+let seekBusy = false, seekNext = null;
+function seekTo(t, pause) {
+  if (pause) vid.pause();
+  const tt = Math.max(0, Math.min(vid.duration || t, t));
+  if (Math.abs(tt - vid.currentTime) < 1e-4) return;
+  if (seekBusy) { seekNext = tt; return; }
+  seekBusy = true; shownT = null; vid.currentTime = tt;
+  setTimeout(() => { seekBusy = false; }, 1500);      // seeked が来なかったときの保険
+}
+vid.addEventListener('seeked', () => { seekBusy = false; if (seekNext !== null) { const n = seekNext; seekNext = null; seekTo(n); } });
+// 1 フレーム送り: 表示中のフレームの番号から、隣のフレームの中ほどへ(フレームの境目に止めると、どちらの絵が出るかがぶれる)
+const stepF = (k) => { vid.pause(); const fps = V ? V.fps : 60; const n = Math.round(frameTime() * fps); seekTo((n + k + 0.5) / fps); };
+function togglePlay() { if (vid.paused) { const p = vid.play(); if (p && p.catch) p.catch(() => updPlay()); } else vid.pause(); updPlay(); }
+$('bPlay').onclick = togglePlay;
+// ボタンを押した後にフォーカスが残ると、Space で「ボタンを押す」と「再生・停止」の両方が起きて 2 回切り替わる。押したらフォーカスを外す
+document.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) b.blur(); });
+$('bPrevF').onclick = () => stepF(-1); $('bNextF').onclick = () => stepF(1);
+function setRate(r) { vid.playbackRate = r; document.querySelectorAll('#rates button, #chRates button').forEach(b => b.classList.toggle('on', +b.dataset.r === r)); drawAll(); }
+$('rates').onclick = (e) => { const b = e.target.closest('button[data-r]'); if (b) setRate(+b.dataset.r); };
+function jumpDiff(dir) {
+  if (!V || !V.diffs.length) return; const t = vid.currentTime + 1.2;
+  const d = dir > 0 ? V.diffs.find(x => x.t > t + 0.05) : [...V.diffs].reverse().find(x => x.t < t - 0.05);
+  if (d) seekTo(d.t - 1.2, true);
+}
+$('bNextD').onclick = () => jumpDiff(1); $('bPrevD').onclick = () => jumpDiff(-1);
+document.addEventListener('keydown', (e) => {
+  if (!V || /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if (e.code === 'Space') { e.preventDefault(); if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); if (!e.repeat) togglePlay(); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); e.shiftKey ? seekTo(vid.currentTime + 1, true) : stepF(1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); e.shiftKey ? seekTo(vid.currentTime - 1, true) : stepF(-1); }
+  else if (e.key === 'n' || e.key === 'N') jumpDiff(1);
+  else if (e.key === 'p' || e.key === 'P') jumpDiff(-1);
+  else if ('1234'.includes(e.key)) setRate([0.1, 0.25, 0.5, 1][+e.key - 1]);
+});
+// 上の時間軸: つかんで左右に引くと時刻が動く(中身をつかむ向き)。動かさずに離したらその時刻へ
+(() => {
+  const cv = $('tl'); let drag = null;
+  cv.onpointerdown = (e) => { if (!V) return; vid.pause(); cv.setPointerCapture(e.pointerId); drag = { x0: e.offsetX, t0: frameTime(), moved: false }; cv.style.cursor = 'grabbing'; };
+  cv.onpointermove = (e) => {
+    if (!drag) return; const w = cv.clientWidth, L = 58, dx = e.offsetX - drag.x0;
+    if (Math.abs(dx) > 3) drag.moved = true;
+    if (drag.moved) scrub(drag.t0 - dx / (w - L) * zoom);
+  };
+  cv.onpointerup = (e) => {
+    if (!drag) return; const w = cv.clientWidth, L = 58;
+    if (!drag.moved && e.offsetX >= L) seekTo(drag.t0 - zoom / 2 + (e.offsetX - L) / (w - L) * zoom, true);
+    else if (drag.moved) endScrub();
+    drag = null; cv.style.cursor = '';
+  };
+})();
+$('tl').onwheel = (e) => { e.preventDefault(); zoom = Math.min(60, Math.max(0.6, zoom * (e.deltaY > 0 ? 1.2 : 1 / 1.2))); drawAll(); };
+// 全体の帯: 押したまま滑らせると、その位置の時刻へ続けて動く
+(() => {
+  const cv = $('ovv'); let on = false;
+  const go = (e) => scrub(V.T0 + Math.max(0, Math.min(1, e.offsetX / cv.clientWidth)) * (V.T1 - V.T0));
+  cv.onpointerdown = (e) => { if (!V) return; vid.pause(); cv.setPointerCapture(e.pointerId); on = true; go(e); };
+  cv.onpointermove = (e) => { if (on) go(e); };
+  cv.onpointerup = () => { if (on) endScrub(); on = false; };
+})();
+
+// URL で開く: ?open=wide:<動画 ID>&t=<秒>(その場面を人に見せる用)
+(async () => {
+  // ページを開き直したとき、実行中の変換があればつなぎ直して進み具合を出す(出力は最初から流し直すので、終わった段階も分かる)。
+  // 結果の一覧(1100 本)の読み込みは遅いので待たない
+  // 開いたときの ?open= は先に読む(結果を開くたびに URL が書き換わるので、一覧を待つ間に変換中の画面などを開くと、それを開き直して上書きしていた)
+  const op = new URLSearchParams(location.search).get('open');
+  const resultsP = loadResults(); await Promise.all([loadVideos(), loadSongs()]);
+  if (new URLSearchParams(location.search).get('tab') === 'run') showTab(true);
+  try {
+    const js = await (await fetch('/api/jobs')).json(); const run = js.find(x => !x.done);
+    if (run) { videoPath = run.video; songDir = run.song_dir || null; startJob(run); }
+  } catch (e) {}
+  await resultsP;
+  // 待つ間に何か開いた・タブを動かしたらそのまま(「新しく変換」で動画を選んでいる途中に「結果を開く」へ戻されていた)
+  if (op && !V && !tabTouched) { const i = op.indexOf(':'); openResult(op.slice(0, i), op.slice(i + 1)); }
+})();
+</script>
+</body>
+</html>

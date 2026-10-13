@@ -1,0 +1,792 @@
+[
+ {
+  "name": "hypernova",
+  "video": "XHcmLQ7vC5o",
+  "dir": "08 Namco Original/HYPERNOVA",
+  "ref": "HYPERNOVA.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "taiko_drum_monster",
+  "video": "XHcmLQ7vC5o",
+  "dir": "08 Namco Original/Taiko Drum Monster",
+  "ref": "Taiko Drum Monster.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "ultraman_x",
+  "video": "XHcmLQ7vC5o",
+  "dir": "02 Kids/Ultraman X",
+  "ref": "Ultraman X.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "vrykolakas",
+  "video": "ylaH01cmYPs",
+  "dir": "08 Namco Original/Vrykolakas",
+  "ref": "Vrykolakas.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "koko_doko",
+  "video": "ylaH01cmYPs",
+  "dir": "08 Namco Original/Koko Doko Tabun Dokka-tou",
+  "ref": "Koko Doko Tabun Dokka-tou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "kumoma_wo_oyogu",
+  "video": "ylaH01cmYPs",
+  "dir": "08 Namco Original/Kumoma wo Oyogu",
+  "ref": "Kumoma wo Oyogu.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "ka_ura",
+  "video": "Mt-Lso5JaLY",
+  "dir": "08 Namco Original/Ka",
+  "ref": "Ka.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "donkama_2000",
+  "video": "DVwnFd_r8u0",
+  "dir": "08 Namco Original/Donkama 2000",
+  "ref": "Donkama 2000.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "resume_story_oni",
+  "video": "34yYZmydidM",
+  "dir": "08 Namco Original/resume story",
+  "ref": "resume story.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "angel_dream_ura",
+  "video": "pXE4B1kuYrg",
+  "dir": "08 Namco Original/Angel Dream",
+  "ref": "Angel Dream.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "kurenai",
+  "video": "Peyi2fka23I",
+  "dir": "01 Pop/Kurenai",
+  "ref": "Kurenai.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "sora8",
+  "video": "JXAbrFfaCEk",
+  "dir": "08 Namco Original/SORA-VIII Nebula Trail",
+  "ref": "SORA-VIII Nebula Trail.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tsundere_cafe",
+  "video": "jN_UKYJve-w",
+  "dir": "08 Namco Original/Tsundere Cafe e Youkoso☆",
+  "ref": "Tsundere Cafe e Youkoso.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "minna_no_kakigoori",
+  "video": "rt9um32DbRc",
+  "dir": "08 Namco Original/Minna no Kakigoori",
+  "ref": "Minna no Kakigoori.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "yami_no_mahou_shoujo",
+  "video": "ACo1DLvX_zM",
+  "dir": "08 Namco Original/Yami no Mahou Shoujo",
+  "ref": "Yami no Mahou Shoujo.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "kumo_no_kanata",
+  "video": "8kJcMM_ew4g",
+  "dir": "08 Namco Original/Kumo no Kanata no Taichi no Kaze",
+  "ref": "Kumo no Kanata no Taichi no Kaze.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "taberuna_2000",
+  "video": "w8-kmyEemPY",
+  "dir": "08 Namco Original/Taberuna 2000",
+  "ref": "Taberuna 2000.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "minuet",
+  "video": "0eFbk9kUpuw",
+  "dir": "07 Classical/Minuet",
+  "ref": "Minuet.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "nivalis_anima_ura",
+  "video": "gCvZpsfzCWA",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/19 Tatsujin",
+  "ref": "Nivalis Anima.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "mayoiduki_ura",
+  "video": "R94-k804usM",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/19 Tatsujin",
+  "ref": "MaYoiDuki.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "gin_no_reimei_ura",
+  "video": "33h_4wd4q_E",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/19 Tatsujin",
+  "ref": "Gin no Reimei ka Kuro no Shouka ka.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "xa_ura_obs120",
+  "video": "testvideos/2026-09-16 16-42-04.mp4",
+  "dir": "08 Namco Original/Xa",
+  "ref": "Xa.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "dan_ai_scream",
+  "video": "iTqtfJ4_gFI",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/01 Gokyuu",
+  "ref": "Ai Scream.tja",
+  "course": "Normal"
+ },
+ {
+  "name": "dan_angel_dream",
+  "video": "NqLetXjlX-4",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/09 Yondan",
+  "ref": "Angel Dream.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_atoz_i_leave_toz",
+  "video": "E1OhS1Izg8s",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/12 Nanadan",
+  "ref": "AtoZ,I leave toZ.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_bad_apple",
+  "video": "QtAjP4LaBJ4",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/02 Yonkyuu",
+  "ref": "Bad Apple!!.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_bai_bai_fight",
+  "video": "tEHo0gtC5J8",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/03 Sankyuu",
+  "ref": "Bai Bai FIGHT.tja",
+  "course": "Hard"
+ },
+ {
+  "name": "dan_carmine",
+  "video": "JNEZwi4_paM",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/01 Gokyuu",
+  "ref": "CARMINE.tja",
+  "course": "Normal"
+ },
+ {
+  "name": "dan_donkyo_likelihood",
+  "video": "oZ8qWnvSZu8",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/15 Judan",
+  "ref": "DONKYO Likelihood.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_hello_worldooon",
+  "video": "REFC36_EOe0",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/08 Sandan",
+  "ref": "Hello, Worldooon!!.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_iris_out",
+  "video": "ceZIpT0p6R4",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/03 Sankyuu",
+  "ref": "IRIS OUT.tja",
+  "course": "Hard"
+ },
+ {
+  "name": "dan_jikuuchou_sousa_2_ka",
+  "video": "oKhNftHojWA",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/11 Rokudan",
+  "ref": "Jikuuchou Sousa 2-ka.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_ka_ma_se",
+  "video": "bgQPwBCaGQY",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/10 Godan",
+  "ref": "Ka Ma Se.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_kaijuu",
+  "video": "sIiivYTR8cc",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/06 Shodan",
+  "ref": "Kaijuu.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_last_brutal_sister_flandre_s",
+  "video": "Fwy6h914_VU",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/05 Ikkyuu",
+  "ref": "Last Brutal Sister Flandre S.tja",
+  "course": "Hard"
+ },
+ {
+  "name": "dan_lisdoonvarna_no_tasogare",
+  "video": "lh2eNiLXYNk",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/09 Yondan",
+  "ref": "Lisdoonvarna no Tasogare.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_lost_one_no_goukoku",
+  "video": "I-lITScpy0A",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/12 Nanadan",
+  "ref": "Lost One no Goukoku.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_matsuri_d_a",
+  "video": "tfS9mK1yFqE",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/11 Rokudan",
+  "ref": "MATSURI D A.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_new_kawaii",
+  "video": "-M9wbHRNQ5Y",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/02 Yonkyuu",
+  "ref": "NEW KAWAII.tja",
+  "course": "Normal"
+ },
+ {
+  "name": "dan_noushou_sakuretsu_girl",
+  "video": "gmzY4O63jhw",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/05 Ikkyuu",
+  "ref": "Noushou Sakuretsu Girl.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_only_my_railgun",
+  "video": "ZmrYCRk1Cbk",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/07 Nidan",
+  "ref": "only my railgun.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_oshama_scramble",
+  "video": "iNfTd6tmWvo",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/10 Godan",
+  "ref": "Oshama Scramble!.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_replay",
+  "video": "KrhwTh-ZDPc",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/08 Sandan",
+  "ref": "RePlay!!.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_rumble_ranbu",
+  "video": "MGK9-599iP4",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/09 Yondan",
+  "ref": "Rumble Ranbu.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "dan_saitama_2000",
+  "video": "_NCXmV04uBk",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/04 Nikyuu",
+  "ref": "Saitama 2000.tja",
+  "course": "Hard"
+ },
+ {
+  "name": "dan_shining_star",
+  "video": "giXUechN_QA",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/03 Sankyuu",
+  "ref": "Shining Star.tja",
+  "course": "Hard"
+ },
+ {
+  "name": "dan_shiro_neko_caramel_mugen_no_wata_ame",
+  "video": "ONvIyowW5Vw",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/08 Sandan",
+  "ref": "Shiro Neko Caramel Mugen no Wata-ame.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_sports_digestdon_fill_in_the_sky",
+  "video": "uNGSjEwToY4",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/12 Nanadan",
+  "ref": "Sports Digestdon Fill in the Sky.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "dan_tetoris",
+  "video": "kdrlIf7jJl4",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/02 Yonkyuu",
+  "ref": "Tetoris.tja",
+  "course": "Normal"
+ },
+ {
+  "name": "dan_boku_wa_synth_nijisanji",
+  "video": "twVKx9btkDM",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/10 Godan",
+  "ref": "Boku wa Synth (Nijisanji).tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_bubbly_kakumei_bang_bang_bubble",
+  "video": "YL_OgwsTpXs",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/11 Rokudan",
+  "ref": "Bubbly Kakumei Bang Bang Bubble.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "dan_carmen_prelude",
+  "video": "N2TP5RhtahM",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/07 Nidan",
+  "ref": "Carmen Prelude.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_dimpy_dimper",
+  "video": "ZSsMjwfzOCY",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/05 Ikkyuu",
+  "ref": "Dimpy Dimper.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_happy_synthesizer",
+  "video": "SfqKVOzlVbE",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/06 Shodan",
+  "ref": "Happy Synthesizer.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_hopes_and_dreams",
+  "video": "r5DLFgPu-wU",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/04 Nikyuu",
+  "ref": "Hopes and Dreams.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_iosys_aki_no_bakushoku_matsuri_2024",
+  "video": "_U4EtPJVLxA",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/16 Kurouto",
+  "ref": "IOSYS Aki no Bakushoku Matsuri 2024.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_kassei_likelihood",
+  "video": "s3Q3529hch4",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/15 Judan",
+  "ref": "KASSEI Likelihood.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_mesmerizer",
+  "video": "eip2wRcTFPE",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/07 Nidan",
+  "ref": "Mesmerizer.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_natsumatsuri_new_audio_chart",
+  "video": "vyLArnypohU",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/06 Shodan",
+  "ref": "Natsumatsuri -New Audio Chart-.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_resume_story",
+  "video": "COy2jdd8kHE",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/16 Kurouto",
+  "ref": "resume story.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "dan_daddy_s_style_konya_wa_daddy_daddy",
+  "video": "jBth875kj8M",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/01 Gokyuu",
+  "ref": "Daddy's Style -Konya wa Daddy Daddy-.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_tokyo_shandy_rendezvous",
+  "video": "ssAIbDZEQTI",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/04 Nikyuu",
+  "ref": "Tokyo Shandy Rendezvous.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dan_doom_noiz",
+  "video": "QAWNHz-2jeg",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/16 Kurouto",
+  "ref": "Doom Noiz.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "vertex",
+  "video": "tD0tWNhrONY",
+  "dir": "05 Game Music/VERTeX",
+  "ref": "VERTeX.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "kassei_yamaharu",
+  "video": "A137hTaA8aA",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/15 Judan",
+  "ref": "KASSEI Likelihood.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "kassei_teamrnh",
+  "video": "Htj0W6xup8c",
+  "dir": "12 Dan Dojo 2026/Nijiiro 2026/15 Judan",
+  "ref": "KASSEI Likelihood.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "mopemope",
+  "video": "67kNjnrjPRI",
+  "dir": "06 Variety/Mopemope",
+  "ref": "Mopemope.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "yuugen_no_ran",
+  "video": "bAXMr52BX_s",
+  "dir": "08 Namco Original/Yuugen no Ran",
+  "ref": "Yuugen no Ran.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dairokuten_oni",
+  "video": "yvVxdnnlLiM",
+  "dir": "08 Namco Original/Dairokuten Maou",
+  "ref": "Dairokuten Maou.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "dairokuten_ura",
+  "video": "UmYmuYYQtEY",
+  "dir": "08 Namco Original/Dairokuten Maou",
+  "ref": "Dairokuten Maou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "zouo_oni",
+  "video": "ROTan3fVPM0",
+  "dir": "08 Namco Original/Zouo to Shuuaku no Hanataba",
+  "ref": "Zouo to Shuuaku no Hanataba.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "zouo_ura",
+  "video": "53NGzFOa7iE",
+  "dir": "08 Namco Original/Zouo to Shuuaku no Hanataba",
+  "ref": "Zouo to Shuuaku no Hanataba.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin25_polarisnaut",
+  "video": "7LlYjfTNm8g",
+  "dir": "08 Namco Original/POLARiSNAUT",
+  "ref": "POLARiSNAUT.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin25_emma_ura",
+  "video": "5NqiL1j1CEY",
+  "dir": "08 Namco Original/Emma",
+  "ref": "Emma.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin25_vigvangs_ura",
+  "video": "JFevgX4F2vk",
+  "dir": "08 Namco Original/vs VIGVANGS",
+  "ref": "vs VIGVANGS.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin25_emma_ura_kurouto",
+  "video": "Zxe6e7qL5P4",
+  "dir": "08 Namco Original/Emma",
+  "ref": "Emma.tja",
+  "course": "Edit",
+  "env": {
+   "BRANCH_PATH": "E"
+  }
+ },
+ {
+  "name": "tatsujin25_emma_ura_futsuu",
+  "video": "3i4fB15r0H4",
+  "dir": "08 Namco Original/Emma",
+  "ref": "Emma.tja",
+  "course": "Edit",
+  "env": {
+   "BRANCH_PATH": "N"
+  }
+ },
+ {
+  "name": "chaos_time",
+  "video": "qbahlfTpF7E",
+  "dir": "08 Namco Original/Chaos Time",
+  "ref": "!!!Chaos Time!!!.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin24_challengers",
+  "video": "w98f4fey_mg",
+  "dir": "08 Namco Original/Challengers",
+  "ref": "Challengers.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin24_future_ura",
+  "video": "TD0_PUB49_8",
+  "dir": "08 Namco Original/The Future of the Taiko Drum",
+  "ref": "The Future of the Taiko Drum.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin23_waraeru",
+  "video": "R3zqmhCp6V0",
+  "dir": "08 Namco Original/Waraeru 2000",
+  "ref": "Waraeru 2000.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin23_shippuudotou_ura",
+  "video": "7cUfTEb4IXA",
+  "dir": "08 Namco Original/Shippuudotou",
+  "ref": "Shippuudotou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin23_prelude_ura",
+  "video": "9Rkmt_AW-kM",
+  "dir": "08 Namco Original/2354 Prelude for The Journey of Sunlight",
+  "ref": "2354 Prelude for The Journey of Sunlight.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "dropsim_shippuu",
+  "video": "dropsim_shippuu",
+  "dir": "08 Namco Original/Shippuudotou",
+  "ref": "Shippuudotou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin22_nemm",
+  "video": "5gDM9my8U7E",
+  "dir": "08 Namco Original/MM",
+  "ref": "≠MM.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin22_dangan_ura",
+  "video": "VF-X2Hp2HO0",
+  "dir": "08 Namco Original/Dangan Notes",
+  "ref": "Dangan Notes.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin22_shinryu_ura",
+  "video": "JCe2FxuwEec",
+  "dir": "08 Namco Original/Dragon of Divinity Shinryu",
+  "ref": "Dragon of Divinity Shinryu.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin21_shimedore",
+  "video": "-hgZGB9OyVg",
+  "dir": "08 Namco Original/Zoku Shimedore 2000",
+  "ref": "Zoku Shimedore 2000.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin21_tdm_ura",
+  "video": "Dpe9PIsGjSY",
+  "dir": "08 Namco Original/Taiko Drum Monster",
+  "ref": "Taiko Drum Monster.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin20_mada_saitama",
+  "video": "r13ID4FAI7s",
+  "dir": "08 Namco Original/Mada Saitama 2000",
+  "ref": "Mada Saitama 2000.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin20_vixtory_ura",
+  "video": "OddrlphhJfs",
+  "dir": "08 Namco Original/Vixtory",
+  "ref": "Vixtory.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tatsujin19_souryuu",
+  "video": "MHWxYcvXr_M",
+  "dir": "08 Namco Original/Souryuu no Ran",
+  "ref": "Souryuu no Ran.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin19_poxei",
+  "video": "xxDifAGsYAI",
+  "dir": "08 Namco Original/poxei DOON",
+  "ref": "poxei DOON.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin18_charlie",
+  "video": "NoMRsmnv8lg",
+  "dir": "07 Classical/Charlie Dash!",
+  "ref": "Charlie Dash!.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin17_infinite",
+  "video": "BQT8zBykbU4",
+  "dir": "08 Namco Original/Infinite Rebellion",
+  "ref": "Infinite Rebellion.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin15_xa",
+  "video": "POEISrpvgzo",
+  "dir": "08 Namco Original/Xa",
+  "ref": "Xa.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin14_hurtling",
+  "video": "omK7eL5N4nA",
+  "dir": "08 Namco Original/Hurtling Boys",
+  "ref": "Hurtling Boys.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin14_shimedore",
+  "video": "pRIjvJzRzDg",
+  "dir": "08 Namco Original/Shimedore 2000",
+  "ref": "Shimedore 2000.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "tatsujin14_shoushitsu_ura",
+  "video": "Kp36vO2CPHk",
+  "dir": "04 Vocaloid/Hatsune Miku no Shoushitsu -Gekijouban-",
+  "ref": "Hatsune Miku no Shoushitsu -Gekijouban-.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "var30_shippuu",
+  "video": "var30_shippuu",
+  "dir": "08 Namco Original/Shippuudotou",
+  "ref": "Shippuudotou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "var50_shippuu",
+  "video": "var50_shippuu",
+  "dir": "08 Namco Original/Shippuudotou",
+  "ref": "Shippuudotou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "var720_shippuu",
+  "video": "var720_shippuu",
+  "dir": "08 Namco Original/Shippuudotou",
+  "ref": "Shippuudotou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "varoff_shippuu",
+  "video": "varoff_shippuu",
+  "dir": "08 Namco Original/Shippuudotou",
+  "ref": "Shippuudotou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "hello_worldooon_ura",
+  "video": "HysFmR9spUU",
+  "dir": "08 Namco Original/Hello, Worldooon!!",
+  "ref": "Hello, Worldooon!!.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "dangan_notes_ura",
+  "video": "VF-X2Hp2HO0",
+  "dir": "08 Namco Original/Dangan Notes",
+  "ref": "Dangan Notes.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "mekadesu_ura",
+  "video": "kFxKSZOSiB4",
+  "dir": "08 Namco Original/Mekadesu",
+  "ref": "Mekadesu. -New Chart-.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "doppelgangers_ura",
+  "video": "k7GLOQrIkIE",
+  "dir": "06 Variety/Doppelgangers",
+  "ref": "Doppelgangers.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "undead_heart_oni",
+  "video": "rCHa2n_9w54",
+  "dir": "08 Namco Original/UNDEAD HEART -Ikari no Warriors-",
+  "ref": "UNDEAD HEART -Ikari no Warriors-.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "kyourandotou_ura",
+  "video": "UlM9QhTHWVw",
+  "dir": "08 Namco Original/Kyourandotou",
+  "ref": "Kyourandotou.tja",
+  "course": "Edit"
+ },
+ {
+  "name": "tenyou_no_mai_oni",
+  "video": "vaK59--tfdg",
+  "dir": "08 Namco Original/Tenyou no Mai",
+  "ref": "Tenyou no Mai.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "ryougen_no_mai_oni",
+  "video": "gYtq3rdnfS8",
+  "dir": "08 Namco Original/Ryougen no Mai",
+  "ref": "Ryougen no Mai.tja",
+  "course": "Oni"
+ },
+ {
+  "name": "hyakki_yakou_oni",
+  "video": "J9HzbLPnD9Q",
+  "dir": "08 Namco Original/Hyakki Yakou",
+  "ref": "Hyakki Yakou.tja",
+  "course": "Oni"
+ }
+]

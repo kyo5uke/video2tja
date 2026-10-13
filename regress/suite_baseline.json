@@ -1,0 +1,4034 @@
+{
+ "hypernova": {
+  "name": "hypernova",
+  "sec": 15,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.8,
+  "sync_mode": "av",
+  "sync_ref": -12.0,
+  "sync_av": -18.0,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 13,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   15,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   1303,
+   1303
+  ]
+ },
+ "taiko_drum_monster": {
+  "name": "taiko_drum_monster",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.2,
+  "sync_mode": "av",
+  "sync_ref": -9.0,
+  "sync_av": -17.8,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 16,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   15,
+   0,
+   0,
+   0,
+   0,
+   6
+  ],
+  "notes": [
+   850,
+   850
+  ]
+ },
+ "ultraman_x": {
+  "name": "ultraman_x",
+  "sec": 14,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.8,
+  "sync_mode": "av",
+  "sync_ref": -6.0,
+  "sync_av": -21.3,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 19,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   1035,
+   1035
+  ]
+ },
+ "vrykolakas": {
+  "name": "vrykolakas",
+  "sec": 15,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.8,
+  "sync_mode": "av",
+  "sync_ref": -20.0,
+  "sync_av": -16.8,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1346,
+   1346
+  ]
+ },
+ "koko_doko": {
+  "name": "koko_doko",
+  "sec": 14,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.2,
+  "sync_mode": "av",
+  "sync_ref": -10.0,
+  "sync_av": -19.1,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.3,
+  "rt_gt20": 0,
+  "roll": [
+   3,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   939,
+   939
+  ]
+ },
+ "kumoma_wo_oyogu": {
+  "name": "kumoma_wo_oyogu",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.2,
+  "sync_mode": "av",
+  "sync_ref": -8.0,
+  "sync_av": -13.6,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 9,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.3,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   678,
+   678
+  ]
+ },
+ "ka_ura": {
+  "name": "ka_ura",
+  "sec": 26,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 4.1,
+  "sync_mode": "av",
+  "sync_ref": -48.0,
+  "sync_av": -26.8,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 30,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   1070,
+   1070
+  ]
+ },
+ "donkama_2000": {
+  "name": "donkama_2000",
+  "sec": 17,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "av",
+  "sync_ref": -28.0,
+  "sync_av": -38.4,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.3,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   765,
+   765
+  ]
+ },
+ "resume_story_oni": {
+  "name": "resume_story_oni",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.1,
+  "sync_mode": "av",
+  "sync_ref": -58.0,
+  "sync_av": -61.7,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 9,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.2,
+  "rt_gt20": 0,
+  "roll": [
+   56,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   531,
+   531
+  ]
+ },
+ "angel_dream_ura": {
+  "name": "angel_dream_ura",
+  "sec": 10,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.2,
+  "sync_mode": "av",
+  "sync_ref": -1.0,
+  "sync_av": -13.4,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 16,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.1,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   906,
+   1254
+  ]
+ },
+ "kurenai": {
+  "name": "kurenai",
+  "sec": 10,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.3,
+  "sync_mode": "av",
+  "sync_ref": -26.0,
+  "sync_av": -28.0,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 1,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.2,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   999,
+   999
+  ]
+ },
+ "sora8": {
+  "name": "sora8",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -68.0,
+  "sync_av": -75.6,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 7,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.5,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   888,
+   888
+  ]
+ },
+ "tsundere_cafe": {
+  "name": "tsundere_cafe",
+  "sec": 6,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.2,
+  "sync_mode": "ref",
+  "sync_ref": -28.0,
+  "sync_av": null,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 4,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.0,
+  "rt_gt20": 0,
+  "roll": [
+   11,
+   0,
+   0,
+   0,
+   1,
+   2
+  ],
+  "notes": [
+   555,
+   555
+  ]
+ },
+ "minna_no_kakigoori": {
+  "name": "minna_no_kakigoori",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "av",
+  "sync_ref": -6.0,
+  "sync_av": -6.1,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 7,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   765,
+   765
+  ]
+ },
+ "yami_no_mahou_shoujo": {
+  "name": "yami_no_mahou_shoujo",
+  "sec": 13,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -44.0,
+  "sync_av": -46.8,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.2,
+  "rt_gt20": 0,
+  "roll": [
+   8,
+   0,
+   0,
+   0,
+   0,
+   8
+  ],
+  "notes": [
+   1158,
+   1158
+  ]
+ },
+ "kumo_no_kanata": {
+  "name": "kumo_no_kanata",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.8,
+  "sync_mode": "av",
+  "sync_ref": -66.0,
+  "sync_av": -69.8,
+  "gogo": [
+   7,
+   7
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   8,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   643,
+   643
+  ]
+ },
+ "taberuna_2000": {
+  "name": "taberuna_2000",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.7,
+  "sync_mode": "av",
+  "sync_ref": -8.0,
+  "sync_av": -10.0,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.9,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   821,
+   821
+  ]
+ },
+ "minuet": {
+  "name": "minuet",
+  "sec": 7,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "av",
+  "sync_ref": -67.0,
+  "sync_av": -73.5,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 14,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   529,
+   529
+  ]
+ },
+ "nivalis_anima_ura": {
+  "name": "nivalis_anima_ura",
+  "sec": 13,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.3,
+  "sync_mode": "ref",
+  "sync_ref": -212.0,
+  "sync_av": null,
+  "gogo": [
+   10,
+   8
+  ],
+  "gogo_start_max": 19,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.7,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   5
+  ],
+  "notes": [
+   1326,
+   1326
+  ]
+ },
+ "mayoiduki_ura": {
+  "name": "mayoiduki_ura",
+  "sec": 20,
+  "course": "Edit",
+  "recall": 99.5,
+  "precision": 99.5,
+  "misses": 5,
+  "extras": 5,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.5,
+  "sync_mode": "av",
+  "sync_ref": -88.0,
+  "sync_av": -115.8,
+  "gogo": [
+   8,
+   8
+  ],
+  "gogo_start_max": 37,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.9,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1013,
+   1013
+  ]
+ },
+ "gin_no_reimei_ura": {
+  "name": "gin_no_reimei_ura",
+  "sec": 15,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.3,
+  "sync_mode": "av",
+  "sync_ref": -127.0,
+  "sync_av": -129.2,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 17,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   1501,
+   1501
+  ]
+ },
+ "xa_ura_obs120": {
+  "name": "xa_ura_obs120",
+  "sec": 13,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.8,
+  "sync_mode": "ref",
+  "sync_ref": -30.0,
+  "sync_av": null,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.3,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   904,
+   904
+  ]
+ },
+ "dan_ai_scream": {
+  "name": "dan_ai_scream",
+  "sec": 5,
+  "course": "Normal",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.7,
+  "sync_mode": "av",
+  "sync_ref": -48.0,
+  "sync_av": -42.3,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 11,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.8,
+  "rt_gt20": 0,
+  "roll": [
+   9,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   159,
+   159
+  ]
+ },
+ "dan_angel_dream": {
+  "name": "dan_angel_dream",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.5,
+  "sync_mode": "av",
+  "sync_ref": -70.0,
+  "sync_av": -68.1,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.8,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   765,
+   765
+  ]
+ },
+ "dan_atoz_i_leave_toz": {
+  "name": "dan_atoz_i_leave_toz",
+  "sec": 13,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.9,
+  "sync_mode": "av",
+  "sync_ref": -48.0,
+  "sync_av": -46.9,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.9,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   759,
+   759
+  ]
+ },
+ "dan_bad_apple": {
+  "name": "dan_bad_apple",
+  "sec": 7,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.1,
+  "sync_mode": "av",
+  "sync_ref": -48.0,
+  "sync_av": -66.2,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 23,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   544,
+   544
+  ]
+ },
+ "dan_bai_bai_fight": {
+  "name": "dan_bai_bai_fight",
+  "sec": 5,
+  "course": "Hard",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.2,
+  "sync_mode": "ref",
+  "sync_ref": -26.0,
+  "sync_av": null,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 2,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   339,
+   339
+  ]
+ },
+ "dan_carmine": {
+  "name": "dan_carmine",
+  "sec": 4,
+  "course": "Normal",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 3.2,
+  "sync_mode": "ref",
+  "sync_ref": -32.0,
+  "sync_av": null,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 11,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.8,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   155,
+   155
+  ]
+ },
+ "dan_dimpy_dimper": {
+  "name": "dan_dimpy_dimper",
+  "sec": 7,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -74.0,
+  "sync_av": -73.2,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 7,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.9,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   474,
+   474
+  ]
+ },
+ "dan_donkyo_likelihood": {
+  "name": "dan_donkyo_likelihood",
+  "sec": 13,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.0,
+  "sync_mode": "av",
+  "sync_ref": -88.0,
+  "sync_av": -74.1,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 19,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.1,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1059,
+   1059
+  ]
+ },
+ "dan_hello_worldooon": {
+  "name": "dan_hello_worldooon",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 3.8,
+  "sync_mode": "av",
+  "sync_ref": -50.0,
+  "sync_av": -42.5,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 16,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.6,
+  "rt_gt20": 0,
+  "roll": [
+   10,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   494,
+   494
+  ]
+ },
+ "dan_iris_out": {
+  "name": "dan_iris_out",
+  "sec": 4,
+  "course": "Hard",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "av",
+  "sync_ref": -54.0,
+  "sync_av": -59.9,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.3,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   257,
+   257
+  ]
+ },
+ "dan_jikuuchou_sousa_2_ka": {
+  "name": "dan_jikuuchou_sousa_2_ka",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.1,
+  "sync_mode": "av",
+  "sync_ref": -20.0,
+  "sync_av": -30.4,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 14,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.1,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   773,
+   773
+  ]
+ },
+ "dan_ka_ma_se": {
+  "name": "dan_ka_ma_se",
+  "sec": 7,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -96.0,
+  "sync_av": -100.8,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 6,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.6,
+  "rt_gt20": 0,
+  "roll": [
+   8,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   527,
+   527
+  ]
+ },
+ "dan_kaijuu": {
+  "name": "dan_kaijuu",
+  "sec": 5,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.6,
+  "sync_mode": "av",
+  "sync_ref": -74.0,
+  "sync_av": -83.5,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.9,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   370,
+   370
+  ]
+ },
+ "dan_last_brutal_sister_flandre_s": {
+  "name": "dan_last_brutal_sister_flandre_s",
+  "sec": 6,
+  "course": "Hard",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.6,
+  "sync_mode": "av",
+  "sync_ref": -10.0,
+  "sync_av": -20.3,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.8,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   497,
+   497
+  ]
+ },
+ "dan_lisdoonvarna_no_tasogare": {
+  "name": "dan_lisdoonvarna_no_tasogare",
+  "sec": 7,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "av",
+  "sync_ref": -1.0,
+  "sync_av": -0.2,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   605,
+   605
+  ]
+ },
+ "dan_lost_one_no_goukoku": {
+  "name": "dan_lost_one_no_goukoku",
+  "sec": 10,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.2,
+  "sync_mode": "av",
+  "sync_ref": -87.0,
+  "sync_av": -75.3,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 11,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.3,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   799,
+   799
+  ]
+ },
+ "dan_matsuri_d_a": {
+  "name": "dan_matsuri_d_a",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.3,
+  "sync_mode": "av",
+  "sync_ref": -8.0,
+  "sync_av": -10.1,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.6,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   574,
+   574
+  ]
+ },
+ "dan_new_kawaii": {
+  "name": "dan_new_kawaii",
+  "sec": 4,
+  "course": "Normal",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "ref",
+  "sync_ref": -40.0,
+  "sync_av": null,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 1,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.6,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   198,
+   198
+  ]
+ },
+ "dan_noushou_sakuretsu_girl": {
+  "name": "dan_noushou_sakuretsu_girl",
+  "sec": 7,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.2,
+  "sync_mode": "av",
+  "sync_ref": -76.0,
+  "sync_av": -78.0,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.3,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   593,
+   593
+  ]
+ },
+ "dan_only_my_railgun": {
+  "name": "dan_only_my_railgun",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.7,
+  "sync_mode": "av",
+  "sync_ref": -4.0,
+  "sync_av": -5.8,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.8,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   429,
+   429
+  ]
+ },
+ "dan_oshama_scramble": {
+  "name": "dan_oshama_scramble",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.6,
+  "sync_mode": "av",
+  "sync_ref": -36.0,
+  "sync_av": -38.3,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   10,
+   0,
+   0,
+   0,
+   0,
+   7
+  ],
+  "notes": [
+   677,
+   677
+  ]
+ },
+ "dan_replay": {
+  "name": "dan_replay",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.1,
+  "sync_mode": "av",
+  "sync_ref": -26.0,
+  "sync_av": -14.9,
+  "gogo": [
+   7,
+   7
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.4,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   625,
+   625
+  ]
+ },
+ "dan_rumble_ranbu": {
+  "name": "dan_rumble_ranbu",
+  "sec": 9,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.1,
+  "sync_mode": "av",
+  "sync_ref": -80.0,
+  "sync_av": -84.4,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.3,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   765,
+   765
+  ]
+ },
+ "dan_saitama_2000": {
+  "name": "dan_saitama_2000",
+  "sec": 6,
+  "course": "Hard",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 3.1,
+  "sync_mode": "av",
+  "sync_ref": -102.0,
+  "sync_av": -94.5,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 0,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.6,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   489,
+   489
+  ]
+ },
+ "dan_shining_star": {
+  "name": "dan_shining_star",
+  "sec": 4,
+  "course": "Hard",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.1,
+  "sync_mode": "av",
+  "sync_ref": -28.0,
+  "sync_av": -18.3,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.8,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   228,
+   228
+  ]
+ },
+ "dan_shiro_neko_caramel_mugen_no_wata_ame": {
+  "name": "dan_shiro_neko_caramel_mugen_no_wata_ame",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.2,
+  "sync_mode": "av",
+  "sync_ref": -22.0,
+  "sync_av": -31.4,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 7,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.0,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   634,
+   634
+  ]
+ },
+ "dan_sports_digestdon_fill_in_the_sky": {
+  "name": "dan_sports_digestdon_fill_in_the_sky",
+  "sec": 10,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -56.0,
+  "sync_av": -60.1,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.5,
+  "rt_gt20": 0,
+  "roll": [
+   3,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   733,
+   733
+  ]
+ },
+ "dan_tetoris": {
+  "name": "dan_tetoris",
+  "sec": 7,
+  "course": "Normal",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "av",
+  "sync_ref": -60.0,
+  "sync_av": -52.9,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   406,
+   406
+  ]
+ },
+ "dan_boku_wa_synth_nijisanji": {
+  "name": "dan_boku_wa_synth_nijisanji",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.4,
+  "sync_mode": "av",
+  "sync_ref": 4.0,
+  "sync_av": -7.8,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 17,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   612,
+   612
+  ]
+ },
+ "dan_bubbly_kakumei_bang_bang_bubble": {
+  "name": "dan_bubbly_kakumei_bang_bang_bubble",
+  "sec": 11,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 3.1,
+  "sync_mode": "av",
+  "sync_ref": -86.0,
+  "sync_av": -87.4,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 13,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.1,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   828,
+   828
+  ]
+ },
+ "dan_carmen_prelude": {
+  "name": "dan_carmen_prelude",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.4,
+  "sync_mode": "av",
+  "sync_ref": -36.0,
+  "sync_av": -51.8,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 19,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.9,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   518,
+   518
+  ]
+ },
+ "dan_happy_synthesizer": {
+  "name": "dan_happy_synthesizer",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -112.0,
+  "sync_av": -119.8,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.9,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   7
+  ],
+  "notes": [
+   331,
+   331
+  ]
+ },
+ "dan_hopes_and_dreams": {
+  "name": "dan_hopes_and_dreams",
+  "sec": 10,
+  "course": "Oni",
+  "recall": 99.9,
+  "precision": 99.9,
+  "misses": 1,
+  "extras": 1,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.8,
+  "sync_mode": "av",
+  "sync_ref": -38.0,
+  "sync_av": -31.7,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 7,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.1,
+  "rt_gt20": 0,
+  "roll": [
+   9,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   694,
+   1023
+  ]
+ },
+ "dan_iosys_aki_no_bakushoku_matsuri_2024": {
+  "name": "dan_iosys_aki_no_bakushoku_matsuri_2024",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.0,
+  "sync_mode": "av",
+  "sync_ref": -128.0,
+  "sync_av": -131.4,
+  "gogo": [
+   7,
+   7
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   16,
+   0,
+   0,
+   0,
+   0,
+   5
+  ],
+  "notes": [
+   811,
+   811
+  ]
+ },
+ "dan_kassei_likelihood": {
+  "name": "dan_kassei_likelihood",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.8,
+  "sync_mode": "av",
+  "sync_ref": 30.0,
+  "sync_av": 24.2,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.8,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   938,
+   938
+  ]
+ },
+ "dan_mesmerizer": {
+  "name": "dan_mesmerizer",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -54.0,
+  "sync_av": -62.5,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   12,
+   0,
+   0,
+   0,
+   0,
+   6
+  ],
+  "notes": [
+   505,
+   505
+  ]
+ },
+ "dan_natsumatsuri_new_audio_chart": {
+  "name": "dan_natsumatsuri_new_audio_chart",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "av",
+  "sync_ref": -0.0,
+  "sync_av": 3.8,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.6,
+  "rt_gt20": 0,
+  "roll": [
+   9,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   488,
+   488
+  ]
+ },
+ "dan_resume_story": {
+  "name": "dan_resume_story",
+  "sec": 15,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.1,
+  "sync_mode": "av",
+  "sync_ref": -26.0,
+  "sync_av": -28.7,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.7,
+  "rt_gt20": 0,
+  "roll": [
+   13,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   1042,
+   1042
+  ]
+ },
+ "dan_daddy_s_style_konya_wa_daddy_daddy": {
+  "name": "dan_daddy_s_style_konya_wa_daddy_daddy",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -106.0,
+  "sync_av": -108.2,
+  "gogo": [
+   9,
+   9
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   8,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   517,
+   517
+  ]
+ },
+ "dan_tokyo_shandy_rendezvous": {
+  "name": "dan_tokyo_shandy_rendezvous",
+  "sec": 7,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.6,
+  "sync_mode": "av",
+  "sync_ref": -102.0,
+  "sync_av": -102.4,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 3.1,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   4
+  ],
+  "notes": [
+   490,
+   490
+  ]
+ },
+ "dan_doom_noiz": {
+  "name": "dan_doom_noiz",
+  "sec": 10,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.4,
+  "sync_mode": "av",
+  "sync_ref": 16.0,
+  "sync_av": -4.1,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 24,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.0,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   961,
+   961
+  ]
+ },
+ "vertex": {
+  "name": "vertex",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 99.9,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "ref",
+  "sync_ref": -64.0,
+  "sync_av": null,
+  "gogo": [
+   6,
+   6
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.0,
+  "rt_gt20": 0,
+  "roll": [
+   6,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   806,
+   806
+  ]
+ },
+ "kassei_yamaharu": {
+  "name": "kassei_yamaharu",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.8,
+  "sync_mode": "av",
+  "sync_ref": 16.0,
+  "sync_av": 10.8,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.3,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   938,
+   938
+  ]
+ },
+ "kassei_teamrnh": {
+  "name": "kassei_teamrnh",
+  "sec": 13,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "av",
+  "sync_ref": -92.0,
+  "sync_av": -89.2,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   938,
+   938
+  ]
+ },
+ "mopemope": {
+  "name": "mopemope",
+  "sec": 18,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.2,
+  "sync_mode": "av",
+  "sync_ref": -48.0,
+  "sync_av": -59.5,
+  "gogo": [
+   11,
+   10
+  ],
+  "gogo_start_max": 14,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.8,
+  "rt_gt20": 0,
+  "roll": [
+   17,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   501,
+   501
+  ]
+ },
+ "yuugen_no_ran": {
+  "name": "yuugen_no_ran",
+  "sec": 10,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -54.0,
+  "sync_av": -70.6,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 18,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.5,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   1262,
+   1262
+  ]
+ },
+ "dairokuten_oni": {
+  "name": "dairokuten_oni",
+  "sec": 13,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -74.0,
+  "sync_av": -74.8,
+  "gogo": [
+   6,
+   6
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.6,
+  "rt_gt20": 0,
+  "roll": [
+   9,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1396,
+   1396
+  ]
+ },
+ "dairokuten_ura": {
+  "name": "dairokuten_ura",
+  "sec": 34,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.1,
+  "sync_mode": "av",
+  "sync_ref": -2.0,
+  "sync_av": -3.8,
+  "gogo": [
+   6,
+   6
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.6,
+  "rt_gt20": 0,
+  "roll": [
+   20,
+   0,
+   0,
+   0,
+   0,
+   5
+  ],
+  "notes": [
+   1582,
+   1582
+  ]
+ },
+ "zouo_ura": {
+  "name": "zouo_ura",
+  "sec": 13,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -86.0,
+  "sync_av": -90.2,
+  "gogo": [
+   14,
+   14
+  ],
+  "gogo_start_max": 9,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.1,
+  "rt_gt20": 0,
+  "roll": [
+   25,
+   0,
+   0,
+   0,
+   0,
+   6
+  ],
+  "notes": [
+   1170,
+   1170
+  ]
+ },
+ "zouo_oni": {
+  "name": "zouo_oni",
+  "sec": 9,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -54.0,
+  "sync_av": -50.0,
+  "gogo": [
+   14,
+   14
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.2,
+  "rt_gt20": 0,
+  "roll": [
+   20,
+   0,
+   0,
+   0,
+   0,
+   5
+  ],
+  "notes": [
+   722,
+   722
+  ]
+ },
+ "tatsujin25_emma_ura": {
+  "name": "tatsujin25_emma_ura",
+  "sec": 12,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 3.8,
+  "sync_mode": "av",
+  "sync_ref": -13.0,
+  "sync_av": -18.6,
+  "gogo": [
+   7,
+   7
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   3
+  ],
+  "notes": [
+   1074,
+   2788
+  ]
+ },
+ "tatsujin25_polarisnaut": {
+  "name": "tatsujin25_polarisnaut",
+  "sec": 20,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.7,
+  "sync_mode": "av",
+  "sync_ref": -101.0,
+  "sync_av": -109.0,
+  "gogo": [
+   11,
+   11
+  ],
+  "gogo_start_max": 22,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.9,
+  "rt_gt20": 0,
+  "roll": [
+   8,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1234,
+   1234
+  ]
+ },
+ "tatsujin25_vigvangs_ura": {
+  "name": "tatsujin25_vigvangs_ura",
+  "sec": 19,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.0,
+  "sync_mode": "av",
+  "sync_ref": -50.0,
+  "sync_av": -46.3,
+  "gogo": [
+   14,
+   14
+  ],
+  "gogo_start_max": 16,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   13,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1438,
+   1438
+  ]
+ },
+ "tatsujin25_emma_ura_kurouto": {
+  "name": "tatsujin25_emma_ura_kurouto",
+  "sec": 11,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "av",
+  "sync_ref": -44.0,
+  "sync_av": -53.0,
+  "gogo": [
+   7,
+   7
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   937,
+   2788
+  ]
+ },
+ "tatsujin25_emma_ura_futsuu": {
+  "name": "tatsujin25_emma_ura_futsuu",
+  "sec": 9,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "ref",
+  "sync_ref": 76.0,
+  "sync_av": null,
+  "gogo": [
+   7,
+   7
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.0,
+  "rt_gt20": 0,
+  "roll": [
+   7,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   781,
+   2788
+  ]
+ },
+ "chaos_time": {
+  "name": "chaos_time",
+  "sec": 18,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 3.2,
+  "sync_mode": "ref",
+  "sync_ref": -15.0,
+  "sync_av": null,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 7,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.2,
+  "rt_gt20": 0,
+  "roll": [
+   12,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   987,
+   987
+  ]
+ },
+ "tatsujin24_challengers": {
+  "name": "tatsujin24_challengers",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.4,
+  "sync_mode": "av",
+  "sync_ref": -14.0,
+  "sync_av": -18.8,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 22,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   5,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   753,
+   753
+  ]
+ },
+ "tatsujin24_future_ura": {
+  "name": "tatsujin24_future_ura",
+  "sec": 15,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.4,
+  "sync_mode": "av",
+  "sync_ref": -42.0,
+  "sync_av": -46.7,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 13,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.1,
+  "rt_gt20": 0,
+  "roll": [
+   19,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   1400,
+   1400
+  ]
+ },
+ "tatsujin23_shippuudotou_ura": {
+  "name": "tatsujin23_shippuudotou_ura",
+  "sec": 14,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -62.0,
+  "sync_av": -59.1,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1083,
+   1083
+  ]
+ },
+ "tatsujin23_waraeru": {
+  "name": "tatsujin23_waraeru",
+  "sec": 13,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -48.0,
+  "sync_av": -56.7,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.6,
+  "rt_gt20": 0,
+  "roll": [
+   18,
+   3,
+   0,
+   0,
+   0,
+   5
+  ],
+  "notes": [
+   818,
+   818
+  ]
+ },
+ "tatsujin23_prelude_ura": {
+  "name": "tatsujin23_prelude_ura",
+  "sec": 46,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "ref",
+  "sync_ref": -10.0,
+  "sync_av": null,
+  "gogo": [
+   10,
+   10
+  ],
+  "gogo_start_max": 6,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.8,
+  "rt_gt20": 0,
+  "roll": [
+   49,
+   0,
+   0,
+   0,
+   0,
+   13
+  ],
+  "notes": [
+   1423,
+   1423
+  ]
+ },
+ "dropsim_shippuu": {
+  "name": "dropsim_shippuu",
+  "sec": 14,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -64.0,
+  "sync_av": -61.5,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1083,
+   1083
+  ]
+ },
+ "tatsujin22_dangan_ura": {
+  "name": "tatsujin22_dangan_ura",
+  "sec": 15,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -33.0,
+  "sync_av": -50.2,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 20,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.9,
+  "rt_gt20": 0,
+  "roll": [
+   3,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   1167,
+   1167
+  ]
+ },
+ "tatsujin22_nemm": {
+  "name": "tatsujin22_nemm",
+  "sec": 28,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.2,
+  "sync_mode": "av",
+  "sync_ref": -60.0,
+  "sync_av": -57.5,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 6,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.2,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   1290,
+   1290
+  ]
+ },
+ "tatsujin22_shinryu_ura": {
+  "name": "tatsujin22_shinryu_ura",
+  "sec": 13,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -54.0,
+  "sync_av": -64.0,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 15,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.9,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1365,
+   1365
+  ]
+ },
+ "tatsujin21_shimedore": {
+  "name": "tatsujin21_shimedore",
+  "sec": 11,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "av",
+  "sync_ref": -67.0,
+  "sync_av": -60.1,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 16,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.1,
+  "rt_gt20": 0,
+  "roll": [
+   8,
+   0,
+   0,
+   0,
+   1,
+   2
+  ],
+  "notes": [
+   940,
+   940
+  ]
+ },
+ "tatsujin21_tdm_ura": {
+  "name": "tatsujin21_tdm_ura",
+  "sec": 49,
+  "course": "Edit",
+  "recall": 99.0,
+  "precision": 99.0,
+  "misses": 10,
+  "extras": 10,
+  "color": 99.6,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -60.0,
+  "sync_av": -61.7,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 11,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   10,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   1044,
+   1044
+  ]
+ },
+ "tatsujin20_mada_saitama": {
+  "name": "tatsujin20_mada_saitama",
+  "sec": 14,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "av",
+  "sync_ref": -84.0,
+  "sync_av": -85.2,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 9,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   999,
+   1225
+  ]
+ },
+ "tatsujin19_souryuu": {
+  "name": "tatsujin19_souryuu",
+  "sec": 23,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.9,
+  "sync_mode": "av",
+  "sync_ref": -46.0,
+  "sync_av": -55.9,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.6,
+  "rt_gt20": 0,
+  "roll": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   970,
+   970
+  ]
+ },
+ "tatsujin20_vixtory_ura": {
+  "name": "tatsujin20_vixtory_ura",
+  "sec": 13,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -48.0,
+  "sync_av": -50.9,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 4,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   12,
+   0,
+   0,
+   0,
+   0,
+   4
+  ],
+  "notes": [
+   1240,
+   1240
+  ]
+ },
+ "tatsujin19_poxei": {
+  "name": "tatsujin19_poxei",
+  "sec": 17,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -44.0,
+  "sync_av": -45.3,
+  "gogo": [
+   7,
+   7
+  ],
+  "gogo_start_max": 11,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.0,
+  "rt_gt20": 0,
+  "roll": [
+   10,
+   0,
+   0,
+   0,
+   0,
+   6
+  ],
+  "notes": [
+   1210,
+   1210
+  ]
+ },
+ "tatsujin18_charlie": {
+  "name": "tatsujin18_charlie",
+  "sec": 18,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.1,
+  "sync_mode": "av",
+  "sync_ref": -42.0,
+  "sync_av": -49.3,
+  "gogo": [
+   4,
+   4
+  ],
+  "gogo_start_max": 12,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   19,
+   1,
+   0,
+   0,
+   0,
+   6
+  ],
+  "notes": [
+   858,
+   858
+  ]
+ },
+ "tatsujin17_infinite": {
+  "name": "tatsujin17_infinite",
+  "sec": 15,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.6,
+  "sync_mode": "av",
+  "sync_ref": -42.0,
+  "sync_av": -51.3,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 13,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.6,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   1304,
+   1304
+  ]
+ },
+ "tatsujin15_xa": {
+  "name": "tatsujin15_xa",
+  "sec": 16,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -66.0,
+  "sync_av": -64.5,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.7,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   675,
+   675
+  ]
+ },
+ "tatsujin14_hurtling": {
+  "name": "tatsujin14_hurtling",
+  "sec": 15,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -66.0,
+  "sync_av": -71.9,
+  "gogo": [
+   6,
+   6
+  ],
+  "gogo_start_max": 13,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   903,
+   903
+  ]
+ },
+ "tatsujin14_shimedore": {
+  "name": "tatsujin14_shimedore",
+  "sec": 17,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -66.0,
+  "sync_av": -67.0,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 8,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.3,
+  "rt_gt20": 0,
+  "roll": [
+   2,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   1414,
+   1414
+  ]
+ },
+ "tatsujin14_shoushitsu_ura": {
+  "name": "tatsujin14_shoushitsu_ura",
+  "sec": 11,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -40.0,
+  "sync_av": -53.7,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 18,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.5,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   999,
+   999
+  ]
+ },
+ "var30_shippuu": {
+  "name": "var30_shippuu",
+  "sec": 9,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -61.0,
+  "sync_av": -59.5,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1083,
+   1083
+  ]
+ },
+ "var720_shippuu": {
+  "name": "var720_shippuu",
+  "sec": 11,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -62.0,
+  "sync_av": -59.0,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.5,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1083,
+   1083
+  ]
+ },
+ "var50_shippuu": {
+  "name": "var50_shippuu",
+  "sec": 11,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -62.0,
+  "sync_av": -58.9,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 6,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1083,
+   1083
+  ]
+ },
+ "varoff_shippuu": {
+  "name": "varoff_shippuu",
+  "sec": 13,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -62.0,
+  "sync_av": -59.1,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 5,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "notes": [
+   1083,
+   1083
+  ]
+ },
+ "hello_worldooon_ura": {
+  "name": "hello_worldooon_ura",
+  "sec": 12,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -67.0,
+  "sync_av": -61.8,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.0,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   954,
+   954
+  ]
+ },
+ "dangan_notes_ura": {
+  "name": "dangan_notes_ura",
+  "sec": 17,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -33.0,
+  "sync_av": -50.2,
+  "gogo": [
+   5,
+   5
+  ],
+  "gogo_start_max": 20,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.9,
+  "rt_gt20": 0,
+  "roll": [
+   3,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   1167,
+   1167
+  ]
+ },
+ "mekadesu_ura": {
+  "name": "mekadesu_ura",
+  "sec": 16,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.0,
+  "sync_mode": "av",
+  "sync_ref": -14.0,
+  "sync_av": -17.3,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.4,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   999,
+   999
+  ]
+ },
+ "doppelgangers_ura": {
+  "name": "doppelgangers_ura",
+  "sec": 14,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 1.8,
+  "sync_mode": "av",
+  "sync_ref": -24.0,
+  "sync_av": -27.5,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 1,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 3.1,
+  "rt_gt20": 0,
+  "roll": [
+   4,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   929,
+   929
+  ]
+ },
+ "tenyou_no_mai_oni": {
+  "name": "tenyou_no_mai_oni",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.8,
+  "sync_mode": "av",
+  "sync_ref": -20.0,
+  "sync_av": -34.6,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 15,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 0.5,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   687,
+   687
+  ]
+ },
+ "kyourandotou_ura": {
+  "name": "kyourandotou_ura",
+  "sec": 11,
+  "course": "Edit",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -6.0,
+  "sync_av": -10.8,
+  "gogo": [
+   3,
+   3
+  ],
+  "gogo_start_max": 10,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 2.3,
+  "rt_gt20": 0,
+  "roll": [
+   8,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   1108,
+   1108
+  ]
+ },
+ "ryougen_no_mai_oni": {
+  "name": "ryougen_no_mai_oni",
+  "sec": 8,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 0.7,
+  "sync_mode": "av",
+  "sync_ref": -2.0,
+  "sync_av": -20.0,
+  "gogo": [
+   1,
+   1
+  ],
+  "gogo_start_max": 18,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.2,
+  "rt_gt20": 0,
+  "roll": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "notes": [
+   822,
+   822
+  ]
+ },
+ "undead_heart_oni": {
+  "name": "undead_heart_oni",
+  "sec": 13,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 2.0,
+  "sync_mode": "av",
+  "sync_ref": -22.0,
+  "sync_av": -28.4,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 16,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   13,
+   0,
+   0,
+   0,
+   0,
+   4
+  ],
+  "notes": [
+   1134,
+   2467
+  ]
+ },
+ "hyakki_yakou_oni": {
+  "name": "hyakki_yakou_oni",
+  "sec": 16,
+  "course": "Oni",
+  "recall": 100.0,
+  "precision": 100.0,
+  "misses": 0,
+  "extras": 0,
+  "color": 100.0,
+  "big": 100.0,
+  "sd": 3.2,
+  "sync_mode": "av",
+  "sync_ref": 8.0,
+  "sync_av": 8.0,
+  "gogo": [
+   2,
+   2
+  ],
+  "gogo_start_max": 3,
+  "rt_unmatched": 0,
+  "rt_type": 0,
+  "rt_sd": 1.7,
+  "rt_gt20": 0,
+  "roll": [
+   3,
+   0,
+   0,
+   0,
+   0,
+   2
+  ],
+  "notes": [
+   711,
+   2133
+  ]
+ }
+}
