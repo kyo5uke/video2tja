@@ -290,7 +290,7 @@ def dups_from_shifts(idx, sh, verbose=True):
 
 def find_dups(video, t0, t1, cal=None, verbose=True):
     """60fps の動画の中の「複製フレーム」(直前と同じ絵)を、レーンが流れた量で見つける。
-    YouTube には 60fps の入れ物に 30fps の中身が入った動画がある(IRIS OUT むずかしい: 流れが 37,0,37,0…px)。
+    60fps の入れ物に 30fps の中身が入った動画がある(IRIS OUT むずかしい: 流れが 37,0,37,0…px)。
     複製フレームも時刻 k/60 として使うと、1 枚おきに 1 フレーム古い点が混ざり、重複の位相が途中で入れ替わるたびに
     音符の時刻が ±8ms の 2 つの山に割れる(sd 9ms)。複製を skip_frames で外すと 30fps 動画と同じ扱いになる。
     画素の差分(prep60.analyze)は、まばらな譜面でレーンが空だと新しい絵でも差が小さく、使えなかった。

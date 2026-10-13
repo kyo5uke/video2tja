@@ -71,7 +71,7 @@ def _tja_title(song_dir, ref):
 
 
 def video_meta():
-    """動画 ID → 曲名・曲フォルダ・参照 TJA(全曲試験 regress/suite.json と一括試験 testvideos/wide/all.json から)。ファイル名は YouTube の ID なので曲名で出す"""
+    """動画 ID → 曲名・曲フォルダ・参照 TJA(全曲試験 regress/suite.json と一括試験 testvideos/wide/all.json から)。ファイル名は動画の ID なので曲名で出す"""
     global _vmeta
     if _vmeta is None:
         m = {}
@@ -108,7 +108,7 @@ def video_list():
     for p in paths:
         if os.path.isfile(p) and not p.endswith('_z0.mp4'):
             vid = os.path.splitext(os.path.basename(p))[0]
-            mb = re.search(r'\[([\w-]{11})\]', vid)             # yt-dlp の既定の名前「曲名 [ID].webm」
+            mb = re.search(r'\[([\w-]{11})\]', vid)             # 「曲名 [ID].webm」の形の名前
             mm = meta.get(vid) or (meta.get(mb.group(1)) if mb else None) or _guess_song(vid) or {}
             vs.append({'path': p, 'name': os.path.basename(p), 'id': vid, 'title': mm.get('title') or os.path.basename(p), 'dir': mm.get('dir'),
                        'ref': mm.get('ref'), 'course': mm.get('course'), 'size': os.path.getsize(p), 'mtime': os.path.getmtime(p),

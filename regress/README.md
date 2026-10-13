@@ -14,14 +14,6 @@ python regress/suite.py --jobs 8        # 同時に回す曲数（既定4）
 
 曲の一覧は`regress/suite.json`です。曲ごとに、名前・動画ID・曲フォルダ・参照TJA・コースを書きます。動画の置き場は`testvideos/<ID>.mp4`です。結果は`regress/suite_out/`に出ます。基準（`regress/suite_baseline.json`）より悪くなった曲があれば、終了コードが1になります。
 
-## 一括試験
-
-```
-python regress/wide.py <targets.json> <作業フォルダ> [--jobs N]
-```
-
-たくさんの動画を1本ずつ取得して採譜し、参照譜面と照合します。途中から再開できます。`targets.json`の形は`suite.json`と同じです。
-
 ## 譜面どうしの照合
 
 ```

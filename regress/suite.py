@@ -9,7 +9,7 @@
 結果: regress/suite_out/<名前>.{log,json,tja}、表を標準出力に。基準より悪くなった曲があれば終了コード 1。
 
 曲の一覧は regress/suite.json(名前, 動画 ID, 曲フォルダ, 参照 TJA, コース)。
-動画は testvideos/<ID>.mp4(YouTube から取ったキャプチャ。直撮りは入れない)。
+動画は testvideos/<ID>.mp4(画面のキャプチャ。直撮りは入れない)。
 曲フォルダは ゲーム側で番号が振り直されることがあるので「カテゴリ/番号を除いた曲名」で探す。
 """
 import sys, os, re, json, glob, subprocess, time

@@ -143,7 +143,7 @@ GRID_CELL_FRAC = 0.25   # ずれはセルの 1/4 まで(_grid のコメント)�
 # 拍子を読み違えた小節用の格子(拍数に掛ける数)。1 拍 3 つ ↔ 4 つの読み違い(3/4 ↔ 4/4)と、2 拍 ↔ 3 拍(6/8 系)。_grid のコメント
 METER_SCALES = (1.0, 0.75, 4.0 / 3, 1.5, 2.0 / 3)
 # BPM の区間を選ぶときの「書く手間」: #BPMCHANGE 1 行 = 1、値の小数 1 桁 = DIGIT_COST(2 桁の値 1 つと BPM 変更 1 行が同じ重み)、
-# そのまま残す小節 1 つ = FROZEN_COST(残す小節は音符ごとに #BPMCHANGE・#SCROLL を書くので BPM 変更 1 行よりずっと重い: 銀の黎明 YouTube の 1 小節で #BPMCHANGE 10 行・#SCROLL 9 行)。
+# そのまま残す小節 1 つ = FROZEN_COST(残す小節は音符ごとに #BPMCHANGE・#SCROLL を書くので BPM 変更 1 行よりずっと重い: 銀の黎明の 1 小節で #BPMCHANGE 10 行・#SCROLL 9 行)。
 # どちらも試験の数字に合わせた値ではない(桁より行の数を減らすこと、残す小節を増やさないことを優先する向きだけ決めている)
 DIGIT_COST = 0.5
 FROZEN_COST = 3
